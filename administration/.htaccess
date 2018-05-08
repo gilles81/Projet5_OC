@@ -1,0 +1,4 @@
+AuthName "Page d'administration protégée"
+AuthType Basic
+AuthUserFile "c:wamp64/www/Projet4/admin/.htpasswd"
+Require valid-user
