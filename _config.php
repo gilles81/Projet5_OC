@@ -21,7 +21,6 @@ class MyAutoload
         $root= $_SERVER['DOCUMENT_ROOT'];
         $host= $_SERVER['HTTP_HOST'];
 
-
         define('HOST','http://' . $host . '/Projet5/');
         define('ROOT',$root .'/Projet5/');
 
@@ -37,13 +36,11 @@ class MyAutoload
 
         define('ASSETS', HOST . 'assets/');
 
-        include_once('./admin/admin.php');
-
+        include_once('./administration/admin.php');
 
     }
     Public static function autoload($class)
     {
-
         if (file_exists(MODEL.$class.'.php'))
         {
             include_once(MODEL.$class.'.php');
