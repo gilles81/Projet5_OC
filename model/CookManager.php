@@ -3,13 +3,17 @@
  *
  *Class CookManager
  *
- *
+ * Manage
  */
 namespace Projet5;
+
 class CookManager extends BackManager
 {
     private  $bdd;
 
+    /**
+     * CookManager constructor.
+     */
     public function __construct()
     {
         $this->bdd = parent ::bddAssign();
@@ -17,9 +21,9 @@ class CookManager extends BackManager
 
     /**
      *
-     *  public function findDishes()
+     *  findDishes
      *
-     * Get all Dishes in database in an array
+     * Get all Dishes in database return an array
      *
      *
 
@@ -38,14 +42,14 @@ class CookManager extends BackManager
 
         while ($row = $req-> fetch(PDO::FETCH_ASSOC))
         {
-            $dish = new Dish();
+            $dish = new BasicDish();
             $dish->setDishId($row['DishId']);
             $dish->setName($row['Name']);
             $dish->setCategory($row['category']);
             $dish->setAuthor($row['Author']);
             $dish->setCreationDate($row['CreationDate']);
             $dish->setRecipe(( ($row['Recipe'])));
-            $dish->setPotion(( ($row['Portion'])));
+            $dish->setPortion(( ($row['Portion'])));
             $dish->setImagePath(( ($row['ImagePath'])));
             $dish->setOrigin(( ($row['Origin'])));
             $dish->setBakeTime(( ($row['BakeTime'])));
@@ -58,7 +62,14 @@ class CookManager extends BackManager
         return $Dishes;
     }
 
-
+    /**
+     * findDish
+     *
+     * find a dish in database and return in a object
+     *
+     * @param $id
+     * @return BasicDish
+     */
     public function findDish($id)
     {
         /**
@@ -72,14 +83,14 @@ class CookManager extends BackManager
         $req->execute();
         $row= $req->fetch(PDO::FETCH_ASSOC);
 
-        $dish = new Dish();
+        $dish = new BasicDish();
         $dish->setDishId($row['DishId']);
         $dish->setName($row['Name']);
         $dish->setCategory($row['category']);
         $dish->setAuthor($row['Author']);
         $dish->setCreationDate($row['CreationDate']);
         $dish->setRecipe(( ($row['Recipe'])));
-        $dish->setPotion(( ($row['Portion'])));
+        $dish->setPortion(( ($row['Portion'])));
         $dish->setImagePath(( ($row['ImagePath'])));
         $dish->setOrigin(( ($row['Origin'])));
         $dish->setBakeTime(( ($row['BakeTime'])));
@@ -89,6 +100,12 @@ class CookManager extends BackManager
 
         return $dish;
     }
+
+    /**
+     * addComment
+     *
+     * @param $values
+     */
 
 
     public function addComment($values)
@@ -105,7 +122,11 @@ class CookManager extends BackManager
             $req->execute();
 
     }
-
+    /**
+     * addanswer
+     *
+     * @param $values
+     */
 
     public function addAnswer($values)
     {
@@ -124,6 +145,13 @@ class CookManager extends BackManager
 
         $req->execute();
     }
+
+    /**
+     *  remove
+     *
+     * remov e a comment from database
+     * @param $ComId
+     */
     public function remove($ComId)
     {
         $bdd = $this->bdd;
@@ -134,6 +162,15 @@ class CookManager extends BackManager
         }
     }
 
+    /**
+     * addDish
+     *
+     *
+     *
+     * @param Post $post
+     */
+
+    //TODO : A faire
     public function addDish(Post $post)
     {
         $bdd = $this->bdd;
@@ -148,8 +185,9 @@ class CookManager extends BackManager
     }
 
     /**
+     *  removePost
      *
-     * public function removePost($PostId)
+     * delette a post from database
      *
      * @param $PostId
      */
@@ -166,7 +204,13 @@ class CookManager extends BackManager
         }
     }
 
-    public function updateDish(Dish $dish)
+    /**
+     * updateDish
+     *
+     * @param BasicDish $dish
+     */
+
+    public function updateDish(BasicDish $dish)
     {
         $bdd = $this->bdd;
 
@@ -179,6 +223,13 @@ class CookManager extends BackManager
 
         $req->execute();
     }
+
+    /**
+     * Warning
+     *
+     * @param $id
+     * @param $value
+     */
     public function Warning($id , $value)
     {
         $bdd = $this->bdd;
@@ -189,7 +240,11 @@ class CookManager extends BackManager
         $req->execute();
     }
 
-
+    /**
+     * getWarnings
+     *
+     * @return array
+     */
     public function getWarnings()
     {
         $bdd = $this->bdd;
