@@ -5,7 +5,7 @@
  *
  * Manage
  */
-namespace Projet5;
+
 
 class CookManager extends BackManager
 {
@@ -35,7 +35,7 @@ class CookManager extends BackManager
         /**
          * model access
          * */
-        $query = "SELECT * FROM Dishes ";
+        $query = "SELECT * FROM dish ";
         $req = $bdd->prepare($query);
         $req->execute();
         $Dishes=  array();
@@ -45,22 +45,66 @@ class CookManager extends BackManager
             $dish = new BasicDish();
             $dish->setDishId($row['DishId']);
             $dish->setName($row['Name']);
-            $dish->setCategory($row['category']);
+            $dish->setCategory($row['Category']);
             $dish->setAuthor($row['Author']);
             $dish->setCreationDate($row['CreationDate']);
             $dish->setRecipe(( ($row['Recipe'])));
             $dish->setPortion(( ($row['Portion'])));
-            $dish->setImagePath(( ($row['ImagePath'])));
+            $dish->setImagePathName(( ($row['ImagePathName'])));
             $dish->setOrigin(( ($row['Origin'])));
-            $dish->setBakeTime(( ($row['BakeTime'])));
+            $dish->setCookingTime(( ($row['CookingTime'])));
             $dish->setPreparationTime(( ($row['PreparationTime'])));
-            $dish->setIngredients(( ($row['PreparationTime'])));
+            $dish->setIngredients(( ($row['Ingredients'])));
             $dish->setDifficulty(( ($row['Difficulty'])));
+            $dish->setFeatured(( ($row['Featured'])));
 
             $Dishes[] = $dish;
         }
         return $Dishes;
     }
+
+
+
+
+    public function findFeaturedDishes()
+    {
+        $bdd = $this->bdd;
+        /**
+         * model access
+         * */
+        $query = "SELECT * FROM dish WHERE Featured =:Featured";
+
+
+        $req = $bdd->prepare($query);
+        $req->bindValue(':Featured', 1 , PDO::PARAM_INT);
+        $req->execute();
+
+        $Dishes=  array();
+
+        while ($row = $req-> fetch(PDO::FETCH_ASSOC))
+        {
+            $dish = new BasicDish();
+            $dish->setDishId($row['DishId']);
+            $dish->setName($row['Name']);
+            $dish->setCategory($row['Category']);
+            $dish->setAuthor($row['Author']);
+            $dish->setCreationDate($row['CreationDate']);
+            $dish->setRecipe(( ($row['Recipe'])));
+            $dish->setPortion(( ($row['Portion'])));
+            $dish->setImagePathName(( ($row['ImagePathName'])));
+            $dish->setOrigin(( ($row['Origin'])));
+            $dish->setCookingTime(( ($row['CookingTime'])));
+            $dish->setPreparationTime(( ($row['PreparationTime'])));
+            $dish->setIngredients(( ($row['Ingredients'])));
+            $dish->setDifficulty(( ($row['Difficulty'])));
+            $dish->setFeatured(( ($row['Featured'])));
+
+            $Dishes[] = $dish;
+        }
+        return $Dishes;
+    }
+
+
 
     /**
      * findDish
@@ -76,7 +120,7 @@ class CookManager extends BackManager
          * model access
          * */
         $bdd = $this->bdd;
-        $query = "SELECT * FROM Dishes WHERE DishId =:id";
+        $query = "SELECT * FROM dish WHERE DishId =:id";
 
         $req = $bdd->prepare($query);
         $req->bindValue(':id', $id , PDO::PARAM_INT);
@@ -86,19 +130,57 @@ class CookManager extends BackManager
         $dish = new BasicDish();
         $dish->setDishId($row['DishId']);
         $dish->setName($row['Name']);
-        $dish->setCategory($row['category']);
+        $dish->setCategory($row['Category']);
         $dish->setAuthor($row['Author']);
         $dish->setCreationDate($row['CreationDate']);
         $dish->setRecipe(( ($row['Recipe'])));
         $dish->setPortion(( ($row['Portion'])));
-        $dish->setImagePath(( ($row['ImagePath'])));
+        $dish->setImagePathName(( ($row['ImagePathName'])));
         $dish->setOrigin(( ($row['Origin'])));
-        $dish->setBakeTime(( ($row['BakeTime'])));
+        $dish->setCookingTime(( ($row['CookingTime'])));
         $dish->setPreparationTime(( ($row['PreparationTime'])));
-        $dish->setIngredients(( ($row['PIngredients'])));
+        $dish->setIngredients(( ($row['Ingredients'])));
         $dish->setDifficulty(( ($row['Difficulty'])));
-
+        $dish->setFeatured(( ($row['Featured'])));
         return $dish;
+    }
+
+    public function findCategory($category)
+    {
+
+        $bdd = $this->bdd;
+
+
+        $query =  "SELECT * FROM dish WHERE Category =:Category";
+
+
+        $req = $bdd->prepare($query);
+        $req->bindValue(':Category', $category , PDO::PARAM_INT);
+        $req->execute();
+
+        $dishes=  array();
+
+        while ($row = $req-> fetch(PDO::FETCH_ASSOC))
+        {
+            $dish = new BasicDish();
+            $dish->setDishId($row['DishId']);
+            $dish->setName($row['Name']);
+            $dish->setCategory($row['Category']);
+            $dish->setAuthor($row['Author']);
+            $dish->setCreationDate($row['CreationDate']);
+            $dish->setRecipe(( ($row['Recipe'])));
+            $dish->setPortion(( ($row['Portion'])));
+            $dish->setImagePathName(( ($row['ImagePathName'])));
+            $dish->setOrigin(( ($row['Origin'])));
+            $dish->setCookingTime(( ($row['CookingTime'])));
+            $dish->setPreparationTime(( ($row['PreparationTime'])));
+            $dish->setIngredients(( ($row['Ingredients'])));
+            $dish->setDifficulty(( ($row['Difficulty'])));
+            $dish->setFeatured(( ($row['Featured'])));
+
+            $dishes[] = $dish;
+        }
+        return $dishes;
     }
 
     /**
@@ -149,7 +231,8 @@ class CookManager extends BackManager
     /**
      *  remove
      *
-     * remov e a comment from database
+     * remove a comment from database
+     *
      * @param $ComId
      */
     public function remove($ComId)
@@ -170,17 +253,27 @@ class CookManager extends BackManager
      * @param Post $post
      */
 
-    //TODO : A faire
-    public function addDish(Post $post)
+    public function addDish(Dish $dish)
     {
         $bdd = $this->bdd;
-        $query = "INSERT INTO Dishes (DishId , Author,CreationDate,ModificationDate,Title,PostContent) VALUES ( NULL ,:Author, NOW(), NOW(),:Name,:PostContent);";
+        $query = "INSERT INTO Dishes (DishId ,Name,Category,Author,Recipe,Portion,ImagePAth,Origin,BakeTime,PreparationTime,Difficulty,Ingredients , CreationDate)
+                VALUES ( NULL ,:Name, :Category, :Author,:Recipe,:Portion,:ImagePAth,:Origin,:BakeTime,:PreparationTime,:Difficulty,:Ingredients,Now() );";
         $req = $bdd->prepare($query);
 
-        $req->bindValue(':Title',$post->getTitle(),PDO::PARAM_STR);
-        $req->bindValue(':Author','Jean Forteroche',PDO::PARAM_STR);
-        $req->bindValue(':PostContent',$post->getContent(),PDO::PARAM_STR);
-        $req->bindValue(':PostPosition',$post->getPosition(),PDO::PARAM_INT);
+        $req->bindValue(':Name',$dish->setName(),PDO::PARAM_STR);
+        $req->bindValue(':Category',$dish->setCategory(),PDO::PARAM_STR);
+        $req->bindValue(':Author',$dish->setAuthor(),PDO::PARAM_STR);
+        $req->bindValue(':Recipe',$dish->setRecipe(),PDO::PARAM_STR);
+        $req->bindValue(':Portion',$dish->setPortion(),PDO::PARAM_INT);
+        $req->bindValue(':ImagePAth',$dish->setImagePAth(),PDO::PARAM_STR);
+        $req->bindValue(':Origin',$dish->setOrigin(),PDO::PARAM_STR);
+        $req->bindValue(':BakeTime',$dish->setBakeTime(),PDO::PARAM_STR);
+        $req->bindValue(':PreparationTime',$dish->setPreparationTime(),PDO::PARAM_STR);
+
+        $req->bindValue(':Difficulty',$dish->setDifficulty(),PDO::PARAM_INT);
+
+        $req->bindValue(':Ingredients',$dish->setIngredients(),PDO::PARAM_STR);
+
         $req -> execute();
     }
 
@@ -205,21 +298,24 @@ class CookManager extends BackManager
     }
 
     /**
-     * updateDish
+     * updateDishRecipe
      *
      * @param BasicDish $dish
      */
 
-    public function updateDish(BasicDish $dish)
+    public function updateDishRecipe(BasicDish $dish)
     {
         $bdd = $this->bdd;
 
         $req = $bdd->prepare('UPDATE posts SET PostContent = :Content, Title = :Title , modificationDate=NOW(),Position= :PostPosition WHERE PostId = :PostId');
+        // TODO : faire updateDishRecipe
 
+        /*
         $req->bindValue(':PostId',$post->getPostId(),PDO::PARAM_INT);
         $req->bindValue(':Content',$post->getContent() ,PDO::PARAM_STR);
         $req->bindValue(':Title',$post->getTitle(),PDO::PARAM_STR);
         $req->bindValue(':PostPosition',$post->getPosition(),PDO::PARAM_INT);
+*/
 
         $req->execute();
     }
