@@ -6,9 +6,6 @@
  * Time: 21:42
  */
 
-namespace Projet5;
-
-
 class BasicDish
 {
     private $dishId;
@@ -18,12 +15,47 @@ class BasicDish
     private $creationDate;
     private $recipe;
     private $portion;
-    private $ImagePAth;
+    private $ImagePathName;
     private $origin;
-    private $bakeTime;
+    private $cookingTime;
     private $preparationTime;
     private $ingredients;
-    private $Difficulty;
+    private $difficulty;
+    private $featured;
+
+    /**
+     * @return mixed
+     */
+    public function getFeatured()
+    {
+        return $this->featured;
+    }
+
+    /**
+     * @param mixed $featured
+     */
+    public function setFeatured($featured)
+    {
+        $this->featured = $featured;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getImagePathName()
+    {
+        return $this->ImagePathName;
+    }
+
+    /**
+     * @param mixed $ImagePathName
+     */
+    public function setImagePathName($ImagePathName)
+    {
+        $this->ImagePathName = $ImagePathName;
+    }
+
+
 
     /**
      * @return mixed
@@ -137,25 +169,7 @@ class BasicDish
         $this->portion = $portion;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getImagePAth()
-    {
-        return $this->ImagePAth;
-    }
 
-    /**
-     * @param mixed $ImagePAth
-     */
-    public function setImagePAth($ImagePAth)
-    {
-        $this->ImagePAth = $ImagePAth;
-    }
-
-    /**
-     * @return mixed
-     */
     public function getOrigin()
     {
         return $this->origin;
@@ -172,17 +186,17 @@ class BasicDish
     /**
      * @return mixed
      */
-    public function getBakeTime()
+    public function getCookingTime()
     {
-        return $this->bakeTime;
+        return $this->cookingTime;
     }
 
     /**
-     * @param mixed $bakeTime
+     * @param mixed $cookingTime
      */
-    public function setBakeTime($bakeTime)
+    public function setCookingTime($cookingTime)
     {
-        $this->bakeTime = $bakeTime;
+        $this->cookingTime = $cookingTime;
     }
 
     /**
@@ -222,16 +236,21 @@ class BasicDish
      */
     public function getDifficulty()
     {
-        return $this->Difficulty;
+        return $this->difficulty;
     }
 
     /**
-     * @param mixed $Difficulty
+     * @param mixed $difficulty
      */
-    public function setDifficulty($Difficulty)
+    public function setDifficulty($difficulty)
     {
-        $this->Difficulty = $Difficulty;
+        $this->difficulty = $difficulty;
     }
+
+
+
+
+
 
 
 

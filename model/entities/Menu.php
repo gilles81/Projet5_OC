@@ -6,7 +6,7 @@
  * Time: 22:20
  */
 
-namespace Projet5;
+
 
 
 class Menu
