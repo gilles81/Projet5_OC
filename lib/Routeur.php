@@ -1,4 +1,5 @@
 <?php
+
 session_start();
 /**
  * Created by PhpStorm.
@@ -7,7 +8,7 @@ session_start();
  * Time: 22:43
  */
 
-namespace Projet5;
+
 
 /**
  * Class Router
@@ -22,7 +23,10 @@ class Routeur
     private $routes = [
        // 'contact.html'                  => ['controller' => 'MiscController', 'method' => 'ShowContact'],
         //'about.html'                    => ['controller' => 'MiscController', 'method' => 'ShowAbout'],
-       'home.html'                     => ['controller' => 'PostsController', 'method' => 'home'],
+       'home.html'                     => ['controller' => 'CookController', 'method' => 'showHome'],
+        'recipe.html'                     => ['controller' => 'CookController', 'method' => 'showDish'],
+        'category.html'                     => ['controller' => 'CookController', 'method' => 'showCategory'],
+
       // 'admin.html'                    => ['controller' => 'MemberController', 'method' => 'loginSession'],
    //  'deconnexion.html'              => ['controller' => 'MemberController', 'method' => 'deconnexion'],
         'error.html'         => ['controller' =>'PostsController', 'method' => 'error']
