@@ -6,7 +6,7 @@
  * Time: 21:43
  */
 
-namespace Projet5;
+
 /**
  * Class User.php
  *
