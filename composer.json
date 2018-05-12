@@ -1,0 +1,12 @@
+{
+    "name": "gilles/projet5",
+    "authors": [
+        {
+            "name": "Gilles Sabathe",
+            "email": "gilles.sabathe@free.fr"
+        }
+    ],
+    "require": {
+        "twig/twig": "~1.0"
+    }
+}

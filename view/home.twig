@@ -1,0 +1,37 @@
+{% extends '_layout.twig' %}
+
+{% block content %}
+
+
+        <div class="container mt-5 "  >
+            <div class="row">
+                <div class="col-lg-12 col-md-4 col-sm-6 mx-auto">
+                    <h6 class="display-3"> </h6><hr> </h6>
+                </div>
+            </div>
+            <div class="row">
+                {% for recipe in recipes %}
+                    <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item mx-auto">
+                        <a class="nav-link" href="recipe.html?dishId={{ recipe.getDishId }}">
+                            <div class="card ">
+                               <img class="card-img-top" src="http://placehold.it/700x400" alt="">
+                                <div class="card-body">
+                                    <h4 class="card-title" >
+                                        {{recipe.getName }}
+                                    </h4>
+                                    <h6>Difficulté : {{ recipe.getDifficulty }}</h6>
+                                    <h6>Préparation :{{ recipe.getPreparationTime }} </h6>
+                                    <h6>Cuisson : {{ recipe.getCookingTime }} </h6>
+
+                                    <h6>Origine  : {{ recipe.getOrigine }} </h6>
+                                    <h6>Avis : </h6>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
+    <!-- /.container -->
+{% endblock %}
