@@ -23,7 +23,7 @@ class CookManager extends BackManager
      *
      *  findDishes
      *
-     * Get all Dishes in database return an array
+     * Get all Dishes in database return an array.
      *
      *
 
@@ -42,23 +42,39 @@ class CookManager extends BackManager
 
         while ($row = $req-> fetch(PDO::FETCH_ASSOC))
         {
-            $dish = new BasicDish();
-            $dish->setDishId($row['DishId']);
-            $dish->setName($row['Name']);
-            $dish->setCategory($row['Category']);
-            $dish->setAuthor($row['Author']);
-            $dish->setCreationDate($row['CreationDate']);
-            $dish->setRecipe(( ($row['Recipe'])));
-            $dish->setPortion(( ($row['Portion'])));
-            $dish->setImagePathName(( ($row['ImagePathName'])));
-            $dish->setOrigin(( ($row['Origin'])));
-            $dish->setCookingTime(( ($row['CookingTime'])));
-            $dish->setPreparationTime(( ($row['PreparationTime'])));
-            $dish->setIngredients(( ($row['Ingredients'])));
-            $dish->setDifficulty(( ($row['Difficulty'])));
-            $dish->setFeatured(( ($row['Featured'])));
-
+            $data = $this->rowInArray($row);
+            $dish = new BasicDish( $data);
             $Dishes[] = $dish;
+        }
+        return $Dishes;
+    }
+
+
+
+
+
+    /**
+     * @return array
+     */
+    public function findDishesFromStatus($status)
+    {
+        $bdd = $this->bdd;
+        /**
+         * model access
+         * */
+        $query = "SELECT * FROM dish WHERE Status =:Status ";
+        $req = $bdd->prepare($query);
+        $req->bindValue(':Status', $status , PDO::PARAM_STR);
+        $req->execute();
+
+        $Dishes=  array();
+
+        while ($row = $req-> fetch(PDO::FETCH_ASSOC))
+        {
+            $data = $this->rowInArray($row);
+            $dish = new BasicDish( $data);
+            $Dishes[] = $dish;
+
         }
         return $Dishes;
     }
@@ -72,7 +88,7 @@ class CookManager extends BackManager
         /**
          * model access
          * */
-        $query = "SELECT * FROM dish WHERE Featured =:Featured";
+        $query = "SELECT * FROM dish WHERE Featured =:Featured AND Status ='R'";
 
 
         $req = $bdd->prepare($query);
@@ -83,23 +99,10 @@ class CookManager extends BackManager
 
         while ($row = $req-> fetch(PDO::FETCH_ASSOC))
         {
-            $dish = new BasicDish();
-            $dish->setDishId($row['DishId']);
-            $dish->setName($row['Name']);
-            $dish->setCategory($row['Category']);
-            $dish->setAuthor($row['Author']);
-            $dish->setCreationDate($row['CreationDate']);
-            $dish->setRecipe(( ($row['Recipe'])));
-            $dish->setPortion(( ($row['Portion'])));
-            $dish->setImagePathName(( ($row['ImagePathName'])));
-            $dish->setOrigin(( ($row['Origin'])));
-            $dish->setCookingTime(( ($row['CookingTime'])));
-            $dish->setPreparationTime(( ($row['PreparationTime'])));
-            $dish->setIngredients(( ($row['Ingredients'])));
-            $dish->setDifficulty(( ($row['Difficulty'])));
-            $dish->setFeatured(( ($row['Featured'])));
-
+            $data = $this->rowInArray($row);
+            $dish = new BasicDish( $data);
             $Dishes[] = $dish;
+
         }
         return $Dishes;
     }
@@ -127,59 +130,36 @@ class CookManager extends BackManager
         $req->execute();
         $row= $req->fetch(PDO::FETCH_ASSOC);
 
-        $dish = new BasicDish();
-        $dish->setDishId($row['DishId']);
-        $dish->setName($row['Name']);
-        $dish->setCategory($row['Category']);
-        $dish->setAuthor($row['Author']);
-        $dish->setCreationDate($row['CreationDate']);
-        $dish->setRecipe(( ($row['Recipe'])));
-        $dish->setPortion(( ($row['Portion'])));
-        $dish->setImagePathName(( ($row['ImagePathName'])));
-        $dish->setOrigin(( ($row['Origin'])));
-        $dish->setCookingTime(( ($row['CookingTime'])));
-        $dish->setPreparationTime(( ($row['PreparationTime'])));
-        $dish->setIngredients(( ($row['Ingredients'])));
-        $dish->setDifficulty(( ($row['Difficulty'])));
-        $dish->setFeatured(( ($row['Featured'])));
+        $data = $this->rowInArray($row);
+        $dish = new BasicDish( $data);
+
         return $dish;
     }
 
-    public function findCategory($category)
+    public function findCategory($category ,$status )
     {
-
         $bdd = $this->bdd;
 
+        if ((!isset($status)) AND (($status ='D')  OR ($status ='R') OR ($status ='W') )) {
 
-        $query =  "SELECT * FROM dish WHERE Category =:Category";
+            $status = 'R';
 
+        }
+
+        $query =  "SELECT * FROM dish WHERE Category=:Category AND Status =:Status";
 
         $req = $bdd->prepare($query);
         $req->bindValue(':Category', $category , PDO::PARAM_INT);
+        $req->bindValue(':Status', $status , PDO::PARAM_STR);
         $req->execute();
-
         $dishes=  array();
-
         while ($row = $req-> fetch(PDO::FETCH_ASSOC))
         {
-            $dish = new BasicDish();
-            $dish->setDishId($row['DishId']);
-            $dish->setName($row['Name']);
-            $dish->setCategory($row['Category']);
-            $dish->setAuthor($row['Author']);
-            $dish->setCreationDate($row['CreationDate']);
-            $dish->setRecipe(( ($row['Recipe'])));
-            $dish->setPortion(( ($row['Portion'])));
-            $dish->setImagePathName(( ($row['ImagePathName'])));
-            $dish->setOrigin(( ($row['Origin'])));
-            $dish->setCookingTime(( ($row['CookingTime'])));
-            $dish->setPreparationTime(( ($row['PreparationTime'])));
-            $dish->setIngredients(( ($row['Ingredients'])));
-            $dish->setDifficulty(( ($row['Difficulty'])));
-            $dish->setFeatured(( ($row['Featured'])));
-
+            $data = $this->rowInArray($row);
+            $dish = new BasicDish( $data);
             $dishes[] = $dish;
         }
+
         return $dishes;
     }
 
@@ -256,23 +236,25 @@ class CookManager extends BackManager
     public function addDish(Dish $dish)
     {
         $bdd = $this->bdd;
-        $query = "INSERT INTO Dishes (DishId ,Name,Category,Author,Recipe,Portion,ImagePAth,Origin,BakeTime,PreparationTime,Difficulty,Ingredients , CreationDate)
-                VALUES ( NULL ,:Name, :Category, :Author,:Recipe,:Portion,:ImagePAth,:Origin,:BakeTime,:PreparationTime,:Difficulty,:Ingredients,Now() );";
+        $query = "INSERT INTO Dishes (DishId ,Name,Category,Author,Recipe,Portion,ImagePAth,Origin,BakeTime,PreparationTime,Difficulty,Ingredients , CreationDate,Status,Likes)
+                VALUES ( NULL ,:Name, :Category, :Author,:Recipe,:Portion,:ImagePAth,:Origin,:BakeTime,:PreparationTime,:Difficulty,:Ingredients,Now(),:Status,:Likes );";
         $req = $bdd->prepare($query);
 
-        $req->bindValue(':Name',$dish->setName(),PDO::PARAM_STR);
-        $req->bindValue(':Category',$dish->setCategory(),PDO::PARAM_STR);
-        $req->bindValue(':Author',$dish->setAuthor(),PDO::PARAM_STR);
-        $req->bindValue(':Recipe',$dish->setRecipe(),PDO::PARAM_STR);
-        $req->bindValue(':Portion',$dish->setPortion(),PDO::PARAM_INT);
-        $req->bindValue(':ImagePAth',$dish->setImagePAth(),PDO::PARAM_STR);
-        $req->bindValue(':Origin',$dish->setOrigin(),PDO::PARAM_STR);
-        $req->bindValue(':BakeTime',$dish->setBakeTime(),PDO::PARAM_STR);
-        $req->bindValue(':PreparationTime',$dish->setPreparationTime(),PDO::PARAM_STR);
+        $req->bindValue(':Name',$dish->getName(),PDO::PARAM_STR);
+        $req->bindValue(':Category',$dish->getCategory(),PDO::PARAM_STR);
+        $req->bindValue(':Author',$dish->getAuthor(),PDO::PARAM_STR);
+        $req->bindValue(':Recipe',$dish->getRecipe(),PDO::PARAM_STR);
+        $req->bindValue(':Portion',$dish->getPortion(),PDO::PARAM_INT);
+        $req->bindValue(':ImagePAth',$dish->getImagePAth(),PDO::PARAM_STR);
+        $req->bindValue(':Origin',$dish->getOrigin(),PDO::PARAM_STR);
+        $req->bindValue(':BakeTime',$dish->getBakeTime(),PDO::PARAM_STR);
+        $req->bindValue(':PreparationTime',$dish->getPreparationTime(),PDO::PARAM_STR);
 
-        $req->bindValue(':Difficulty',$dish->setDifficulty(),PDO::PARAM_INT);
+        $req->bindValue(':Difficulty',$dish->getDifficulty(),PDO::PARAM_INT);
 
-        $req->bindValue(':Ingredients',$dish->setIngredients(),PDO::PARAM_STR);
+        $req->bindValue(':Ingredients',$dish->getIngredients(),PDO::PARAM_STR);
+        $req->bindValue(':Status',$dish->getStatus(),PDO::PARAM_STR);
+        $req->bindValue(':Status',$dish->getLikes(),PDO::PARAM_INT);
 
         $req -> execute();
     }
