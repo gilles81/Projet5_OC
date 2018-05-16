@@ -1,7 +1,72 @@
 {% extends '_layout.twig' %}
 
-{% block content %}
 
+
+{% block contentHeader %}
+    <div class="container mt-5 "  >
+
+        <div class="row  ">
+            <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item card-deck mx-auto ">
+                <a href="category.html?category=1">
+                    <div class="card bg-dark text-white">
+                        <img class="card-img" src="http://placehold.it/700x400" alt="Viandes">
+                        <div class="card-img-overlay">
+                            <h5 class="card-title">Viandes</h5>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item card-deck mx-auto ">
+                <a href="category.html?category=2">
+                    <div class="card bg-dark text-white">
+                        <img class="card-img" src="http://placehold.it/700x400" alt="Légumes">
+                        <div class="card-img-overlay">
+                            <h5 class="card-title">Légumes</h5>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item card-deck mx-auto ">
+                <a href="category.html?category=3">
+                    <div class="card bg-dark text-white">
+                        <img class="card-img" src="http://placehold.it/700x400" alt="Pâtes">
+                        <div class="card-img-overlay">
+                            <h5 class="card-title">Pâtes</h5>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item card-deck mx-auto ">
+                <a href="category.html?category=4">
+                    <div class="card bg-dark text-white">
+                        <img class="card-img" src="http://placehold.it/700x400" alt="Selection ">
+                        <div class="card-img-overlay">
+                            <h5 class="card-title">Selections</h5>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="row  ">
+            <div class="col-lg-12  text-center ">
+                <form class="form-inline my-2 my-lg-0 mx-auto">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Recettes , Ingredients , ..." aria-label="Search">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Recherche</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+
+{% block contentHeaderMessage%}
+        {{ message }}
+{% endblock %}
+
+
+{% block content %}
 
         <div class="container mt-5 "  >
             <div class="row">
@@ -33,5 +98,5 @@
             </div>
         </div>
 
-    <!-- /.container -->
+
 {% endblock %}
