@@ -6,7 +6,7 @@
  * Time: 22:37
  */
 
-namespace Projet5;
+
 
 
 /**
@@ -34,5 +34,29 @@ class lib
             $_SESSION['Status'] = 1;
             $_SESSION['adminLevel'] = 0; // Direct in VISITOR MODE
         }
+    }
+
+    public function rowInArray( $row)
+    {
+        $donnees = array();
+        $donnees = [
+            'dishId' => $row['DishId'],
+            'name' => $row['Name'],
+            'category' => $row['Category'],
+            'author' =>$row['Author'],
+            'creationDate' => $row['CreationDate'],
+            'recipe' => $row['Recipe'],
+            'portion' => $row['Portion'],
+            'imagePathName' => $row['ImagePathName'],
+            'origin' => $row['Origin'],
+            'cookingTime' => $row['CookingTime'],
+            'preparationTime' => $row['PreparationTime'],
+            'ingredients' => $row['Ingredients'],
+            'difficulty' => $row['Difficulty'],
+            'featured' => $row['Featured'],
+            'likes' => $row['Likes'],
+            'status' => $row['Status']
+        ];
+        return $donnees;
     }
 }
