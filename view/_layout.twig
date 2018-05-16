@@ -8,7 +8,13 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>4 Col Portfolio - Start Bootstrap Template</title>
+
+
+    <!-- Tinny Mce initialisation -->
+    <script src="https://cloud.tinymce.com/stable/tinymce.min.js"></script>
+    <script>tinymce.init({ selector:'#newRecipePreparation' });</script>
+</head>
+    <title>Cook</title>
 
     <!-- Bootstrap core CSS -->
     <link href="./assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -19,18 +25,16 @@
     <!-- Custom styles for this project -->
     <link href="./assets/style.css" rel="stylesheet">
 
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+
 </head>
 
 <body>
 
 <header>
 
-
-
-
-
 <!-- Navigation -->
-
+    {% set admin = adminLevel %}
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container">
         <a class="navbar-brand" href="#">Start Bootstrap</a>
@@ -40,7 +44,7 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Home
+                    <a class="nav-link" href="home.html#">Home
                         <span class="sr-only">(current)</span>
                     </a>
                 </li>
@@ -48,74 +52,25 @@
                     <a class="nav-link" href="#">About</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Services</a>
-                </li>
-                <li class="nav-item">
                     <a class="nav-link" href="#">Contact</a>
                 </li>
+                {% if admin == true  %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="deconnection.html">Déconnexion</a>
+                    </li>
+                {% endif %}
             </ul>
         </div>
     </div>
 
 </nav>
-    <div class="container mt-5 "  >
 
-        <div class="row  ">
-            <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item card-deck mx-auto ">
-                <a href="category.html?category=1">
-                    <div class="card bg-dark text-white">
-                        <img class="card-img" src="http://placehold.it/700x400" alt="Viandes">
-                        <div class="card-img-overlay">
-                            <h5 class="card-title">Viandes</h5>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item card-deck mx-auto ">
-                <a href="category.html?category=2">
-                    <div class="card bg-dark text-white">
-                        <img class="card-img" src="http://placehold.it/700x400" alt="Légumes">
-                        <div class="card-img-overlay">
-                            <h5 class="card-title">Légumes</h5>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item card-deck mx-auto ">
-                <a href="category.html?category=3">
-                    <div class="card bg-dark text-white">
-                        <img class="card-img" src="http://placehold.it/700x400" alt="Pâtes">
-                        <div class="card-img-overlay">
-                            <h5 class="card-title">Pâtes</h5>
-                        </div>
-                    </div>
-                </a>
-            </div>
+{% block contentHeader%}
 
-            <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item card-deck mx-auto ">
-                <a href="category.html?category=4">
-                    <div class="card bg-dark text-white">
-                        <img class="card-img" src="http://placehold.it/700x400" alt="Selection ">
-                        <div class="card-img-overlay">
-                            <h5 class="card-title">Selections</h5>
-                        </div>
-                    </div>
-                </a>
-            </div>
-        </div>
-        <div class="row  ">
-            <div class="col-lg-12  text-center ">
-                 <form class="form-inline my-2 my-lg-0 mx-auto">
-                      <input class="form-control mr-sm-2" type="search" placeholder="Recettes , Ingredients , ..." aria-label="Search">
-                     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Recherche</button>
-                </form>
-            </div>
-        </div>
-    </div>
+{% endblock %}
+    {% block contentHeaderMessage%}
 
-
-
-
+    {% endblock %}
 
 </header>
 <!-- Content -->
@@ -132,9 +87,9 @@
 </footer>
 
 <!-- Bootstrap core JavaScript -->
-<script src="./ assets/vendor/jquery/jquery.min.js"></script>
+<script src="./assets/vendor/jquery/jquery.min.js"></script>
 <script src="./assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
+<script src="./assets/js/Modal_remove.js"></script>
 </body>
 
 </html>
