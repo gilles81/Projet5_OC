@@ -3,7 +3,7 @@
  *
  *
  */
-namespace Projet5;
+
 class MemberManager extends BackManager
 {
     private  $bdd;
@@ -82,7 +82,7 @@ class MemberManager extends BackManager
     public function getAdminMember()
     {
         $bdd = $this->bdd;
-        $query = "SELECT * FROM members WHERE rights =:rights";
+        $query = "SELECT * FROM member WHERE rights =:rights";
 
         $req = $bdd->prepare($query);
         $req->bindValue('rights', "1" , PDO::PARAM_INT);
@@ -98,4 +98,7 @@ class MemberManager extends BackManager
 
         return $user;
     }
+
+
+
 }
