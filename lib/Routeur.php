@@ -23,12 +23,19 @@ class Routeur
     private $routes = [
        // 'contact.html'                  => ['controller' => 'MiscController', 'method' => 'ShowContact'],
         //'about.html'                    => ['controller' => 'MiscController', 'method' => 'ShowAbout'],
-       'home.html'                     => ['controller' => 'CookController', 'method' => 'showHome'],
+        'home.html'                     => ['controller' => 'CookController', 'method' => 'showHome'],
+        'admin.html'                     => ['controller' => 'MemberController', 'method' => 'loginSession'],
+        'adminverif.html'               => ['controller' => 'MemberController', 'method' => 'identification'],
+        'adminBoard.html'               => ['controller' => 'CookController', 'method' => 'adminBoard'],
+        'adminRecipes.html'               => ['controller' => 'CookController', 'method' => 'adminRecipes'],
+        'adminAddRecipe.html'               => ['controller' => 'CookController', 'method' => 'adminAddRecipeView'],
+
+
         'recipe.html'                     => ['controller' => 'CookController', 'method' => 'showDish'],
         'category.html'                     => ['controller' => 'CookController', 'method' => 'showCategory'],
 
       // 'admin.html'                    => ['controller' => 'MemberController', 'method' => 'loginSession'],
-   //  'deconnexion.html'              => ['controller' => 'MemberController', 'method' => 'deconnexion'],
+        'deconnection.html'              => ['controller' => 'MemberController', 'method' => 'deconnection'],
         'error.html'         => ['controller' =>'PostsController', 'method' => 'error']
     ];
 
@@ -56,8 +63,8 @@ class Routeur
             $currentController = new $controller();
             $currentController ->$method();
         }else{
-            //$myView = new View('error');
-            //$myView->build( array('chapters'=> null ,'comments'=>null,'warningList' => null,'HOST'=>HOST, 'adminLevel' => $_SESSION['adminLevel']));
+            $myView = new View('error');
+            $myView->build( array('recipes'=> null ,'comments'=>null,'warningList' => null,'message'=>null,'HOST'=>HOST, 'adminLevel' => $_SESSION['adminLevel']));
         }
     }
 
