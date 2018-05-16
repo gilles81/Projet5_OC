@@ -1,0 +1,69 @@
+{% extends '_layout.twig' %}
+
+{% block contentHeader %}
+    <div class="container mt-5">
+        <div class="row">
+                <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item mx-auto">
+                    <a href="adminAddRecipe.html" class="nav-link">
+                    <div class="card w-200">
+                        <img class="card-img-top rounded" src="./assets/pics/1584_700_400.jpg" alt="">
+                        <div class="card-img-overlay text-center"> Nouvelle Recette</div>
+                        <div class="card-body">
+                            <p class="card-title" > Il y a xx  recettes</p>
+                        </div>
+                    </div>
+                    </a>
+                </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="container mt-5 "  >
+        <div class="row">
+            <div class="col-lg-12 col-md-4 col-sm-6 mx-auto">
+                <h6 class="display-3"> </h6><hr>
+            </div>
+        </div>
+        <div class="row">
+            {% for recipe in recipes %}
+                <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item mx-auto">
+                        <div class="card w-200">
+                            <img class="card-img-top rounded" src="./assets/pics/1584_700_400.jpg" alt="">
+                            <!--<div class="card-img-overlay"><a href="#"><i class="far fa-edit"></i> </a></div>-->
+                            <div class="card-body">
+                                <h4 class="card-title" >{{recipe.getName }}</h4>
+                                <h6>Difficulté  : {{ recipe.getDifficulty }}</h6>
+                                <h6>Préparation :{{ recipe.getPreparationTime }} </h6>
+                                <h6>Cuisson     : {{ recipe.getCookingTime }} </h6>
+                                <h6>Origine     : {{ recipe.getOrigine }} </h6>
+                            </div>
+                            <div class="card-body">
+                                <button type="button" class="btn btn-link " id ="bt_eraser_receipe" data-toggle="modal" ><i class="fas fa-eraser"></i></button>
+                                <a href ="recipe.html?dishId={{ recipe.getDishId }}"><i class="far fa-edit"></i></a>
+                                <a href ="recipe.html?dishId={{ recipe.getDishId }}"><i class="far fa-copy"></i></a>
+                                <!-- Erraser -->
+                                <div class="modal fade bd-eraserReceipe-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-lg">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">Suppression</h5>
+                                            </div>
+                                            <div class="modal-body">
+                                                <p> Confirmer la suppression !</p>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Annulation</button>
+                                                <button type="button" class="btn btn-primary">Validation</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+{% endblock %}
