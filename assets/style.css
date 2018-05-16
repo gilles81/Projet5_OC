@@ -1,7 +1,9 @@
-#error{
+.container
+{
+    /**
+     background-color: green;
+  color : darkblue;
+     */
 
-  background-color: red;
-
-  height: 5000px;
 
 }
