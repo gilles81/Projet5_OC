@@ -6,7 +6,7 @@
  * Time: 22:22
  */
 
-namespace Projet5;
+
 
 /**
  * Class BackManager
