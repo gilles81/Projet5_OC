@@ -46,11 +46,11 @@ class CookController extends lib
         $manager = new CookManager();
         $recipes= $manager->findFeaturedDishes();
         if (empty($recipes)){
-            $recipes= $manager->findDishes();
+            $recipes= $manager->findDishesfromStatus('R'); // R = ready to display
         }
-        $_SESSION['adminLevel']=0;
+
         $myView = new View('home');
-        $myView->build( array('recipes'=> $recipes ,'comments'=>null,'warningList' => null ,'HOST'=>HOST ,'adminLevel'=> $_SESSION['adminLevel']));
+        $myView->build( array('recipes'=> $recipes ,'comments'=>null,'warningList' => null ,'message'=>null,'HOST'=>HOST ,'adminLevel'=> $_SESSION['adminLevel']));
     }
 
     /**
@@ -69,16 +69,16 @@ class CookController extends lib
             if (!empty($recipe)){
                 $_SESSION['adminLevel']=0;
                 $myView = new View('recipe');
-                $myView->build( array('recipes'=> $recipe ,'comments'=>null,'warningList' => null ,'HOST'=>HOST ,'adminLevel'=> $_SESSION['adminLevel']));
+                $myView->build( array('recipes'=> $recipe ,'comments'=>null,'warningList' => null ,'message'=>null,'HOST'=>HOST ,'adminLevel'=> $_SESSION['adminLevel']));
             }else{
                 $_SESSION['adminLevel']=0;
                 $myView = new View('error');
-                $myView->build( array('recipes'=>null ,'comments'=>null,'warningList' => null ,'HOST'=>HOST ,'adminLevel'=> $_SESSION['adminLevel']));
+                $myView->build( array('recipes'=>null ,'comments'=>null,'warningList' => null, 'message'=>null,'HOST'=>HOST ,'adminLevel'=> $_SESSION['adminLevel']));
             }
         }else {
             $_SESSION['adminLevel']=0;
         $myView = new View('error');
-        $myView->build( array('recipes'=>null ,'comments'=>null,'warningList' => null ,'HOST'=>HOST ,'adminLevel'=> $_SESSION['adminLevel']));
+        $myView->build( array('recipes'=>null ,'comments'=>null,'warningList' => null ,'message'=>null,'HOST'=>HOST ,'adminLevel'=> $_SESSION['adminLevel']));
         }
 
     }
@@ -95,27 +95,51 @@ class CookController extends lib
     {
         if (isset($_GET['category']) and $_GET['category']>0){
             $manager = new CookManager();
-            $recipes= $manager->findCategory($_GET['category']);
-
+            $recipes= $manager->findCategory($_GET['category'],'R');
             if (!empty($recipes)){
-                $_SESSION['adminLevel']=0;
                 $myView = new View('home');
-                $myView->build( array('recipes'=> $recipes ,'comments'=>null,'warningList' => null ,'HOST'=>HOST ,'adminLevel'=> $_SESSION['adminLevel']));
+                $myView->build( array('recipes'=> $recipes ,'comments'=>null,'warningList' => null ,'message'=>null ,'HOST'=>HOST ,'adminLevel'=> $_SESSION['adminLevel']));
             }else{
+
+
+
                 $manager = new CookManager();
-                $recipes= $manager->findDishes();
-                $_SESSION['adminLevel']=0;
+                $recipes= $manager->findDishesFromStatus("R");
+
                 $myView = new View('home');
-                $myView->build( array('recipes'=> $recipes ,'comments'=>null,'warningList' => null ,'HOST'=>HOST ,'adminLevel'=> $_SESSION['adminLevel']));
+                $myView->build( array('recipes'=> $recipes ,'comments'=>null,'warningList' => null ,'message'=>'Il n\'y a pas encore de recette dans cette categorie !','HOST'=>HOST ,'adminLevel'=> $_SESSION['adminLevel']));
+
+                //$myView = new View('errorContaintNotAllowed');
+               // $myView->build( array('recipes'=>null ,'comments'=>null,'warningList' => null ,'HOST'=>HOST ,'adminLevel'=> $_SESSION['adminLevel']));
+
+
             }
         }else {
-            $_SESSION['adminLevel']=0;
             $myView = new View('error');
-            $myView->build( array('recipes'=>null ,'comments'=>null,'warningList' => null ,'HOST'=>HOST ,'adminLevel'=> $_SESSION['adminLevel']));
+            $myView->build( array('recipes'=>null ,'comments'=>null,'warningList' => null ,'message'=>null,'HOST'=>HOST ,'adminLevel'=> $_SESSION['adminLevel']));
         }
-
+    }
+    public function adminBoard()
+    {
+        $myView = new View('adminBoard');
+        $myView->build( array('recipes'=> null ,'comments'=>null,'warningList' => null ,'message'=>null,'HOST'=>HOST ,'adminLevel'=> $_SESSION['adminLevel']));
     }
 
+    public function adminRecipes()
+    {
+
+        $manager = new CookManager();
+        $recipes= $manager->findDishes();
+        $myView = new View('adminRecipes');
+        $myView->build( array('recipes'=> $recipes ,'comments'=>null,'warningList' => null ,'message'=>null,'HOST'=>HOST ,'adminLevel'=> $_SESSION['adminLevel']));
+
+    }
+    public function adminAddRecipeView()
+    {
+        $myView = new View('adminAddRecipe');
+        $myView->build( array('recipes'=> null ,'comments'=>null,'warningList' => null ,'message'=>null,'HOST'=>HOST ,'adminLevel'=> $_SESSION['adminLevel']));
+
+    }
 
 
 }
