@@ -136,10 +136,53 @@ class CookController extends lib
     }
     public function adminAddRecipeView()
     {
-        $myView = new View('adminAddRecipe');
+       /** $myView = new View('adminAddRecipe');
         $myView->build( array('recipes'=> null ,'comments'=>null,'warningList' => null ,'message'=>null,'HOST'=>HOST ,'adminLevel'=> $_SESSION['adminLevel']));
+**/
+
+        $manager = new CookManager();
+        $recipes= $manager->createEmptyRecipe();
+        $recipes= $manager->findDishes();
+        $myView = new View('adminRecipes');
+        $myView->build( array('recipes'=> $recipes ,'comments'=>null,'warningList' => null ,'message'=>null,'HOST'=>HOST ,'adminLevel'=> $_SESSION['adminLevel']));
+
+
 
     }
 
+    public function adminSendNewRecipe() {
+        if (isset($_POST['newRecipePreparation']) AND isset($_POST['newRecipeTitle'])) {
+            if (!empty($_POST['newRecipeTitle']) AND (!empty($_POST['newRecipePreparation']))  ) {
+                $values = array('Title' => $_POST['newRecipeTitle'], 'Preparation' => $_POST['newRecipePreparation']);
+                $manager = new CookManager();
+                $manager->addDish($values);
+
+
+                //$myView = new View('error');
+                //myView->build(array('recipes' => null, 'comments' => null, 'warningList' => null, 'message' => null, 'HOST' => HOST, 'adminLevel' => $_SESSION['adminLevel']));
+
+            } else {
+                $myView = new View('error');
+                $myView->build(array('recipes' => null, 'comments' => null, 'warningList' => null, 'message' => null, 'HOST' => HOST, 'adminLevel' => $_SESSION['adminLevel']));
+            }
+        }
+    }
+
+    public function adminRemoveDish()
+    {
+        if (isset($_GET['dishId']) AND $_GET['dishId'] > 0) {
+                $manager = new CookManager();
+                $manager->removeDish($_GET['dishId']);
+
+                $myView = new View('');
+                $myView->redirect('adminRecipes.html');
+                //$myView = new View('error');
+                //myView->build(array('recipes' => null, 'comments' => null, 'warningList' => null, 'message' => null, 'HOST' => HOST, 'adminLevel' => $_SESSION['adminLevel']));
+        } else {
+            $myView = new View('error');
+            $myView->build(array('recipes' => null, 'comments' => null, 'warningList' => null, 'message' => null, 'HOST' => HOST, 'adminLevel' => $_SESSION['adminLevel']));
+
+        }
+    }
 
 }
