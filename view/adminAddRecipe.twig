@@ -1,61 +1,65 @@
 {% extends '_layout.twig' %}
-
+{% block contentHeader %}
+{% endblock %}
+{% block contentHeaderMessage %}
+{% endblock %}
 {% block content %}
+    <form class="form-group" action="adminSendNewRecipe.html" method="post">
     <!-- Page Content -->
-    <div class="container">
-        <!-- Portfolio Item Heading -->
-        <h1 class="my-4">{{ recipes.getName }}
-        </h1>
-
-        <!-- Portfolio Item Row -->
-    <div class="row">
-
-        <div class="col-md-8">
-    <!-- <img class="img-fluid" src="http://placehold.it/600x350" alt="">-->
-            <img class="img-fluid" src="./assets/pics/1584_600_350.png" alt="">
-
-        </div>
-        <div class="col-md-4">
-
-                <h3 class="my-3">Ingredients</h3>
-                <ul>
-                    <li>Lorem Ipsum</li>
-                    <li>Dolor Sit Amet</li>
-                    <li>Consectetur</li>
-                    <li>Adipiscing Elit</li>
-                </ul>
-        </div>
-
-    </div>
-        <div class="row">
-            <div class="col-md-12">
-                <h3 class="my-3">Préparation :</h3>
-                <article>
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-lg-8 col-md-10 mx-auto">
-                                <form class="form-group" action="SendNewRecipe.html" method="post">
-                                    <div>
-                                        <label for="comment">Préparation :</label><br />
-                                        <textarea rows="10"  id="newRecipePreparation" name="newRecipePreparation"></textarea>
-                                    </div>
-
-                                    <div>
-                                        </br>
-                                        <input class="btn btn-group-sm btn-primary" type="submit" value="Validation" name="validAddPost" />
-                                        <input class="btn btn-group-sm btn-primary" type="submit" value="Annulation"  name="AnnulAddPost"/>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-
-
-                </article>
+        <div class="container">
+            <!-- Portfolio Item Heading -->
+            <h1 class="my-4">{{ recipes.getName }}
+            </h1>
+            <div>
+                <label for="comment">Title : </label><br />
+                <textarea rows="1"  id="newRecipeTitle" name="newRecipeTitle">Title</textarea>
             </div>
 
-        </div>
+            <!-- Portfolio Item Row -->
+            <div class="row">
 
+                <div class="col-md-8">
+            <!-- <img class="img-fluid" src="http://placehold.it/600x350" alt="">-->
+                    <img class="img-fluid" src="./assets/pics/1584_600_350.png" alt="">
+
+                </div>
+                <div class="col-md-4">
+
+                        <h3 class="my-3">Ingredients</h3>
+
+
+
+                    <div>
+                        <button>associer des ingredients></button>
+                    </div>
+                </div>
+
+            </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <h3 class="my-3">Préparation :</h3>
+                                <div class="row">
+                                    <div class="col-lg-8 col-md-10 mx-auto">
+
+                                            <div>
+                                                <label for="comment">Préparation :</label><br />
+                                                <textarea rows="10"  id="newRecipePreparation" name="newRecipePreparation"></textarea>
+                                            </div>
+
+                                            <div>
+                                                </br>
+
+                                            </div>
+
+                                    </div>
+                                </div>
+                    </div>
+
+                    <input class="btn btn-group-sm btn-primary" type="submit" value="Valider la recette" name="validAddRecipe" />
+                    <input class="btn btn-group-sm btn-primary" type="submit" value="Annulation"  name="AnnulAddRecipe"/>
+                </div>
+        </div>
+    </form>
         <!-- /.row -->
     <!-- /.container -->
 {% endblock %}
