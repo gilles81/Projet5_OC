@@ -233,32 +233,47 @@ class CookManager extends BackManager
      * @param Post $post
      */
 
-    public function addDish(Dish $dish)
+
+    public function createEmptyRecipe()
     {
         $bdd = $this->bdd;
-        $query = "INSERT INTO Dishes (DishId ,Name,Category,Author,Recipe,Portion,ImagePAth,Origin,BakeTime,PreparationTime,Difficulty,Ingredients , CreationDate,Status,Likes)
-                VALUES ( NULL ,:Name, :Category, :Author,:Recipe,:Portion,:ImagePAth,:Origin,:BakeTime,:PreparationTime,:Difficulty,:Ingredients,Now(),:Status,:Likes );";
+
+        $query = "INSERT INTO `dish` (`DishId`, `Title`, `Category`, `Author`, `CreationDate`, `Recipe`, `Portion`, `ImagePathName`, `Origin`, `CookingTime`,
+ `PreparationTime`, `Ingredients`, `Difficulty`, `Featured`, `Status`, `lke`)
+                  VALUES (NULL, 'Nouvelle recette ', '1', '', now(), 'rrr', '5', 'rrr', 'FRANCE', '0:00:00', '0:00:00', '', '0', '0', 'D', '0');";
+
+
         $req = $bdd->prepare($query);
-
-        $req->bindValue(':Name',$dish->getName(),PDO::PARAM_STR);
-        $req->bindValue(':Category',$dish->getCategory(),PDO::PARAM_STR);
-        $req->bindValue(':Author',$dish->getAuthor(),PDO::PARAM_STR);
-        $req->bindValue(':Recipe',$dish->getRecipe(),PDO::PARAM_STR);
-        $req->bindValue(':Portion',$dish->getPortion(),PDO::PARAM_INT);
-        $req->bindValue(':ImagePAth',$dish->getImagePAth(),PDO::PARAM_STR);
-        $req->bindValue(':Origin',$dish->getOrigin(),PDO::PARAM_STR);
-        $req->bindValue(':BakeTime',$dish->getBakeTime(),PDO::PARAM_STR);
-        $req->bindValue(':PreparationTime',$dish->getPreparationTime(),PDO::PARAM_STR);
-
-        $req->bindValue(':Difficulty',$dish->getDifficulty(),PDO::PARAM_INT);
-
-        $req->bindValue(':Ingredients',$dish->getIngredients(),PDO::PARAM_STR);
-        $req->bindValue(':Status',$dish->getStatus(),PDO::PARAM_STR);
-        $req->bindValue(':Status',$dish->getLikes(),PDO::PARAM_INT);
-
-        $req -> execute();
+        $req->execute();
     }
 
+    public function addDish($values)
+    {
+        $bdd = $this->bdd;
+        $query = "INSERT INTO dish (DishId,Title,Category,Author, CreationDate,Recipe,Portion,ImagePathName,Origin,CookingTime,PreparationTime,Ingredients ,Difficulty,Featured,Status,lke)
+                  VALUES (NULL ,:Title,:Category,:Author,Now(),:Recipe,:Portion,:ImagePathName,:Origin,NULL,NULL,:Ingredients,:Difficulty,:Featured,:Status,:Likes );";
+
+
+        $req = $bdd->prepare($query);
+        $req->execute();
+
+        $req->bindValue(':Title',$values['Name'],PDO::PARAM_STR);
+        $req->bindValue(':Category',1,PDO::PARAM_INT);
+        $req->bindValue(':Author','Gilles',PDO::PARAM_STR);
+        $req->bindValue(':Recipe',$values['Preparation'],PDO::PARAM_STR);
+        $req->bindValue(':Portion',4,PDO::PARAM_INT);
+        $req->bindValue(':ImagePathName','',PDO::PARAM_STR);
+        $req->bindValue(':Origin','FRANCE',PDO::PARAM_STR);
+        //$req->bindValue(':CookingTime','',PDO::PARAM_STR );
+        //$req->bindValue(':PreparationTime','',PDO::PARAM_STR);
+        $req->bindValue(':Ingredients','ffff',PDO::PARAM_STR);
+        $req->bindValue(':Difficulty',1,PDO::PARAM_INT);
+        $req->bindValue(':Featured',0,PDO::PARAM_INT);
+        $req->bindValue(':Status','D',PDO::PARAM_STR);
+        $req->bindValue(':Likes',0,PDO::PARAM_INT);
+        $req->execute();
+
+    }
     /**
      *  removePost
      *
@@ -266,11 +281,11 @@ class CookManager extends BackManager
      *
      * @param $PostId
      */
-    public function removeDish($DishId)
+    public function removeDish( $dishId)
     {
 
         $bdd = $this->bdd;
-        $req = $bdd->exec("DELETE FROM `Dishes` WHERE `DishId` = $DishId");
+        $req = $bdd->exec("DELETE FROM `dish` WHERE `DishId` = $dishId");
 
         if (!$req) {
 
