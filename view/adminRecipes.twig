@@ -32,37 +32,49 @@
                             <img class="card-img-top rounded" src="./assets/pics/1584_700_400.jpg" alt="">
                             <!--<div class="card-img-overlay"><a href="#"><i class="far fa-edit"></i> </a></div>-->
                             <div class="card-body">
-                                <h4 class="card-title" >{{recipe.getName }}</h4>
+                                <h4 class="card-title" >{{ recipe.getName }}</h4>
                                 <h6>Difficulté  : {{ recipe.getDifficulty }}</h6>
                                 <h6>Préparation :{{ recipe.getPreparationTime }} </h6>
                                 <h6>Cuisson     : {{ recipe.getCookingTime }} </h6>
-                                <h6>Origine     : {{ recipe.getOrigine }} </h6>
-                            </div>
-                            <div class="card-body">
-                                <button type="button" class="btn btn-link " id ="bt_eraser_receipe" data-toggle="modal" ><i class="fas fa-eraser"></i></button>
+                                <h6>Origine     : {{ recipe.getOrigine }} {{ recipe.getDishId }} </h6>
+
+                                <button type="button" class="btn btn-link "
+                                        id ="bt_eraser_receipe_{{ recipe.getDishId }}"
+                                        data-toggle="modal"
+                                        data-target="#modalDelete_{{ recipe.getDishId }}"
+                                        > <i class="fas fa-eraser"></i></button>
                                 <a href ="recipe.html?dishId={{ recipe.getDishId }}"><i class="far fa-edit"></i></a>
                                 <a href ="recipe.html?dishId={{ recipe.getDishId }}"><i class="far fa-copy"></i></a>
                                 <!-- Erraser -->
-                                <div class="modal fade bd-eraserReceipe-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog modal-lg">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLabel">Suppression</h5>
-                                            </div>
-                                            <div class="modal-body">
-                                                <p> Confirmer la suppression !</p>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Annulation</button>
-                                                <button type="button" class="btn btn-primary">Validation</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                            </div>
+
+                        </div>
+
+                </div>
+                <div class="modal fade bd-eraserReceipe-modal-lg" id="modalDelete_{{ recipe.getDishId }}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Suppression  Validation   </a>
+                                </h5>
+                            </div>
+                            <div class="modal-body">
+                                <p> Confirmer la suppression ! de  Validation </a>
+                                </p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal"> Annulation</button>
+                                <a href ="adminRemoveRecipe.html?dishId={{ recipe.getDishId }}" class="btn btn-danger">   Validation </a>
+
                             </div>
                         </div>
+                    </div>
                 </div>
+
+
             {% endfor %}
+
         </div>
     </div>
 
