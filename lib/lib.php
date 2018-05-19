@@ -41,7 +41,7 @@ class lib
         $donnees = array();
         $donnees = [
             'dishId' => $row['DishId'],
-            'name' => $row['Name'],
+            'Name' => $row['Title'],
             'category' => $row['Category'],
             'author' =>$row['Author'],
             'creationDate' => $row['CreationDate'],
@@ -54,7 +54,7 @@ class lib
             'ingredients' => $row['Ingredients'],
             'difficulty' => $row['Difficulty'],
             'featured' => $row['Featured'],
-            'likes' => $row['Likes'],
+            'likes' => $row['lke'],
             'status' => $row['Status']
         ];
         return $donnees;
