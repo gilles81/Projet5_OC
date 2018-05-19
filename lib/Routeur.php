@@ -29,6 +29,8 @@ class Routeur
         'adminBoard.html'               => ['controller' => 'CookController', 'method' => 'adminBoard'],
         'adminRecipes.html'               => ['controller' => 'CookController', 'method' => 'adminRecipes'],
         'adminAddRecipe.html'               => ['controller' => 'CookController', 'method' => 'adminAddRecipeView'],
+        'adminSendNewRecipe.html'               => ['controller' => 'CookController', 'method' => 'adminSendNewRecipe'],
+        'adminRemoveRecipe.html'               => ['controller' => 'CookController', 'method' => 'adminRemoveDish'],
 
 
         'recipe.html'                     => ['controller' => 'CookController', 'method' => 'showDish'],
