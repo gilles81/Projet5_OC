@@ -1,9 +1,8 @@
-.container
-{
-    /**
-     background-color: green;
-  color : darkblue;
-     */
 
+Body{
 
+    background-image: url( '../assets/pics/wood-2142241_1920.jpg');
+    background-repeat: no-repeat;
+    background-size:100%;
+    background-color: white;
 }
