@@ -185,4 +185,26 @@ class CookController extends lib
         }
     }
 
+
+    public function duplicDish()
+    {
+        if (isset($_GET['dishId']) AND $_GET['dishId'] > 0) {
+
+            $manager = new CookManager();
+            $currentDish = $manager->findDish($_GET['dishId']);
+
+            $manager = new CookManager();
+            $manager->duplicRecipe($currentDish);
+
+            $myView = new View('');
+            $myView->redirect('adminRecipes.html');
+            //$myView = new View('error');
+            //myView->build(array('recipes' => null, 'comments' => null, 'warningList' => null, 'message' => null, 'HOST' => HOST, 'adminLevel' => $_SESSION['adminLevel']));
+        } else {
+            $myView = new View('error');
+            $myView->build(array('recipes' => null, 'comments' => null, 'warningList' => null, 'message' => null, 'HOST' => HOST, 'adminLevel' => $_SESSION['adminLevel']));
+
+        }
+    }
+
 }
