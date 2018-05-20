@@ -233,6 +233,36 @@ class CookManager extends BackManager
      * @param Post $post
      */
 
+    public function duplicRecipe( $currentDish)
+    {
+        $bdd = $this->bdd;
+
+        $query = "INSERT INTO `dish` (`DishId`, `Title`, `Category`, `Author`, `CreationDate`, `Recipe`, `Portion`, `ImagePathName`, `Origin`, `CookingTime`,
+ `PreparationTime`, `Ingredients`, `Difficulty`, `Featured`, `Status`, `lke`)
+                  VALUES (NULL, 'Nouvelle recette ', :Category, '', now(), 'rrr', '5', 'rrr', 'FRANCE', '0:00:00', '0:00:00', '', '0', '0', 'D', '0');";
+
+
+        $req = $bdd->prepare($query);
+        $req->execute();
+
+        //$req->bindValue(':Title',$values['Name'],PDO::PARAM_STR);
+        $req->bindValue(':Category',$currentDish->getCategory(),PDO::PARAM_INT);
+        $req->bindValue(':Author',$currentDish->getAuthor(),PDO::PARAM_STR);
+        $req->bindValue(':Recipe',$currentDish->getRecipe(),PDO::PARAM_STR);
+        $req->bindValue(':Portion',4,PDO::PARAM_INT);
+        $req->bindValue(':ImagePathName','',PDO::PARAM_STR);
+        $req->bindValue(':Origin','FRANCE',PDO::PARAM_STR);
+        //$req->bindValue(':CookingTime','',PDO::PARAM_STR );
+        //$req->bindValue(':PreparationTime','',PDO::PARAM_STR);
+        $req->bindValue(':Ingredients','ffff',PDO::PARAM_STR);
+        $req->bindValue(':Difficulty',1,PDO::PARAM_INT);
+        $req->bindValue(':Featured',0,PDO::PARAM_INT);
+        $req->bindValue(':Status','D',PDO::PARAM_STR);
+        $req->bindValue(':Likes',0,PDO::PARAM_INT);
+        $req->execute();
+    }
+
+
 
     public function createEmptyRecipe()
     {
