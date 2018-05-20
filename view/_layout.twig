@@ -7,26 +7,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-
-
-
     <!-- Tinny Mce initialisation -->
     <script src="https://cloud.tinymce.com/stable/tinymce.min.js"></script>
     <script>tinymce.init({ selector:'#newRecipePreparation' });</script>
-</head>
     <title>Cook</title>
-
     <!-- Bootstrap core CSS -->
     <link href="./assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
     <!-- Custom styles for this template -->
     <link href="./assets/css/4-col-portfolio.css" rel="stylesheet">
-
     <!-- Custom styles for this project -->
     <link href="./assets/style.css" rel="stylesheet">
-
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
-
 </head>
 
 <body>
@@ -62,18 +53,18 @@
             </ul>
         </div>
     </div>
-
 </nav>
 
-{% block contentHeader%}
+<div class="container mt-5">
+    {% block contentHeader%}
 
-{% endblock %}
+    {% endblock %}
     {% block contentHeaderMessage%}
 
     {% endblock %}
-
+</div>
 </header>
-
+<div class="container mt-5">
 
 <!-- Content -->
 {% block content%}
@@ -87,7 +78,7 @@
     </div>
     <!-- /.container -->
 </footer>
-
+</div>
 <!-- Bootstrap core JavaScript -->
 <script src="./assets/vendor/jquery/jquery.min.js"></script>
 <script src="./assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

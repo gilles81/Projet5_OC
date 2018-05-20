@@ -1,19 +1,11 @@
 {% extends '_layout.twig' %}
 
 {% block content %}
-    <!-- Page Content -->
-    <div class="container">
 
-        <!-- Portfolio Item Heading -->
-        <h1 class="my-4">{{ recipes.getName }}
-
-        </h1>
-
-        <!-- Portfolio Item Row -->
+    <h1 class="my-4">{{ recipes.getName }}</h1>
     <div class="row">
-
         <div class="col-md-8">
-    <!-- <img class="img-fluid" src="http://placehold.it/600x350" alt="">-->
+            <!-- <img class="img-fluid" src="http://placehold.it/600x350" alt="">-->
             <img class="img-fluid" src="./assets/pics/1584_600_350.png" alt="">
 
         </div>
@@ -34,7 +26,6 @@
                 <h3 class="my-3">Préparation :</h3>
                 <p>{{ recipes.getRecipe }}</p>
             </div>
-
         </div>
 
         <!-- /.row -->
