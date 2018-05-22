@@ -348,25 +348,28 @@ class CookManager extends BackManager
     }
 
     /**
-     * updateDishRecipe
-     *
-     * @param BasicDish $dish
+     * u
      */
 
-    public function updateDishRecipe(BasicDish $dish)
+    public function UpdateRecipeName($newRecipeName)
     {
         $bdd = $this->bdd;
+        $req = $bdd->prepare('UPDATE dish SET  Title =:Name WHERE DishId = :DishId ');
+        $req->bindValue(':DishId',$newRecipeName->getDishId(),PDO::PARAM_INT);
+        $req->bindValue(':Name',$newRecipeName->getName(),PDO::PARAM_STR);
+        $req->execute();
+    }
 
-        $req = $bdd->prepare('UPDATE posts SET PostContent = :Content, Title = :Title , modificationDate=NOW(),Position= :PostPosition WHERE PostId = :PostId');
-        // TODO : faire updateDishRecipe
+    /**
+     * u
+     */
 
-        /*
-        $req->bindValue(':PostId',$post->getPostId(),PDO::PARAM_INT);
-        $req->bindValue(':Content',$post->getContent() ,PDO::PARAM_STR);
-        $req->bindValue(':Title',$post->getTitle(),PDO::PARAM_STR);
-        $req->bindValue(':PostPosition',$post->getPosition(),PDO::PARAM_INT);
-*/
-
+    public function UpdateRecipePreparation($newRecipePreparation)
+    {
+        $bdd = $this->bdd;
+        $req = $bdd->prepare('UPDATE dish SET  Recipe =:Name WHERE DishId = :DishId ');
+        $req->bindValue(':DishId',$newRecipePreparation->getDishId(),PDO::PARAM_INT);
+        $req->bindValue(':Name',$newRecipePreparation->getRecipe(),PDO::PARAM_STR);
         $req->execute();
     }
 

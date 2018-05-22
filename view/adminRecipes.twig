@@ -9,7 +9,7 @@
             </form>
         </div>
         <div class="col-lg-6  text-center ">
-            <a class ="btn btn-dark" href="adminAddRecipe.html"> Ajouter une carte</a>
+            <a class ="btn btn-dark" href="adminAddCardRecipe.html"> Ajouter une carte</a>
         </div>
     </div>
 {% endblock %}
@@ -18,7 +18,7 @@
 {% block content %}
     <div class="row">
         <div class="mx-auto my-1 ">
-            <a  class = "btn btn-dark " href="{{ HOST }}adminRecipes.html?page={{ recipes['cPage']-1  }}" > << </a><a class = "btn btn-dark " href="" > {{ recipes['cPage'] }} / {{ recipes['nbPage'] }}  </a><a  class = "btn btn-dark " href="adminRecipes.html?page={{ recipes['cPage']+1  }}"  >>> </a>
+            <a  class = "btn btn-dark " href="adminRecipes.html?page={{ recipes['cPage']-1  }}" > << </a><a class = "btn btn-dark " href="" > {{ recipes['cPage'] }} / {{ recipes['nbPage'] }}  </a><a  class = "btn btn-dark " href="adminRecipes.html?page={{ recipes['cPage']+1  }}"  >>> </a>
         </div>
     </div>
     <div class="row">
@@ -38,8 +38,8 @@
                                         data-toggle="modal"
                                         data-target="#modalDelete_{{ recipe.getDishId }}"
                                 > <i class="fas fa-eraser"></i></button>
-                                <a href ="recipe.html?dishId={{ recipe.getDishId }}"><i class="far fa-edit"></i></a>
-                                <a href ="recipe.html?dishId={{ recipe.getDishId }}"><i class="far fa-copy"></i></a>
+                                <a href ="adminUpdateRecipe.html?dishId={{ recipe.getDishId }}"><i class="far fa-edit"></i></a>
+                                <a href ="adminUpdateRecipe.html?dishId={{ recipe.getDishId }}"><i class="far fa-copy"></i></a>
                             </div>
                         </div>
 

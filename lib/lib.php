@@ -38,6 +38,7 @@ class lib
 
     public function rowInArray( $row)
     {
+
         $donnees = array();
         $donnees = [
             'dishId' => $row['DishId'],
@@ -59,4 +60,34 @@ class lib
         ];
         return $donnees;
     }
+
+
+
+    public function createRecipeDataEmpty($newRecipeEmpty)
+    {
+
+        $donnees = array();
+        $donnees = [
+            'dishId' => 0,
+            'Name' => '',
+            'category' => '',
+            'author' =>'',
+            'creationDate' => '',
+            'recipe' => '',
+            'portion' => '',
+            'imagePathName' =>'',
+            'origin' => '',
+            'cookingTime' => '',
+            'preparationTime' => '',
+            'ingredients' =>'',
+            'difficulty' => '',
+            'featured' => '',
+            'likes' => '',
+            'status' => ''
+        ];
+        return $donnees;
+    }
+
+
+
 }

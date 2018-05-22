@@ -27,7 +27,10 @@ class BasicDish
 
     public function __construct($data)
     {
-        $this->hydrate($data);
+        if (!empty($data)) {
+            $this->hydrate($data);
+        }
+
     }
 
 
