@@ -32,10 +32,31 @@ class CookManager extends BackManager
     public function findDishes()
     {
         $bdd = $this->bdd;
+
+        $perPage=8;
+        $req=$bdd->query('SELECT COUNT(*) AS total FROM dish');
+        $result=$req->fetch();
+        $total = $result['total'];
+
+        $nbPage = ceil($total/$perPage);
+
+        if ((isset ($_GET['page'])) &&  (!empty($_GET['page'])) && (ctype_digit($_GET['page']) ==1 )){
+            if ($_GET['page'] > $nbPage) {
+                $current = $nbPage;
+            }else {
+
+                $current = $_GET['page'];
+            }
+        }else {
+            $current = 1;
+        }
+        $firstOfPage = ($current-1)*$perPage;
+
+
         /**
          * model access
          * */
-        $query = "SELECT * FROM dish ";
+        $query = "SELECT * FROM dish LIMIT $firstOfPage,$perPage ";
         $req = $bdd->prepare($query);
         $req->execute();
         $Dishes=  array();
@@ -46,7 +67,9 @@ class CookManager extends BackManager
             $dish = new BasicDish( $data);
             $Dishes[] = $dish;
         }
-        return $Dishes;
+        $dishToDisplay = array();
+        $dishToDisplay = ['dishes'=>$Dishes ,'cPage'=> $current ,'nbPage'=>$nbPage ];
+        return  $dishToDisplay;
     }
 
 
