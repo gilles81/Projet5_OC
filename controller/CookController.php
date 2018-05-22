@@ -127,18 +127,14 @@ class CookController extends lib
 
     public function adminRecipes()
     {
-
         $manager = new CookManager();
-        $recipes= $manager->findDishes();
+        $recipes= $manager->findDishes();//all status are called
         $myView = new View('adminRecipes');
         $myView->build( array('recipes'=> $recipes ,'comments'=>null,'warningList' => null ,'message'=>null,'HOST'=>HOST ,'adminLevel'=> $_SESSION['adminLevel']));
 
     }
     public function adminAddRecipeView()
     {
-       /** $myView = new View('adminAddRecipe');
-        $myView->build( array('recipes'=> null ,'comments'=>null,'warningList' => null ,'message'=>null,'HOST'=>HOST ,'adminLevel'=> $_SESSION['adminLevel']));
-**/
 
         $manager = new CookManager();
         $recipes= $manager->createEmptyRecipe();
