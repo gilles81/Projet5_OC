@@ -1,0 +1,52 @@
+{% extends '_layout.twig' %}
+{% block contentHeader %}
+{% endblock %}
+{% block contentHeaderMessage %}
+{% endblock %}
+{% block content %}
+   <div class="row">
+        <div class="col-lg-12  mx-auto">
+            <form action="adminSendNewRecipeName.html?dishId={{ recipes.getDishId  }}" method="post">
+                <div>
+                    <label for="Name"></label><br />
+                    <input type="text" id="newName" name="newName" value=" {{ recipes.getName }}" />
+                    <input class ="btn btn-group-sm btn-primary" type="submit" name="Validation" />
+                    <input class ="btn btn-group-sm btn-primary" type="submit" value ="ANNULER"   name="Annulation"/>
+                </div>
+
+            </form>
+        </div>
+   </div>
+
+   <div class="row ">
+       <div class="col-lg-4 justify-content-between">
+           <form action="adminSendNewRecipePreparation.html?dishId={{ recipes.getDishId  }}" method="post">
+               <div>
+                   <label for="comment"></label><br />
+                   <textarea id="newRecipePreparation" name="newRecipePreparation" cols="45" rows="15" >{{ recipes.getRecipe}}</textarea>
+               </div>
+               <div>
+
+                   <input class ="btn btn-group-sm btn-primary" type="submit" name="Validation" />
+                   <input class ="btn btn-group-sm btn-primary" type="submit" value ="ANNULER"   name="Annulation"/>
+               </div>
+           </form>
+        </div>
+       <div class="col-lg-8 mx-auto">
+           <img class="img-fluid" src="http://placehold.it/500x250" alt="">
+           <!-- <img class="img-fluid" src="./assets/pics/1584_600_350.png" alt="">-->
+           <div class="card-img-overlay ">
+               <a class="btn-link" href="" ><i class="far fa-image fa-2x"></i></a>
+           </div>
+       </div>
+     </div>
+     <div class="col-md-4">
+         <h3 class="my-3">Ingredients</h3>
+         <ul>
+             <li>Lorem Ipsum</li>
+             <li>Dolor Sit Amet</li>
+             <li>Consectetur</li>
+             <li>Adipiscing Elit</li>
+         </ul>
+     </div>
+{% endblock %}
