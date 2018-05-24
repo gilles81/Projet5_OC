@@ -270,7 +270,7 @@ class CookController extends lib
 
     public function adminUpdateStatusRecipe()
     {
-        echo $_POST['customRadioInline1'];
+
         if ((isset($_POST['customRadioInline1'])) AND (isset($_GET['dishId'] ))  AND ($_GET['dishId'] >=(int) 0) AND (ctype_digit($_GET['dishId']) ==1 ))  {
             // Get Bdd ident
 
