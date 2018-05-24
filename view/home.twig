@@ -1,43 +1,47 @@
-{% extends '_layout.twig' %}
+{% extends '_layout_new.twig' %}
 
+{% block Part1 %}
+    <div class="container-fluid " id="firstPartHome">
 
-
-{% block contentHeader %}
-    <div class="container mt-5   " id ="firstPage" >
-        <div class="row  ">
-            <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item card-deck mx-auto ">
-                <a href="category.html?category=1">
+        <!--Select of cat 1-->
+        <div class="row mt-3 justify-content-center" >
+            <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item card-deck  ">
+                <a href="category.html?category=1#RecipeList">
                     <div class="card bg-dark text-white">
                         <img class="card-img" src="http://placehold.it/700x400" alt="Viandes">
                         <div class="card-img-overlay">
-                            <h5 class="card-title">Viandes</h5>
+                            <h5 class="card-title">Entrées</h5>
                         </div>
                     </div>
                 </a>
             </div>
-            <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item card-deck mx-auto ">
-                <a href="category.html?category=2">
+            <!--Select of cat 2-->
+            <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item card-deck ">
+                <a href="category.html?category=2#RecipeList">
                     <div class="card bg-dark text-white">
                         <img class="card-img" src="http://placehold.it/700x400" alt="Légumes">
                         <div class="card-img-overlay">
-                            <h5 class="card-title">Légumes</h5>
+                            <h5 class="card-title">Plats</h5>
                         </div>
                     </div>
                 </a>
             </div>
-            <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item card-deck mx-auto ">
-                <a href="category.html?category=3">
+        </div>
+        <div class="row mt-3 justify-content-center">
+            <!--Select of cat 3-->
+            <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item card-deck ">
+                <a href="category.html?category=3#RecipeList">
                     <div class="card bg-dark text-white">
                         <img class="card-img" src="http://placehold.it/700x400" alt="Pâtes">
                         <div class="card-img-overlay">
-                            <h5 class="card-title">Pâtes</h5>
+                            <h5 class="card-title">Dessert</h5>
                         </div>
                     </div>
                 </a>
             </div>
-
-            <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item card-deck mx-auto ">
-                <a href="category.html?category=4">
+            <!--Select of cat 4-->
+            <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item card-deck  ">
+                <a href="category.html?category=4#RecipeList">
                     <div class="card bg-dark text-white">
                         <img class="card-img" src="http://placehold.it/700x400" alt="Selection ">
                         <div class="card-img-overlay">
@@ -47,33 +51,35 @@
                 </a>
             </div>
         </div>
-        <div class="row  ">
-            <div class="col-lg-12  text-center ">
-                <form class="form-inline my-2 my-lg-0 mx-auto">
-                    <input class="form-control mr-sm-2" type="search" placeholder="Recettes , Ingredients , ..." aria-label="Search">
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Recherche</button>
+        <div class="row justify-content-center " id="RecipeList">
+            <div class="col-lg-12">
+                <form class="form-inline justify-content-center">
+                    <input class="form-control " type="search" placeholder="Recettes , Ingredients , ..." aria-label="Search">
+                    <button class="btn btn-outline-success  my-2 my-sm-0" type="submit">Recherche</button>
                 </form>
+            </div>
+        </div>
+    </div>
+
+
+
+
+{% endblock %}
+
+
+
+
+{% block Part2 %}
+    <div class="container " id="secondPartHome">
+
+        <div class="row justify-content-center ">
+            <div class="col-lg-12">
+                {{ message }}
             </div>
         </div>
 
 
-{% endblock %}
-
-
-{% block contentHeaderMessage%}
-        {{ message }}
-{% endblock %}
-
-
-{% block content %}
-
-
-            <div class="row">
-                <div class="col-lg-12 col-md-4 col-sm-6 mx-auto">
-                    <h6 class="display-3"> </h6><hr> </h6>
-                </div>
-            </div>
-            <div class="row">
+            <div class="row" id="RecipeList">
                 {% for recipe in recipes %}
                     <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item mx-auto">
                         <a class="nav-link" href="recipe.html?dishId={{ recipe.getDishId }}">
@@ -95,7 +101,7 @@
                     </div>
                 {% endfor %}
             </div>
-     
+    </div>
 
 
 {% endblock %}

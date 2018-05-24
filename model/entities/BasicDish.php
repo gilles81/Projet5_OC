@@ -23,6 +23,10 @@ class BasicDish
     private $difficulty;
     private $featured;
     private $status;// R = Ready to published , D = Draft , W = Wainting list
+    private $cat1;
+    private $cat2;
+    private $cat3;
+    private $cat4;
 
 
     public function __construct($data)
@@ -51,6 +55,70 @@ class BasicDish
     }
 
 // …
+    /**
+     * @return mixed
+     */
+    public function getCat1()
+    {
+        return $this->cat1;
+    }
+
+    /**
+     * @param mixed $cat1
+     */
+    public function setCat1($cat1)
+    {
+        $this->cat1 = $cat1;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCat2()
+    {
+        return $this->cat2;
+    }
+
+    /**
+     * @param mixed $cat2
+     */
+    public function setCat2($cat2)
+    {
+        $this->cat2 = $cat2;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCat3()
+    {
+        return $this->cat3;
+    }
+
+    /**
+     * @param mixed $cat3
+     */
+    public function setCat3($cat3)
+    {
+        $this->cat3 = $cat3;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCat4()
+    {
+        return $this->cat4;
+    }
+
+    /**
+     * @param mixed $cat4
+     */
+    public function setCat4($cat4)
+    {
+        $this->cat4 = $cat4;
+    }
+
 
 
 

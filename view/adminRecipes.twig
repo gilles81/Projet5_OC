@@ -1,67 +1,68 @@
-{% extends '_layout.twig' %}
+{% extends '_layout_new.twig' %}
 
-{% block contentHeader %}
-    <div class="row  ">
-        <div class="col-lg-6  text-center ">
-            <form class="form-inline my-2 my-lg-0 mx-auto">
-                <input class="form-control mr-sm-2" type="search" placeholder="Recettes , Ingredients , ..." aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Recherche</button>
-            </form>
+{% block Part1 %}
+    <div class="container-fluid  "  id="firstPartHome">
+        <div class="row  ">
+            <div class="col-lg-6  text-center ">
+                <form class="form-inline my-2 my-lg-0 mx-auto">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Recettes , Ingredients , ..." aria-label="Search">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Recherche</button>
+                </form>
+            </div>
+            <div class="col-lg-6  text-center ">
+                <a class ="btn btn-dark" href="adminAddCardRecipe.html"> Ajouter une carte</a>
+            </div>
         </div>
-        <div class="col-lg-6  text-center ">
-            <a class ="btn btn-dark" href="adminAddCardRecipe.html"> Ajouter une carte</a>
+
+        <div class="row">
+            <div class="mx-auto my-1 ">
+                <a  class = "btn btn-dark " href="adminRecipes.html?page={{ recipes['cPage']-1  }}" > << </a><a class = "btn btn-dark " href="" > {{ recipes['cPage'] }} / {{ recipes['nbPage'] }}  </a><a  class = "btn btn-dark " href="adminRecipes.html?page={{ recipes['cPage']+1  }}"  >>> </a>
+            </div>
         </div>
-    </div>
-{% endblock %}
-{% block contentHeaderMessage%}
-{% endblock %}
-{% block content %}
-    <div class="row">
-        <div class="mx-auto my-1 ">
-            <a  class = "btn btn-dark " href="adminRecipes.html?page={{ recipes['cPage']-1  }}" > << </a><a class = "btn btn-dark " href="" > {{ recipes['cPage'] }} / {{ recipes['nbPage'] }}  </a><a  class = "btn btn-dark " href="adminRecipes.html?page={{ recipes['cPage']+1  }}"  >>> </a>
-        </div>
-    </div>
-    <div class="row">
+        <div class="row">
 
-            {% for recipe in recipes['dishes'] %}
-                <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item mx-auto">
-                        <div class="card w-100">
-                            <img class="card-img-top rounded" src="./assets/pics/1584_700_400.jpg" alt="">
-                            <!--<div class="card-img-overlay"><a href="#"><i class="far fa-edit"></i> </a></div>-->
-                            <div class="card-title"  >
-                                <h5 class="card-title" > {{ recipe.getName }} </h5>
+                {% for recipe in recipes['dishes'] %}
+                    <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item mx-auto">
+                            <div class="card w-100">
+                                <img class="card-img-top rounded" src="./assets/pics/1584_700_400.jpg" alt="">
+                                <!--<div class="card-img-overlay"><a href="#"><i class="far fa-edit"></i> </a></div>-->
+                                <div class="card-title"  >
+                                    <h5 class="card-title" > {{ recipe.getName }} </h5>
+                                </div>
+
+                                <div class="card-footer " style="height: 50px;">
+                                    <button type="button" class="btn btn-link "
+                                            id ="bt_eraser_receipe_{{ recipe.getDishId }}"
+                                            data-toggle="modal"
+                                            data-target="#modalDelete_{{ recipe.getDishId }}"
+                                    > <i class="fas fa-eraser"></i></button>
+                                    <a href ="adminUpdateRecipe.html?dishId={{ recipe.getDishId }}"><i class="far fa-edit"></i></a>
+                                    <a href ="adminUpdateRecipe.html?dishId={{ recipe.getDishId }}"><i class="far fa-copy"></i></a>
+                                </div>
                             </div>
 
-                            <div class="card-footer " style="height: 50px;">
-                                <button type="button" class="btn btn-link "
-                                        id ="bt_eraser_receipe_{{ recipe.getDishId }}"
-                                        data-toggle="modal"
-                                        data-target="#modalDelete_{{ recipe.getDishId }}"
-                                > <i class="fas fa-eraser"></i></button>
-                                <a href ="adminUpdateRecipe.html?dishId={{ recipe.getDishId }}"><i class="far fa-edit"></i></a>
-                                <a href ="adminUpdateRecipe.html?dishId={{ recipe.getDishId }}"><i class="far fa-copy"></i></a>
-                            </div>
-                        </div>
-
-                </div>
-                <div class="modal fade bd-eraserReceipe-modal-lg" id="modalDelete_{{ recipe.getDishId }}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-lg">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Suppression  Validation   </a>
-                                </h5>
-                            </div>
-                            <div class="modal-body">
-                                <p> Confirmer la suppression ! de  Validation </a>
-                                </p>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal"> Annulation</button>
-                                <a href ="adminRemoveRecipe.html?dishId={{ recipe.getDishId }}" class="btn btn-danger">   Validation </a>
+                    </div>
+                    <div class="modal fade bd-eraserReceipe-modal-lg" id="modalDelete_{{ recipe.getDishId }}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Suppression  Validation   </a>
+                                    </h5>
+                                </div>
+                                <div class="modal-body">
+                                    <p> Confirmer la suppression ! de  Validation </a>
+                                    </p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal"> Annulation</button>
+                                    <a href ="adminRemoveRecipe.html?dishId={{ recipe.getDishId }}" class="btn btn-danger">   Validation </a>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            {% endfor %}
-        </div>
+                {% endfor %}
+            </div>
+    </div>
+{% endblock %}
+{% block Part2 %}
 {% endblock %}

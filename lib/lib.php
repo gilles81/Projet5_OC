@@ -56,7 +56,11 @@ class lib
             'difficulty' => $row['Difficulty'],
             'featured' => $row['Featured'],
             'likes' => $row['lke'],
-            'status' => $row['Status']
+            'status' => $row['Status'],
+            'cat1' => $row['Cat1'],
+            'cat2' => $row['Cat2'],
+            'cat3' => $row['Cat3'],
+            'cat4' => $row['Cat4']
         ];
         return $donnees;
     }
@@ -83,7 +87,11 @@ class lib
             'difficulty' => '',
             'featured' => '',
             'likes' => '',
-            'status' => ''
+            'status' => '',
+            'cat1' => '',
+            'cat2' => '',
+            'cat3' => '',
+            'cat4' => ''
         ];
         return $donnees;
     }

@@ -195,16 +195,16 @@ class CookManager extends BackManager
 
     public function addComment($values)
     {
-            $bdd = $this->bdd;
-            $query = "INSERT INTO Comments (CommentId , DishId , Author,CreationDate,ModificationDate,CommentContent,Answ) VALUES (NULL, :DishID ,:Author, NOW(), NOW(),:CommentContent,'');";
-            $req = $bdd->prepare($query);
+        $bdd = $this->bdd;
+        $query = "INSERT INTO Comments (CommentId , DishId , Author,CreationDate,ModificationDate,CommentContent,Answ) VALUES (NULL, :DishID ,:Author, NOW(), NOW(),:CommentContent,'');";
+        $req = $bdd->prepare($query);
 
 
-            $req->bindValue(':Dishid', $values['DishId'], PDO::PARAM_INT);
-            $req->bindValue(':Author', $values['Author'], PDO::PARAM_STR);
-            $req->bindValue(':CommentContent', $values['Topic'], PDO::PARAM_STR);
+        $req->bindValue(':Dishid', $values['DishId'], PDO::PARAM_INT);
+        $req->bindValue(':Author', $values['Author'], PDO::PARAM_STR);
+        $req->bindValue(':CommentContent', $values['Topic'], PDO::PARAM_STR);
 
-            $req->execute();
+        $req->execute();
 
     }
     /**
@@ -373,6 +373,58 @@ class CookManager extends BackManager
         $req->execute();
     }
 
+    public function UpdateRecipeStatus($newRecipe)
+    {
+        $bdd = $this->bdd;
+        $req = $bdd->prepare('UPDATE dish SET  Status =:Status WHERE DishId = :DishId ');
+        $req->bindValue(':DishId',$newRecipe->getDishId(),PDO::PARAM_INT);
+        $req->bindValue(':Status',$newRecipe->getStatus(),PDO::PARAM_STR);
+        $req->execute();
+    }
+
+
+    public function UpdateRecipePortion($newRecipe)
+    {
+        $bdd = $this->bdd;
+        $req = $bdd->prepare('UPDATE dish SET  Portion=:Portion WHERE DishId = :DishId ');
+        $req->bindValue(':DishId',$newRecipe->getDishId(),PDO::PARAM_INT);
+        $req->bindValue(':Portion',$newRecipe->getPortion(),PDO::PARAM_STR);
+        $req->execute();
+    }
+
+    public function UpdateRecipeOrigin($newRecipe)
+    {
+        $bdd = $this->bdd;
+        $req = $bdd->prepare('UPDATE dish SET  Origin =:Origin WHERE DishId = :DishId ');
+        $req->bindValue(':DishId',$newRecipe->getDishId(),PDO::PARAM_INT);
+        $req->bindValue(':Origin',$newRecipe->getOrigin(),PDO::PARAM_STR);
+        $req->execute();
+    }
+
+    public function UpdateRecipeDifficulty($newRecipe)
+    {
+        $bdd = $this->bdd;
+        $req = $bdd->prepare('UPDATE dish SET  Difficulty =:Difficulty WHERE DishId = :DishId ');
+        $req->bindValue(':DishId',$newRecipe->getDishId(),PDO::PARAM_INT);
+        $req->bindValue(':Difficulty',$newRecipe->getStatus(),PDO::PARAM_STR);
+        $req->execute();
+    }
+    public function UpdateRecipeCategory($newRecipe)
+    {
+
+        $bdd = $this->bdd;
+        $req = $bdd->prepare('UPDATE dish SET  Cat1 =:Cat1  , Cat2 =:Cat2 ,Cat3 =:Cat3, Cat4 =:Cat4 WHERE DishId = :DishId ');
+        $req->bindValue(':DishId',$newRecipe->getDishId(),PDO::PARAM_INT);
+        $req->bindValue(':Cat1',$newRecipe->getCat1(),PDO::PARAM_INT);
+        $req->bindValue(':Cat2',$newRecipe->getCat2(),PDO::PARAM_INT);
+        $req->bindValue(':Cat3',$newRecipe->getCat3(),PDO::PARAM_INT);
+        $req->bindValue(':Cat4',$newRecipe->getCat4(),PDO::PARAM_INT);
+
+        $req->execute();
+    }
+
+
+
     /**
      * Warning
      *
@@ -423,5 +475,5 @@ class CookManager extends BackManager
 
     }
 
-    
+
 }

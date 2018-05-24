@@ -1,6 +1,7 @@
-{% extends '_layout.twig' %}
+{% extends '_layout_new.twig' %}
 
-{% block content %}
+{% block Part1 %}
+<div class="container " >
         <div class="row  ">
             <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item card-deck mx-auto ">
                 <a href="categorie1.html">
@@ -45,12 +46,12 @@
                 <h6 class="display-3"> </h6><hr> </h6>
             </div>
         </div>
-            <div class="row">
-                {% for recipe in recipes %}
-                    <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item mx-auto">
-                        <a class="nav-link" href="recipe.html?dishId={{ recipe.getDishId }}">
+        <div class="row">
+            {% for recipe in recipes %}
+                <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item mx-auto">
+                    <a class="nav-link" href="recipe.html?dishId={{ recipe.getDishId }}">
                         <div class="card ">
-                           <img class="card-img-top" src="http://placehold.it/700x400" alt="">
+                            <img class="card-img-top" src="http://placehold.it/700x400" alt="">
                             <div class="card-body">
                                 <h4 class="card-title" >
                                     {{recipe.getName }}
@@ -63,11 +64,13 @@
                                 <h6>Avis : </h6>
                             </div>
                         </div>
-                        </a>
-                    </div>
+                    </a>
+                </div>
 
-                {% endfor %}
+            {% endfor %}
+        </div>
+</div>
 
-
-    <!-- /.container -->
+{% endblock %}
+{% block Part2 %}
 {% endblock %}

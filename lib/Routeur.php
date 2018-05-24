@@ -21,7 +21,7 @@ class Routeur
 {
     private $request;
     private $routes = [
-       // 'contact.html'                  => ['controller' => 'MiscController', 'method' => 'ShowContact'],
+        // 'contact.html'                  => ['controller' => 'MiscController', 'method' => 'ShowContact'],
         //'about.html'                    => ['controller' => 'MiscController', 'method' => 'ShowAbout'],
         'home.html'                             => ['controller' => 'CookController', 'method' => 'showHome'],
         'admin.html'                            => ['controller' => 'MemberController', 'method' => 'loginSession'],
@@ -34,12 +34,17 @@ class Routeur
         'adminAddCardRecipe.html'               => ['controller' => 'CookController', 'method' => 'adminAddCardRecipeView'],
         'adminSendNewRecipe.html'               => ['controller' => 'CookController', 'method' => 'adminSendNewRecipe'],
         'adminRemoveRecipe.html'                => ['controller' => 'CookController', 'method' => 'adminRemoveDish'],
+        'adminUpdateStatusRecipe.html'          => ['controller' => 'CookController', 'method' => 'adminUpdateStatusRecipe'],
+        'adminUpdateDifficultyRecipe.html'      => ['controller' => 'CookController', 'method' => 'adminUpdateDifficultyRecipe'],
+        'adminUpdatePortionRecipe.html'         => ['controller' => 'CookController', 'method' => 'adminUpdatePortionRecipe'],
+        'adminUpdateOriginRecipe.html'          => ['controller' => 'CookController', 'method' => 'adminUpdateOriginRecipe'],
+        'adminUpdateCategoryRecipe.html'        => ['controller' => 'CookController', 'method' => 'adminUpdateCategoryRecipe'],
 
 
         'recipe.html'                     => ['controller' => 'CookController', 'method' => 'showDish'],
         'category.html'                     => ['controller' => 'CookController', 'method' => 'showCategory'],
 
-      // 'admin.html'                    => ['controller' => 'MemberController', 'method' => 'loginSession'],
+        // 'admin.html'                    => ['controller' => 'MemberController', 'method' => 'loginSession'],
         'deconnection.html'              => ['controller' => 'MemberController', 'method' => 'deconnection'],
         'error.html'         => ['controller' =>'PostsController', 'method' => 'error']
     ];
