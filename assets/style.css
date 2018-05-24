@@ -1,17 +1,26 @@
-
 Body{
 
-    background-image: url( '../assets/pics/wood-test1.jpg');
-    background-repeat: no-repeat;
-    background-size:100%;
-    background-color: rgb(236,236,199,1);
+    background-color: white;
 }
-
 .textCard {
 
     margin :0px;
     padding:0;
     font-size : 0.4em;
     color:red;
+}
 
+#firstPartHome{
+    width:100%;
+    min-height:100vh;
+    background: url( '../assets/pics/wood-2142241_1280.jpg') no-repeat center fixed;
+
+    background-size: cover;
+    background-attachment: unset;
+    border: 1px solid red;
+
+}
+#secondPartHome{
+    height: 900px;
+    background-color:whitesmoke;
 }

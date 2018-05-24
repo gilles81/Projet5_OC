@@ -195,16 +195,16 @@ class CookManager extends BackManager
 
     public function addComment($values)
     {
-            $bdd = $this->bdd;
-            $query = "INSERT INTO Comments (CommentId , DishId , Author,CreationDate,ModificationDate,CommentContent,Answ) VALUES (NULL, :DishID ,:Author, NOW(), NOW(),:CommentContent,'');";
-            $req = $bdd->prepare($query);
+        $bdd = $this->bdd;
+        $query = "INSERT INTO Comments (CommentId , DishId , Author,CreationDate,ModificationDate,CommentContent,Answ) VALUES (NULL, :DishID ,:Author, NOW(), NOW(),:CommentContent,'');";
+        $req = $bdd->prepare($query);
 
 
-            $req->bindValue(':Dishid', $values['DishId'], PDO::PARAM_INT);
-            $req->bindValue(':Author', $values['Author'], PDO::PARAM_STR);
-            $req->bindValue(':CommentContent', $values['Topic'], PDO::PARAM_STR);
+        $req->bindValue(':Dishid', $values['DishId'], PDO::PARAM_INT);
+        $req->bindValue(':Author', $values['Author'], PDO::PARAM_STR);
+        $req->bindValue(':CommentContent', $values['Topic'], PDO::PARAM_STR);
 
-            $req->execute();
+        $req->execute();
 
     }
     /**
@@ -475,5 +475,5 @@ class CookManager extends BackManager
 
     }
 
-    
+
 }

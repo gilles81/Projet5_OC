@@ -21,7 +21,7 @@ class Routeur
 {
     private $request;
     private $routes = [
-       // 'contact.html'                  => ['controller' => 'MiscController', 'method' => 'ShowContact'],
+        // 'contact.html'                  => ['controller' => 'MiscController', 'method' => 'ShowContact'],
         //'about.html'                    => ['controller' => 'MiscController', 'method' => 'ShowAbout'],
         'home.html'                             => ['controller' => 'CookController', 'method' => 'showHome'],
         'admin.html'                            => ['controller' => 'MemberController', 'method' => 'loginSession'],
@@ -44,7 +44,7 @@ class Routeur
         'recipe.html'                     => ['controller' => 'CookController', 'method' => 'showDish'],
         'category.html'                     => ['controller' => 'CookController', 'method' => 'showCategory'],
 
-      // 'admin.html'                    => ['controller' => 'MemberController', 'method' => 'loginSession'],
+        // 'admin.html'                    => ['controller' => 'MemberController', 'method' => 'loginSession'],
         'deconnection.html'              => ['controller' => 'MemberController', 'method' => 'deconnection'],
         'error.html'         => ['controller' =>'PostsController', 'method' => 'error']
     ];
