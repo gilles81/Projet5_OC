@@ -43,6 +43,7 @@ class CookController extends lib
                 }
         */
         // Call of manager to get all recipes
+        $this->sessionStatus();//determine status admin or not
         $manager = new CookManager();
         $recipes= $manager->findFeaturedDishes();
         if (empty($recipes)){
