@@ -1,0 +1,168 @@
+{% extends '_layout_new.twig' %}
+
+{% block Part1 %}
+{% endblock %}
+{% block Part2 %}
+    <div class="container-fluid " id="firstPartHome">
+
+        <form action="adminSendUpdateRecipe2.html?dishId={{ recipes.getDishId  }}" method="post">
+            <!-- Row with image and status block-->
+           <div class="row "  style="border : 1px solid yellow">
+               <!-- Recipe picture-->
+                <div class="col-lg-6  mx-auto">
+                    <img class="img-fluid" src="http://placehold.it/500x250" alt="">
+                    <!-- <img class="img-fluid" src="./assets/pics/1584_600_350.png" alt="">-->
+                    <div class="card-img-overlay ">
+                        <a class="btn-link" href="" ><i class="far fa-image fa-2x"></i></a>
+                    </div>
+                </div>
+               <!-- Recipe options -->
+                <div class="col-lg-6  mx-auto">
+                    <div class="row" style="border:2px solid red">
+                        <!-- Recipe Status in database-->
+                        <div class="col-lg-12  mx-auto" style="border : 1px solid green">
+                            {% set checkedStatus = recipes.getStatus %}
+                            <!-- Draft Option-->
+                            <div class="custom-control custom-radio custom-control-inline">
+                               {% if checkedStatus=="D" %}
+                                <input type="radio" id="customRadioInline1" name="customRadioInline1"  value="D" class="custom-control-input" checked  >
+                               {% else %}
+                                 <input type="radio" id="customRadioInline1" name="customRadioInline1" value="D" class="custom-control-input" >
+                               {% endif %}
+                               <label class="custom-control-label" for="customRadioInline1">Brouillon {{ recipes.getStatus }}</label>
+                            </div>
+                            <!-- Ready option-->
+                            <div class="custom-control custom-radio custom-control-inline">
+                                {% if checkedStatus=="R" %}
+                                  <input type="radio" id="customRadioInline2" name="customRadioInline1" value="R" class="custom-control-input" checked>
+                                {% else %}
+                                  <input type="radio" id="customRadioInline2" name="customRadioInline1"  value="R" class="custom-control-input" >
+                                {% endif %}
+                                <label class="custom-control-label" for="customRadioInline2">Pret</label>
+                            </div>
+                            <!-- Wainting Option-->
+                            <div class="custom-control custom-radio custom-control-inline">
+                                {% if checkedStatus=="W" %}
+                                  <input type="radio" id="customRadioInline3" name="customRadioInline1"  value="W" class="custom-control-input" checked>
+                                {% else %}
+                                  <input type="radio" id="customRadioInline3" name="customRadioInline1" value="W" class="custom-control-input" >
+                                {% endif %}
+                                <label class="custom-control-label" for="customRadioInline3">En attente</label>
+                            </div>
+                        </div>
+                    </div><!-- /row of radio option-->
+                    <div class="row">
+                        <!-- Recipe Diffiulty in database-->
+                        <div class="col-lg-6  ">
+                            {% set Difficulty = recipes.getDifficulty %}
+                            <!-- Difficulty parametrage-->
+                                <div class="form-group">
+                                    <label for="formControlRangeDiff">Difficulty </label>
+                                    <input type="range" class="form-control-range" name="DifficultyFormValue" id="formControlRange" min="0" max="3" step="1" value= {{  Difficulty }}  >
+                                </div>
+                        </div>
+                        <!-- Recipe  Portion-->
+                        <div class="col-lg-6 mx-auto ">
+                            {% set Portion = recipes.getPortion %}
+                                <div class="form-group">
+                                    <label for="formControlRangePortion">Portion </label>
+                                    <input  type="number" class="form-control-range" name="PortionFormValue" id="number" value = {{ Portion }}>
+                                </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <!-- Recipe  Category-->
+                        <div class="col-lg-12 mx-auto ">
+                            <div class="form-check form-check-inline">
+                                <label class="form-check-label" for="inlineCheckboxCat">Entrées</label>
+                                {% if recipes.getCat1==1 %}
+                                    <input class="form-check-input" type="checkbox" id="inlineCheckboxCat1" value="1" name="CategoryValueCatchoix[]" checked>
+                                {% else %}
+                                    <input class="form-check-input" type="checkbox" id="inlineCheckboxCat1" value="1" name="CategoryValueCatchoix[]" >
+                                {% endif %}
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <label class="form-check-label" for="inlineCheckboxCat">Plats </label>
+                                {% if recipes.getCat2==1 %}
+                                    <input class="form-check-input" type="checkbox" id="inlineCheckboxCat2" value="2" name="CategoryValueCatchoix[]" checked>
+                                {% else %}
+                                    <input class="form-check-input" type="checkbox" id="inlineCheckboxCat2" value="2" name="CategoryValueCatchoix[]" >
+                                {% endif %}
+                            </div>
+
+                            <div class="form-check form-check-inline">
+                                <label class="form-check-label" for="inlineCheckboxCat">Desserts </label>
+                                {% if recipes.getCat3==1 %}
+                                    <input class="form-check-input" type="checkbox" id="inlineCheckboxCat3" value="3" name="CategoryValueCatchoix[]" checked>
+                                {% else %}
+                                    <input class="form-check-input" type="checkbox" id="inlineCheckboxCat3" value="3" name="CategoryValueCatchoix[]" >
+                                {% endif %}
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <label class="form-check-label" for="inlineCheckboxCat">Sélection </label>
+                                {% if recipes.getCat4==1 %}
+                                    <input class="form-check-input" type="checkbox" id="inlineCheckboxCat4" value="4" name="CategoryValueCatchoix[]" checked>
+                                {% else %}
+                                    <input class="form-check-input" type="checkbox" id="inlineCheckboxCat4" value="4" name="CategoryValueCatchoix[]" >
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Origin-->
+                    <div class="row">
+                        <div class="col-lg-12 mx-auto ">
+                            {% set Origin = recipes.getOrigin %}
+                            <div class="form-group">
+                                <label for="formControlRangeOrigin">Origin </label>
+                                <input  type="text" class="form-control-range" name="OriginFormValue" id="formOriginForm"  value = {{ Origin }}>
+                            </div>
+                        </div>
+                        <div class="col-lg-12 mx-auto ">
+                            {% set Time = recipes.PreparationTime %}
+                            <div class="form-group">
+                                <label for="formControlRangeOrigin">Temps </label>
+                                <input  type="text" class="form-control-range" name="OriginFormValue" id="formOriginForm"  value = {{ Time }}>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+           </div><!-- END Recipe options -->
+           <div class="col-lg-6  mx-auto">
+                <label for="Name"></label><br />
+                <input type="text" id="newName" name="newName" value="{{ recipes.getName }}" />
+
+           </div>
+           <div class="row mx-2" style="border : 3px solid green" >
+               <div class="col-lg-7 mx-auto">
+                   <div>
+                       <label for="comment"></label><br />
+                       <textarea id="newRecipePreparation" name="newRecipe" cols="200" rows="15" >{{ recipes.getRecipe}}</textarea>
+                   </div>
+
+               </div>
+               <div class="col-md-5 "style="border : 3px solid green">
+                        <h3 class="my-3 mx-auto" >Ingredients</h3>
+                        <ul>
+                            <li>Lorem Ipsum</li>
+                            <li>Dolor Sit Amet</li>
+                            <li>Consectetur</li>
+                            <li>Adipiscing Elit</li>
+                        </ul>
+
+               </div>
+            </div>
+            <div class="row text-center  "  >
+                <div class="col-lg-12 my-5 " >
+                    <input class ="btn btn-group-sm btn-primary" type="submit" name="Validation"/>
+                    <input class ="btn btn-group-sm btn-primary" type="submit" value ="ANNULER"   name="Annulation"/>
+                </div>
+            </div>
+         </form>
+   <!-- Validation bouton , recipe preparation , and ingredients -->
+    </div>
+    <!---->
+{% endblock %}
+
