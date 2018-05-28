@@ -27,6 +27,7 @@ class Routeur
         'home.html'                             => ['controller' => 'CookController', 'method' => 'showHome'],
         'admin.html'                            => ['controller' => 'MemberController', 'method' => 'loginSession'],
         'adminverif.html'                       => ['controller' => 'MemberController', 'method' => 'identification'],
+        // Recipe Administration
         'adminBoard.html'                       => ['controller' => 'CookController', 'method' => 'adminBoard'],
         'adminRecipes.html'                     => ['controller' => 'CookController', 'method' => 'adminRecipes'],
         'adminUpdateRecipe.html'                => ['controller' => 'CookController', 'method' => 'adminUpdateRecipeView'],
@@ -35,11 +36,17 @@ class Routeur
         'adminAddCardRecipe.html'               => ['controller' => 'CookController', 'method' => 'adminAddCardRecipeView'],
         'adminSendNewRecipe.html'               => ['controller' => 'CookController', 'method' => 'adminSendNewRecipe'],
         'adminRemoveRecipe.html'                => ['controller' => 'CookController', 'method' => 'adminRemoveDish'],
-        'adminUpdateStatusRecipe.html'          => ['controller' => 'CookController', 'method' => 'adminUpdateStatusRecipe'],
-        'adminUpdateDifficultyRecipe.html'      => ['controller' => 'CookController', 'method' => 'adminUpdateDifficultyRecipe'],
-        'adminUpdatePortionRecipe.html'         => ['controller' => 'CookController', 'method' => 'adminUpdatePortionRecipe'],
-        'adminUpdateOriginRecipe.html'          => ['controller' => 'CookController', 'method' => 'adminUpdateOriginRecipe'],
-        'adminUpdateCategoryRecipe.html'        => ['controller' => 'CookController', 'method' => 'adminUpdateCategoryRecipe'],
+
+
+
+        'adminUpdateRecipemiseajours.html'      => ['controller' => 'CookController', 'method' => 'adminUpdateRecipeView'],
+        'adminSendUpdateRecipe2.html'           => ['controller' => 'CookController', 'method' => 'adminUpdateStatusRecipe'],
+
+        //'adminUpdateStatusRecipe.html'          => ['controller' => 'CookController', 'method' => 'adminUpdateStatusRecipe'],
+        //'adminUpdateDifficultyRecipe.html'      => ['controller' => 'CookController', 'method' => 'adminUpdateDifficultyRecipe'],
+        //'adminUpdatePortionRecipe.html'         => ['controller' => 'CookController', 'method' => 'adminUpdatePortionRecipe'],
+        //'adminUpdateOriginRecipe.html'          => ['controller' => 'CookController', 'method' => 'adminUpdateOriginRecipe'],
+        //'adminUpdateCategoryRecipe.html'        => ['controller' => 'CookController', 'method' => 'adminUpdateCategoryRecipe'],
 
 
         'recipe.html'                     => ['controller' => 'CookController', 'method' => 'showDish'],

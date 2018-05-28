@@ -347,9 +347,62 @@ class CookManager extends BackManager
         }
     }
 
-    /**
-     * u
-     */
+    public function UpdateRecipe($newRecipe)
+    {
+
+        echo '<br>';
+
+        print_r($newRecipe);
+        echo 'name   -----   <br>';
+        echo $newRecipe->getName();
+        echo '<br>';
+
+        $bdd = $this->bdd;
+        $req = $bdd->prepare('UPDATE dish SET  Title=:Title
+/*
+                                                         CreationDate =:CreationDate ,
+                                                         Recipe=:Recipe ,
+                                                         Portion=:Portion,
+                                                         ImagePathName=:ImagePath,
+                                                         Origin=:Origin,
+                                                         CookingTime=:CookingTime,
+                                                         PreparationTime=:PreparationTime,
+                                                         Ingredients=:Ingredients,
+                                                         Difficulty:=Difficulty,
+                                                         Featured:=Featured,
+                                                         Status:=Status,
+                                                         Cat1=:Cat1,
+                                                         Cat2=:Cat2,
+                                                         Cat3=:Cat3, 
+                                                         Cat4=:Cat4*/
+                                                         
+                                                      
+        WHERE DishId=$newRecipe->getDishId() ');
+        //$req->bindValue(':DishId',,PDO::PARAM_INT);
+
+        $req->bindValue(':Title',$newRecipe->getName(),PDO::PARAM_STR);
+        /*
+        $req->bindValue(':CreationDate',$newRecipe->getCreationDate(),PDO::PARAM_STR);
+        $req->bindValue(':Recipe',$newRecipe->getRecipe(),PDO::PARAM_STR);
+        $req->bindValue(':Portion',$newRecipe->getPortion(),PDO::PARAM_INT);
+        $req->bindValue(':ImagePathName',$newRecipe->getImagePathName(),PDO::PARAM_STR);
+        $req->bindValue(':Origin',$newRecipe->getOrigin(),PDO::PARAM_STR);
+        $req->bindValue(':CookingTime',$newRecipe->getCookingTime(),PDO::PARAM_STR);
+        $req->bindValue(':PreparationTime',$newRecipe->getPreparationTime(),PDO::PARAM_STR);
+        $req->bindValue(':Ingredients',$newRecipe->getIngredients(),PDO::PARAM_STR);
+        $req->bindValue(':Difficulty',$newRecipe->getDifficulty(),PDO::PARAM_INT);
+        $req->bindValue(':Featured',$newRecipe->getFeatured(),PDO::PARAM_STR);
+        $req->bindValue(':Status',$newRecipe->getStatus(),PDO::PARAM_STR);
+        $req->bindValue(':Cat1',$newRecipe->getCat1(),PDO::PARAM_INT);
+        $req->bindValue(':Cat2',$newRecipe->getCat2(),PDO::PARAM_INT);
+        $req->bindValue(':Cat3',$newRecipe->getCat3(),PDO::PARAM_INT);
+        $req->bindValue(':Cat4',$newRecipe->getCat4(),PDO::PARAM_INT);
+*/
+        $req->execute();
+    }
+
+
+
 
     public function UpdateRecipeName($newRecipeName)
     {
@@ -360,9 +413,7 @@ class CookManager extends BackManager
         $req->execute();
     }
 
-    /**
-     * u
-     */
+
 
     public function UpdateRecipePreparation($newRecipePreparation)
     {
@@ -456,7 +507,6 @@ class CookManager extends BackManager
         //$req->fetch(PDO::FETCH_ASSOC);
 
         $warnings = array();
-
         while ($row = $req-> fetch(PDO::FETCH_ASSOC)){
             $warning = new Warning();
             $warning->setPostId($row['PostId']);
@@ -467,12 +517,8 @@ class CookManager extends BackManager
             $warning->setAuthor($row['Author']);
 
             $warnings[] = $warning;
-
         }
-
         return $warnings;
-
-
     }
 
 

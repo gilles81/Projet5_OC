@@ -126,6 +126,12 @@ class CookController extends lib
         $myView->build( array('recipes'=> null ,'comments'=>null,'warningList' => null ,'message'=>null,'HOST'=>HOST ,'adminLevel'=> $_SESSION['adminLevel']));
     }
 
+    /**
+     * adminRecipes
+     *
+     * call manager to find all recipes (all status) and call the view display them.
+     *
+     */
     public function adminRecipes()
     {
         $manager = new CookManager();
@@ -145,21 +151,16 @@ class CookController extends lib
 
     public function adminUpdateRecipeView()
     {
-
         if (isset($_GET['dishId'])&& (ctype_digit($_GET['dishId']) ==1 ) && $_GET['dishId']>0 ) {
-
             $manager = new CookManager();
-
             $recipes= $manager->findDish($_GET['dishId']);
 
-            $myView = new View('adminUpdateRecipe');
+            $myView = new View('adminUpdateRecipemiseajours');
             $myView->build( array('recipes'=> $recipes ,'comments'=>null,'warningList' => null ,'message'=>null,'HOST'=>HOST ,'adminLevel'=> $_SESSION['adminLevel']));
         }
 
-
     }
 
-// TODO:  verify
     public function adminSendNewRecipe() {
         if (isset($_POST['newRecipePreparation']) AND isset($_POST['newRecipeTitle'])) {
             if (!empty($_POST['newRecipeTitle']) AND (!empty($_POST['newRecipePreparation']))  ) {
@@ -194,195 +195,53 @@ class CookController extends lib
 
         }
     }
-// todo :
-    public function adminSendNewRecipeName()
-    {
-        if ((!isset($_POST['Annulation']) )) {
-            if ((isset($_POST['newName'])) AND (isset($_POST['newName'])) AND (isset($_GET['dishId'] ))  AND ($_GET['dishId'] >=(int) 0) AND (ctype_digit($_GET['dishId']) ==1 ))  {
-                // Get Bdd ident
 
-                $data = array();
-                $newRecipe= new BasicDish($data);
-                $newRecipe->setDishId($_GET['dishId']);
+
+
+
+    public function  adminUpdateStatusRecipe()
+    {
+        if ( (isset($_GET['dishId'] )) AND ($_GET['dishId'] >=(int)0)  AND (ctype_digit($_GET['dishId']) ==1 )) {
+            $data = array();
+            $newRecipe= new BasicDish($data);
+            $newRecipe->setDishId($_GET['dishId']);
+            $manager = new CookManager();
+
+            if ((isset($_POST['newName'])) )  {
+                // Get Bdd ident
+                echo $_POST['newName'];
                 $newRecipe->setName($_POST['newName']);
-
-                // Manager Call
-                $manager = new CookManager();
-                $manager->UpdateRecipeName( $newRecipe);
-
-                $recipe=$manager->findDish($_GET['dishId'] );
-                $myView = new View('adminUpdateRecipe');
-                $myView->build( array('recipes'=> $recipe ,'comments'=>null,'warningList' => null ,'message'=>null,'HOST'=>HOST ,'adminLevel'=> $_SESSION['adminLevel']));
-
-
-
-                //View call
-                $myView = new View(' ');
-                //$myView->redirect('home.html');
-            }else {
-                $myView = new View('error');
-                $myView->build( array('recipes'=> null ,'comments'=>null,'warningList' => null,'message'=>null,'HOST'=>HOST, 'adminLevel' => $_SESSION['adminLevel']));
+                $manager->UpdateRecipeName($newRecipe);
             }
-        }else{
-            $myView = new View('error');
-            $myView->build( array('recipes'=> null ,'comments'=>null,'warningList' => null,'message'=>null,'HOST'=>HOST, 'adminLevel' => $_SESSION['adminLevel']));
-        }
-
-
-
-    }
-
-    public function adminSendNewRecipePreparation()
-    {
-        if ((!isset($_POST['Annulation']) )) {
-            if ((isset($_POST['newRecipePreparation'])) AND (isset($_POST['newRecipePreparation'])) AND (isset($_GET['dishId'] ))  AND ($_GET['dishId'] >=(int) 0) AND (ctype_digit($_GET['dishId']) ==1 ))  {
+            if ((isset($_POST['newRecipe'])) )  {
                 // Get Bdd ident
-
-                $data = array();
-                $newRecipe= new BasicDish($data);
-                $newRecipe->setDishId($_GET['dishId']);
-                $newRecipe->setRecipe($_POST['newRecipePreparation']);
-
-
-                $manager = new CookManager();
-                $manager->UpdateRecipePreparation( $newRecipe);
-                $recipe=$manager->findDish($_GET['dishId'] );
-
-                $myView = new View('adminUpdateRecipe');
-                $myView->build( array('recipes'=> $recipe ,'comments'=>null,'warningList' => null ,'message'=>null,'HOST'=>HOST ,'adminLevel'=> $_SESSION['adminLevel']));
-
-
-            }else {
-
-                $myView = new View('error');
-                $myView->build( array('recipes'=> null ,'comments'=>null,'warningList' => null,'message'=>null,'HOST'=>HOST, 'adminLevel' => $_SESSION['adminLevel']));
+                $newRecipe->setRecipe($_POST['newRecipe']);
+                $manager->UpdateRecipePreparation($newRecipe);
             }
-        }else{
+            if ((isset($_POST['customRadioInline1'])) )  {
+                // Get Bdd ident
+                $newRecipe->setStatus($_POST['customRadioInline1']);
+                $manager->UpdateRecipeStatus($newRecipe);
+            }
 
-            $myView = new View('error');
-            $myView->build( array('recipes'=> null ,'comments'=>null,'warningList' => null,'message'=>null,'HOST'=>HOST, 'adminLevel' => $_SESSION['adminLevel']));
-        }
+            // Difficulty
 
+            if ((isset($_POST['DifficultyFormValue'])))   {
+                $newRecipe->setStatus($_POST['DifficultyFormValue']);
+                $manager->UpdateRecipeDifficulty($newRecipe);
+            }
+            // Portion
+            if ((isset($_POST['PortionFormValue'])) )  {
+                $newRecipe->setPortion($_POST['PortionFormValue']);
+                $manager->UpdateRecipePortion($newRecipe);
+            }
 
-
-    }
-
-
-
-    public function adminUpdateStatusRecipe()
-    {
-
-        if ((isset($_POST['customRadioInline1'])) AND (isset($_GET['dishId'] ))  AND ($_GET['dishId'] >=(int) 0) AND (ctype_digit($_GET['dishId']) ==1 ))  {
-            // Get Bdd ident
-
-            $data = array();
-            $newRecipe= new BasicDish($data);
-            $newRecipe->setDishId($_GET['dishId']);
-            $newRecipe->setStatus($_POST['customRadioInline1']);
-
-
-            $manager = new CookManager();
-            $manager->UpdateRecipeStatus( $newRecipe);
-            $recipe=$manager->findDish($_GET['dishId'] );
-
-            $myView = new View('adminUpdateRecipe');
-            $myView->build( array('recipes'=> $recipe ,'comments'=>null,'warningList' => null ,'message'=>null,'HOST'=>HOST ,'adminLevel'=> $_SESSION['adminLevel']));
-
-
-        }else {
-
-            $myView = new View('error');
-            $myView->build( array('recipes'=> null ,'comments'=>null,'warningList' => null,'message'=>null,'HOST'=>HOST, 'adminLevel' => $_SESSION['adminLevel']));
-        }
-
-    }
-
-
-    public function adminUpdateDifficultyRecipe()
-    {
-
-        if ((isset($_POST['DifficultyFormValue'])) AND (isset($_GET['dishId'] ))  AND ($_GET['dishId'] >=(int) 0) AND (ctype_digit($_GET['dishId']) ==1 ))  {
-            // Get Bdd ident
-
-            $data = array();
-            $newRecipe= new BasicDish($data);
-            $newRecipe->setDishId($_GET['dishId']);
-            $newRecipe->setStatus($_POST['DifficultyFormValue']);
-
-
-            $manager = new CookManager();
-            $manager->UpdateRecipeDifficulty( $newRecipe);
-            $recipe=$manager->findDish($_GET['dishId'] );
-
-            $myView = new View('adminUpdateRecipe');
-            $myView->build( array('recipes'=> $recipe ,'comments'=>null,'warningList' => null ,'message'=>null,'HOST'=>HOST ,'adminLevel'=> $_SESSION['adminLevel']));
-
-
-        }else {
-
-            $myView = new View('error');
-            $myView->build( array('recipes'=> null ,'comments'=>null,'warningList' => null,'message'=>null,'HOST'=>HOST, 'adminLevel' => $_SESSION['adminLevel']));
-        }
-
-    }
-//
-
-    public function adminUpdatePortionRecipe()
-    {
-
-        if ((isset($_POST['PortionFormValue'])) AND (isset($_GET['dishId'] ))  AND ($_GET['dishId'] >=(int) 0) AND (ctype_digit($_GET['dishId']) ==1 ))  {
-            // Get Bdd ident
-
-            $data = array();
-            $newRecipe= new BasicDish($data);
-            $newRecipe->setDishId($_GET['dishId']);
-            $newRecipe->setPortion($_POST['PortionFormValue']);
-
-            $manager = new CookManager();
-            $manager->UpdateRecipePortion( $newRecipe);
-            $recipe=$manager->findDish($_GET['dishId'] );
-
-            $myView = new View('adminUpdateRecipe');
-            $myView->build( array('recipes'=> $recipe ,'comments'=>null,'warningList' => null ,'message'=>null,'HOST'=>HOST ,'adminLevel'=> $_SESSION['adminLevel']));
-
-
-        }else {
-
-            $myView = new View('error');
-            $myView->build( array('recipes'=> null ,'comments'=>null,'warningList' => null,'message'=>null,'HOST'=>HOST, 'adminLevel' => $_SESSION['adminLevel']));
-        }
-
-    }
-
-    public function adminUpdateOriginRecipe()
-    {
-        echo $_POST['OriginFormValue'];
-        if ((isset($_POST['OriginFormValue'])) AND (isset($_GET['dishId'] ))  AND ($_GET['dishId'] >=(int) 0) AND (ctype_digit($_GET['dishId']) ==1 ))  {
-            // Get Bdd ident
-
-            $data = array();
-            $newRecipe= new BasicDish($data);
-            $newRecipe->setDishId($_GET['dishId']);
-            $newRecipe->setOrigin($_POST['OriginFormValue']);
-
-            $manager = new CookManager();
-            $manager->UpdateRecipeOrigin( $newRecipe);
-            $recipe=$manager->findDish($_GET['dishId'] );
-
-            $myView = new View('adminUpdateRecipe');
-            $myView->build( array('recipes'=> $recipe ,'comments'=>null,'warningList' => null ,'message'=>null,'HOST'=>HOST ,'adminLevel'=> $_SESSION['adminLevel']));
-
-
-        }else {
-
-            $myView = new View('error');
-            $myView->build( array('recipes'=> null ,'comments'=>null,'warningList' => null,'message'=>null,'HOST'=>HOST, 'adminLevel' => $_SESSION['adminLevel']));
-        }
-
-    }
-    public function adminUpdateCategoryRecipe()
-    {
-        if ( (isset($_GET['dishId'] )) AND ($_GET['dishId'] >=(int)0) ) {
+            // Origin
+            if ((isset($_POST['OriginFormValue'])) )  {
+                $newRecipe->setOrigin($_POST['OriginFormValue']);
+                $manager->UpdateRecipeOrigin($newRecipe);
+            }
+            // Category
 
             // variable set to 0 the variable checked shal be set to 1 when checkbox is on
             $cat1check = 0;
@@ -397,40 +256,51 @@ class CookController extends lib
                     if ($cat == 3) {$cat3check=1;}
                     if ($cat == 4) {$cat4check=1;}
                 }
-
-                $data = array();
-                $newRecipe= new BasicDish($data);
-                $newRecipe->setDishId($_GET['dishId']);
                 $newRecipe->setCat1($cat1check);
                 $newRecipe->setCat2($cat2check);
                 $newRecipe->setCat3($cat3check);
                 $newRecipe->setCat4($cat4check);
 
-                $manager = new CookManager();
-                $manager->UpdateRecipeCategory( $newRecipe);
+                $manager->UpdateRecipeCategory($newRecipe);
 
-                $manager = new CookManager();
-                $recipe = $manager->findDish($_GET['dishId']);
-
-                $myView = new View('adminUpdateRecipe');
-                $myView->build(array('recipes' => $recipe, 'comments' => null, 'warningList' => null, 'message' => null, 'HOST' => HOST, 'adminLevel' => $_SESSION['adminLevel']));
             } else {
-                $data = array();
-                $newRecipe= new BasicDish($data);
-                $newRecipe->setDishId($_GET['dishId']);
+
                 $newRecipe->setCat1(0);
                 $newRecipe->setCat2(0);
                 $newRecipe->setCat3(0);
                 $newRecipe->setCat4(0);
-                $manager = new CookManager();
-                $manager->UpdateRecipeCategory( $newRecipe);
-                $manager = new CookManager();
-                $currentRecipe = $manager->findDish($_GET['dishId']);
-                $myView = new View('adminUpdateRecipe');
-                $myView->build(array('recipes' => $currentRecipe, 'comments' => null, 'warningList' => null, 'message' => null, 'HOST' => HOST, 'adminLevel' => $_SESSION['adminLevel']));
+                $manager->UpdateRecipeCategory($newRecipe);
+
             }
+
+
+            if ((isset($_POST['CookingTime'])) )  {
+                // Get Bdd ident
+
+                $newRecipe->setCookingTime($_POST['CookingTime']);
+                $manager->UpdateRecipeName($newRecipe);
+            }
+
+            if ((isset($_POST['PreparationTime'])) )  {
+                // Get Bdd ident
+                $newRecipe->setCookingTime($_POST['PreparationTime']);
+                $manager->UpdateRecipeName($newRecipe);
+            }
+
+        }else { // If not an dish ID
+            $manager = new CookManager();
+            $currentRecipe = $manager->findDish($_GET['dishId']);
+            $myView = new View('adminUpdateRecipemiseajours');
+            $myView->build(array('recipes' => $currentRecipe, 'comments' => null, 'warningList' => null, 'message' => null, 'HOST' => HOST, 'adminLevel' => $_SESSION['adminLevel']));
+
         }
+        $manager = new CookManager();
+        $Recipe = $manager->findDish($_GET['dishId']);
+        $myView = new View('adminUpdateRecipemiseajours');
+        $myView->build(array('recipes' => $Recipe, 'comments' => null, 'warningList' => null, 'message' => null, 'HOST' => HOST, 'adminLevel' => $_SESSION['adminLevel']));
     }
+
+
 
     public function duplicDish()
     {
