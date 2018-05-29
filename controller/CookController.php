@@ -290,10 +290,18 @@ class CookController extends lib
                 $manager->createRecipeIngredient($_GET['dishId'], $_POST['NewRecipeIngredient']);
                 //var_dump($_POST['NewRecipeIngredient']);
 
-                //$newRecipe->setIngredients()($_POST['NewRecipeIngredient']);
+               // $newRecipe->setIngredients($_POST['NewRecipeIngredient']);
+
+                $manager->addIngredientInRecipe($_GET['dishId'],$_POST['NewRecipeIngredient']);
+
+
+                //var_dump($newRecipe);
+                // a new ingredient is added to recipe
+
+
                 // Get Bdd ident
-            //$newRecipe->setCookingTime($_POST['CookingTime']);
-            //$manager->UpdateRecipeName($newRecipe);
+
+               //$manager->UpdateRecipeName($newRecipe);
         }
 
         }else { // If not an dish ID
@@ -307,6 +315,9 @@ class CookController extends lib
         $manager = new CookManager();
         $Recipe = $manager->findDish($_GET['dishId']);
         $IngredientsList=$manager->findIngredientsList();
+
+
+
         $IngredientsRecipes=$manager->findIngredientsRecipe($_GET['dishId']);
 
 
