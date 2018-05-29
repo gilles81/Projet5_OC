@@ -1,26 +1,88 @@
-Body{
 
-    background-color: white;
+@media (min-width: 992px) {
+
+
+    Body{
+
+
+
+        background-color: white;
+    }
+
+    .textCard {
+
+        margin :0px;
+        padding:0;
+        font-size : 0.4em;
+        color:red;
+
+    }
+
+
+    #firstPartHome{
+        width:100%;
+        min-height:100vh;
+        background: url( '../assets/pics/wood-2142241_1280.jpg') no-repeat center ;
+
+        background-size: cover;
+        background-attachment: unset;
+
+    }
+    #secondPartHome{
+        height: 900px;
+        background-color:whitesmoke;
+
+
+    }
+
+
+
 }
-.textCard {
 
-    margin :0px;
-    padding:0;
-    font-size : 0.4em;
-    color:red;
+
+
+
+/*Extra small devices (portrait phones, less than 576px)
+// No media query for `xs` since this is the default in Bootstrap
+
+// Small devices (landscape phones, 576px and up)*/
+@media (min-width: 576px) {
+
+    #firstPartHome{
+        width:100%;
+        min-height:100vh;
+        background: url( '../assets/pics/wood-2142241_1280.jpg') no-repeat center ;
+
+        background-size: cover;
+        background-attachment: unset;
+
+    }
+    #secondPartHome{
+        height: auto;
+        background-color:whitesmoke;
+
+    }
 }
 
-#firstPartHome{
-    width:100%;
-    min-height:100vh;
-    background: url( '../assets/pics/wood-2142241_1280.jpg') no-repeat center fixed;
+/*Medium devices (tablets, 768px and up)*/
+@media (min-width: 768px) {
+    #firstPartHome{
+        width:100%;
+        min-height:100vh;
+        background: url( '../assets/pics/wood-2142241_1280.jpg') no-repeat center ;
 
-    background-size: cover;
-    background-attachment: unset;
-    border: 1px solid red;
+        background-size: cover;
+        background-attachment: unset;
+    }
+    #secondPartHome{
+        height: auto;
+    }
+}
 
-}
-#secondPartHome{
-    height: 900px;
-    background-color:whitesmoke;
-}
+
+/*Large devices (desktops, 992px and up)*/
+/* @media (min-width: 992px) { ... }
+
+/* Extra large devices (large desktops, 1200px and up)*/
+/* @media (min-width: 1200px) { ... }*/
+

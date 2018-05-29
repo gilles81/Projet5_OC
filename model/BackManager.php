@@ -16,6 +16,7 @@
  */
 class BackManager extends lib
 {
+
     private  $bdd;
     Public function bddAssign() {
         try {
@@ -24,6 +25,7 @@ class BackManager extends lib
             die('Erreur : '.$e->getMessage());
         }
     }
+
 
 
 }

@@ -31,7 +31,7 @@ class View {
                 $$a = $value;
             }
            // echo $twig->render($template . '.twig', ['chapters' => $chapters,'comments' => $comments ,'warningList' => $warningList,'HOST'=>$HOST, 'adminLevel' => $adminLevel]);
-           echo $twig->render($template . '.twig', ['recipes' => $recipes,'comments' => $comments ,'warningList' => $warningList,'message'=>$message,'HOST'=>$HOST, 'adminLevel' => $adminLevel]);
+           echo $twig->render($template . '.twig', ['recipes' => $recipes,'ingredients'=> $ingredients,'comments' => $comments ,'warningList' => $warningList,'message'=>$message,'HOST'=>$HOST, 'adminLevel' => $adminLevel]);
         }
     }
 
