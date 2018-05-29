@@ -30,7 +30,7 @@ class Routeur
         // Recipe Administration
         'adminBoard.html'                       => ['controller' => 'CookController', 'method' => 'adminBoard'],
         'adminRecipes.html'                     => ['controller' => 'CookController', 'method' => 'adminRecipes'],
-        'adminUpdateRecipe.html'                => ['controller' => 'CookController', 'method' => 'adminUpdateRecipeView'],
+        //'adminUpdateRecipe.html'                => ['controller' => 'CookController', 'method' => 'adminUpdateRecipeView'],
         'adminSendNewRecipeName.html'           => ['controller' => 'CookController', 'method' => 'adminSendNewRecipeName'],
         'adminSendNewRecipePreparation.html'    => ['controller' => 'CookController', 'method' => 'adminSendNewRecipePreparation'],
         'adminAddCardRecipe.html'               => ['controller' => 'CookController', 'method' => 'adminAddCardRecipeView'],

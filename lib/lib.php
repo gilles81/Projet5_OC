@@ -65,6 +65,31 @@ class lib
         return $donnees;
     }
 
+    public function recipeIngredientsRowInArray($row)
+    {
+        $donnees = array();
+        $donnees = [
+           // 'Id' => $row['IngredientId'],
+            'RecipeId' => $row['RecipeId'],
+            'IngredientId' => $row['IngredientId'],
+            'Name' => $row['Name'],
+        ];
+
+        return $donnees;
+    }
+    public function ingredientsRowInArray($row)
+    {
+
+        $donnees = array();
+        $donnees = [
+            'Id' => $row['Id'],
+            'Name' => $row['Name'],
+            'Category' => $row['Category']
+        ];
+        return $donnees;
+
+    }
+
 
 
     public function createRecipeDataEmpty($newRecipeEmpty)

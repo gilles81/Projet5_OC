@@ -126,9 +126,6 @@
                         </div>
                     </div>
                 </div>
-
-
-
            </div><!-- END Recipe options -->
            <div class="col-lg-6  mx-auto">
                 <label for="Name"></label><br />
@@ -145,12 +142,15 @@
                </div>
                <div class="col-md-5 "style="border : 3px solid green">
                         <h3 class="my-3 mx-auto" >Ingredients</h3>
-                        <ul>
-                            <li>Lorem Ipsum</li>
-                            <li>Dolor Sit Amet</li>
-                            <li>Consectetur</li>
-                            <li>Adipiscing Elit</li>
-                        </ul>
+                   <select class="IngedientsSelect" name="NewRecipeIngredient" >
+                       {% for ingredient in ingredients[0] %}
+                           <option value="{{ ingredient.getName }}">{{ ingredient.getName }}</option>
+                       {% endfor %}
+                       <input class ="btn btn-group-sm btn-primary" type="submit" />
+                   </select>
+                   {% for ingredient in ingredients[1] %}
+                       <option value="{{ ingredient.Name }}">{{ ingredient.Name }}</option>
+                   {% endfor %}
 
                </div>
             </div>
