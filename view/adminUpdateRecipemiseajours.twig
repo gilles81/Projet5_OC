@@ -144,7 +144,7 @@
                         <h3 class="my-3 mx-auto" >Ingredients</h3>
                    <select class="IngedientsSelect" name="NewRecipeIngredient" >
                        {% for ingredient in ingredients[0] %}
-                           <option value="{{ ingredient.getName }}">{{ ingredient.getName }}</option>
+                           <option value="{{ ingredient.getId }}">{{ ingredient.getName }}</option>
                        {% endfor %}
                        <input class ="btn btn-group-sm btn-primary" type="submit" />
                    </select>

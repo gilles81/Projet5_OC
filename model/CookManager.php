@@ -376,7 +376,21 @@ class CookManager extends BackManager
         }
         return $recipeIngredients;
     }
+    public function addIngredientInRecipe($id,$newIngredient)
+    {
 
+        $bdd = $this->bdd;
+        $query = "INSERT INTO recipe_ingredients (Id,RecipeId,IngredientId)
+                  VALUES (NULL ,:RecipeId,:IngredientId);";
+        $req = $bdd->prepare($query);
+
+        $req->bindValue(':RecipeId',$id,PDO::PARAM_INT);
+        $req->bindValue(':IngredientId',$newIngredient,PDO::PARAM_INT);
+
+        $req->execute();
+
+
+    }
 
     public function addDish($values)
     {
@@ -385,7 +399,7 @@ class CookManager extends BackManager
                   VALUES (NULL ,:Title,:Category,:Author,Now(),:Recipe,:Portion,:ImagePathName,:Origin,NULL,NULL,:Ingredients,:Difficulty,:Featured,:Status,:Likes );";
 
         $req = $bdd->prepare($query);
-        $req->execute();
+
 
         $req->bindValue(':Title',$values['Name'],PDO::PARAM_STR);
         $req->bindValue(':Category',1,PDO::PARAM_INT);
