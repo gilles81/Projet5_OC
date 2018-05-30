@@ -388,42 +388,29 @@ class CookManager extends BackManager
     }
 
 
-    public function findIngredientsRecipe($id){
-/*
+    public function findIngredientsRecipe($idrecipe){
+
         $bdd = $this->bdd;
 
-        $query =  "SELECT * FROM `recipe_ingredients` WHERE RecipeId=$id";
-
-        $req = $bdd->prepare($query);
-        //$req->bindValue(':Id', $id , PDO::PARAM_INT);
-        $req->execute();
-
-        $recipeIngredients=array();
-
-        while ($row = $req-> fetch(PDO::FETCH_ASSOC)) {
-            $RecipeIngredientData = array();
-            $RecipeIngredientData = $this->recipeIngredientsRowInArray($row);
-
-            $recipeIngredient = new RecipeIngredient($RecipeIngredientData);
-            $recipeIngredients[] = $recipeIngredient;
-        }
-
-        return $recipeIngredients;
-*/
-        $bdd = $this->bdd;
-
-        $query =  "SELECT recipe_ingredients.RecipeId,recipe_ingredients.IngredientId , ingredients.Name 
+        $query =  "SELECT  recipe_ingredients.RecipeId,
+                           recipe_ingredients.IngredientId,
+                           recipe_ingredients.Id , 
+                           ingredients.Name 
                     FROM recipe_ingredients 
                     LEFT JOIN ingredients 
                     ON recipe_ingredients.IngredientId=ingredients.Id 
-                    WHERE recipe_ingredients.RecipeId=$id";
+                    WHERE recipe_ingredients.RecipeId=$idrecipe";
 
         $req = $bdd->prepare($query);
         $req->execute();
 
         $recipeIngredients=array();
+
+
+
         while ($row = $req-> fetch(PDO::FETCH_ASSOC)) {
             $RecipeIngredientData = array();
+
             $RecipeIngredientData = $this->recipeIngredientsRowInArray($row);
             $recipeIngredient = new RecipeIngredient($RecipeIngredientData);
             $recipeIngredients[] = $recipeIngredient;
@@ -432,7 +419,6 @@ class CookManager extends BackManager
     }
     public function addIngredientInRecipe($id,$newIngredient)
     {
-
         $bdd = $this->bdd;
         $query = "INSERT INTO recipe_ingredients (Id,RecipeId,IngredientId)
                   VALUES (NULL ,:RecipeId,:IngredientId);";
@@ -444,6 +430,19 @@ class CookManager extends BackManager
         $req->execute();
 
 
+    }
+
+    public function removeIngredientRecipe($Id)
+    {
+
+        $bdd = $this->bdd;
+        $req = $bdd->exec("DELETE FROM `recipe_ingredients` WHERE `Id` = $Id");
+
+        if (!$req) {
+
+            echo 'Erreur a la suppression du chapitre';
+
+        }
     }
 
     public function addDish($values)

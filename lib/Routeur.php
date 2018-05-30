@@ -36,10 +36,10 @@ class Routeur
         'adminAddCardRecipe.html'               => ['controller' => 'CookController', 'method' => 'adminAddCardRecipeView'],
         'adminSendNewRecipe.html'               => ['controller' => 'CookController', 'method' => 'adminSendNewRecipe'],
         'adminRemoveRecipe.html'                => ['controller' => 'CookController', 'method' => 'adminRemoveDish'],
+        'adminRemoveIngredientRecipe.html'      => ['controller' => 'CookController', 'method' => 'adminRemoveIngredientRecipe'],
 
 
-
-        'adminUpdateRecipemiseajours.html'      => ['controller' => 'CookController', 'method' => 'adminUpdateRecipeView'],
+        'adminUpdateRecipe.html'      => ['controller' => 'CookController', 'method' => 'adminUpdateRecipeView'],
         'adminSendUpdateRecipe2.html'           => ['controller' => 'CookController', 'method' => 'adminUpdateStatusRecipe'],
 
 
