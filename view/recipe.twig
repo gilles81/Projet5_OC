@@ -12,12 +12,10 @@
         <div class="col-md-4">
 
                 <h3 class="my-3">Ingredients</h3>
-                <ul>
-                    <li>Lorem Ipsum</li>
-                    <li>Dolor Sit Amet</li>
-                    <li>Consectetur</li>
-                    <li>Adipiscing Elit</li>
-                </ul>
+
+            {% for ingredient in ingredients[1] %}
+                <option value="{{ ingredient.Name }}">{{ ingredient.Name }}</option>
+            {% endfor %}
         </div>
 
     </div>
@@ -31,5 +29,6 @@
 
 {% endblock %}
 {% block Part2%}
+    <!-- integration des comments-->
 
 {% endblock %}
