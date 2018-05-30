@@ -270,26 +270,16 @@ class CookController extends lib
 
             if ((isset($_POST['NewRecipeIngredient'])) )  {
                 $manager->createRecipeIngredient($_GET['dishId'], $_POST['NewRecipeIngredient']);
-                //var_dump($_POST['NewRecipeIngredient']);
-
-               // $newRecipe->setIngredients($_POST['NewRecipeIngredient']);
-
                 $manager->addIngredientInRecipe($_GET['dishId'],$_POST['NewRecipeIngredient']);
-
-
-                //var_dump($newRecipe);
-                // a new ingredient is added to recipe
-
-
-                // Get Bdd ident
-
-               //$manager->UpdateRecipeName($newRecipe);
         }
 
-        }else { // If not an dish ID
+        }else { // If not a good  dish ID
+
+            // todo : refaire vers une page d'eeror
             $manager = new CookManager();
             $currentRecipe = $manager->findDish($_GET['dishId']);
             $IngredientsList=$manager->findIngredientsList();
+
             $myView = new View('adminUpdateRecipe');
             $myView->build(array('recipes' => $currentRecipe, 'ingredients'=>$IngredientsList, 'comments' => null, 'warningList' => null, 'message' => null, 'HOST' => HOST, 'adminLevel' => $_SESSION['adminLevel']));
 
