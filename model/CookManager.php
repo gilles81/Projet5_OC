@@ -180,31 +180,85 @@ class CookManager extends BackManager
         return $dish;
     }
 
-    public function findCategory($category ,$status )
-    {
+    public function findCategory($category ,$status )    {
         $bdd = $this->bdd;
-
         if ((!isset($status)) AND (($status ='D')  OR ($status ='R') OR ($status ='W') )) {
-
             $status = 'R';
+        }
+        $Dishes=  array();
+        $idAlreadyInDishes=array();
 
+        if ($category == 1) {
+            $query = "SELECT * FROM dish WHERE Cat1 =1 AND Status ='R' ";
+            $req = $bdd->prepare($query);
+            $req->execute();
+            while ($row = $req-> fetch(PDO::FETCH_ASSOC))
+            {
+                $data = $this->RowInArray($row);
+                $dish = new BasicDish($data);
+
+                $recipeDummy=$this->verifyIdInlist( $idAlreadyInDishes,$dish);
+
+                if (!$recipeDummy){
+                    $Dishes[] = $dish;
+                }
+            }
+        }
+        if ($category == 2) {
+            $query = "SELECT * FROM dish WHERE Cat2 =1 AND Status ='R'";
+            $req = $bdd->prepare($query);
+            $req->execute();
+            while ($row = $req-> fetch(PDO::FETCH_ASSOC))
+            {
+                $data = $this->RowInArray($row);
+                $dish = new BasicDish($data);
+
+                $recipeDummy=$this->verifyIdInlist( $idAlreadyInDishes,$dish);
+
+                if (!$recipeDummy){
+                    $Dishes[] = $dish;
+                }
+            }
+        }
+        if ($category == 3) {
+            $query = "SELECT * FROM dish WHERE Cat3 =1 AND Status ='R'";
+            $req = $bdd->prepare($query);
+            $req->execute();
+
+            while ($row = $req-> fetch(PDO::FETCH_ASSOC))
+            {
+                $data = $this->RowInArray($row);
+                $dish = new BasicDish($data);
+
+                $recipeDummy=$this->verifyIdInlist( $idAlreadyInDishes,$dish);
+
+                if (!$recipeDummy){
+                    $Dishes[] = $dish;
+                }
+            }
+        }
+        if ($category == 4) {
+
+            $test ="SELECT * FROM dish WHERE Cat4 =1 AND Status ='R'";
+            $query = $test ;
+            $req = $bdd->prepare($query);
+            $req->execute();
+
+            while ($row = $req-> fetch(PDO::FETCH_ASSOC))
+            {
+                $data = $this->RowInArray($row);
+                $dish = new BasicDish($data);
+
+                $recipeDummy=$this->verifyIdInlist( $idAlreadyInDishes,$dish);
+
+                if (!$recipeDummy){
+                    $Dishes[] = $dish;
+                }
+            }
         }
 
-        $query =  "SELECT * FROM dish WHERE Category=:Category AND Status =:Status";
+        return $Dishes;
 
-        $req = $bdd->prepare($query);
-        $req->bindValue(':Category', $category , PDO::PARAM_INT);
-        $req->bindValue(':Status', $status , PDO::PARAM_STR);
-        $req->execute();
-        $dishes=  array();
-        while ($row = $req-> fetch(PDO::FETCH_ASSOC))
-        {
-            $data = $this->rowInArray($row);
-            $dish = new BasicDish( $data);
-            $dishes[] = $dish;
-        }
-
-        return $dishes;
     }
 
     /**
@@ -438,59 +492,6 @@ class CookManager extends BackManager
         }
     }
 
-    public function UpdateRecipe($newRecipe)
-    {
-
-        echo '<br>';
-
-        print_r($newRecipe);
-        echo 'name   -----   <br>';
-        echo $newRecipe->getName();
-        echo '<br>';
-
-        $bdd = $this->bdd;
-        $req = $bdd->prepare('UPDATE dish SET  Title=:Title
-/*
-                                                         CreationDate =:CreationDate ,
-                                                         Recipe=:Recipe ,
-                                                         Portion=:Portion,
-                                                         ImagePathName=:ImagePath,
-                                                         Origin=:Origin,
-                                                         CookingTime=:CookingTime,
-                                                         PreparationTime=:PreparationTime,
-                                                         Ingredients=:Ingredients,
-                                                         Difficulty:=Difficulty,
-                                                         Featured:=Featured,
-                                                         Status:=Status,
-                                                         Cat1=:Cat1,
-                                                         Cat2=:Cat2,
-                                                         Cat3=:Cat3, 
-                                                         Cat4=:Cat4*/
-                                                         
-                                                      
-        WHERE DishId=$newRecipe->getDishId() ');
-        //$req->bindValue(':DishId',,PDO::PARAM_INT);
-
-        $req->bindValue(':Title',$newRecipe->getName(),PDO::PARAM_STR);
-        /*
-        $req->bindValue(':CreationDate',$newRecipe->getCreationDate(),PDO::PARAM_STR);
-        $req->bindValue(':Recipe',$newRecipe->getRecipe(),PDO::PARAM_STR);
-        $req->bindValue(':Portion',$newRecipe->getPortion(),PDO::PARAM_INT);
-        $req->bindValue(':ImagePathName',$newRecipe->getImagePathName(),PDO::PARAM_STR);
-        $req->bindValue(':Origin',$newRecipe->getOrigin(),PDO::PARAM_STR);
-        $req->bindValue(':CookingTime',$newRecipe->getCookingTime(),PDO::PARAM_STR);
-        $req->bindValue(':PreparationTime',$newRecipe->getPreparationTime(),PDO::PARAM_STR);
-        $req->bindValue(':Ingredients',$newRecipe->getIngredients(),PDO::PARAM_STR);
-        $req->bindValue(':Difficulty',$newRecipe->getDifficulty(),PDO::PARAM_INT);
-        $req->bindValue(':Featured',$newRecipe->getFeatured(),PDO::PARAM_STR);
-        $req->bindValue(':Status',$newRecipe->getStatus(),PDO::PARAM_STR);
-        $req->bindValue(':Cat1',$newRecipe->getCat1(),PDO::PARAM_INT);
-        $req->bindValue(':Cat2',$newRecipe->getCat2(),PDO::PARAM_INT);
-        $req->bindValue(':Cat3',$newRecipe->getCat3(),PDO::PARAM_INT);
-        $req->bindValue(':Cat4',$newRecipe->getCat4(),PDO::PARAM_INT);
-*/
-        $req->execute();
-    }
 
 
 

@@ -122,5 +122,16 @@ class lib
     }
 
 
+    public function verifyIdInList($idList,$dish){
+        $IdInList=false;
+        foreach ($idList as $element  ) {
+            if ($dish->getDishId() == $element) {
+               $IdInList=true;
+            }
+        }
+
+        return $IdInList;
+    }
+
 
 }

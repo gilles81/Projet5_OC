@@ -16,7 +16,7 @@ class MemberController extends lib
        $this->sessionStatus();
 
         $myView = new View('userCnxForm');
-        $myView->build( array('recipes'=> null ,'ingredientList'=>null,'comments'=>null,'warningList' => null,'message'=>null,'HOST'=>HOST,'adminLevel'=>  $_SESSION['adminLevel']));
+        $myView->build( array('recipes'=> null ,'ingredients'=>null,'comments'=>null,'warningList' => null,'message'=>null,'HOST'=>HOST,'adminLevel'=>  $_SESSION['adminLevel']));
     }
 
     /**
@@ -34,7 +34,7 @@ class MemberController extends lib
         session_destroy();
         // redirect to Home Page
         $myView = new View('userCnxForm');
-        $myView->build( array('recipes'=> null ,'ingredientList'=>null,'comments'=>null,'warningList' => null,'message'=>null,'HOST'=>HOST,'adminLevel'=> 0));
+        $myView->build( array('recipes'=> null ,'ingredients'=>null,'comments'=>null,'warningList' => null,'message'=>null,'HOST'=>HOST,'adminLevel'=> 0));
 
     }
 
@@ -72,21 +72,19 @@ class MemberController extends lib
                         $myView->redirect('adminBoard.html');
                     } else {
                         /** Redirection to cnx PAge**/
-
                         $myView = new View('userCnxForm');
-                        $myView->build( array('recipes'=> null ,'ingredientList'=>null,'comments'=>null,'warningList' => null,'message'=>null,'HOST'=>HOST,'adminLevel'=>  $_SESSION['adminLevel']) );
-
+                        $myView->build( array('recipes'=> null ,'ingredientst'=>null,'comments'=>null,'warningList' => null,'message'=>null,'HOST'=>HOST,'adminLevel'=>  $_SESSION['adminLevel']) );
                     }
                 } else {
                     /** Redirection to PWD Page **/
 
                     $myView = new View('userCnxForm');
-                    $myView->build( array('recipes'=> null ,'ingredientList'=>null,'comments'=>null,'warningList' => null,'message'=>null,'HOST'=>HOST,'adminLevel'=>  $_SESSION['adminLevel']) );
+                    $myView->build( array('recipes'=> null ,'ingredients'=>null,'comments'=>null,'warningList' => null,'message'=>null,'HOST'=>HOST,'adminLevel'=>  $_SESSION['adminLevel']) );
                 }
             }
         }else{
             $myView = new View('userCnxForm');
-            $myView->build( array('recipes'=> null ,'ingredientList'=>null,'comments'=>null,'warningList' => null,'message'=>null,'HOST'=>HOST,'adminLevel'=>  $_SESSION['adminLevel']  ));
+            $myView->build( array('recipes'=> null ,'ingredients'=>null,'comments'=>null,'warningList' => null,'message'=>null,'HOST'=>HOST,'adminLevel'=>  $_SESSION['adminLevel']  ));
         }
     }
 

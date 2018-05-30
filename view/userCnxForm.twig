@@ -1,25 +1,56 @@
 {% extends '_layout_new.twig' %}
 
+{% block Part1 %}
+    <div class="container-fluid"  id="firstPartHome"  >
+        <div class="row  " >
+            <div class="col" ></div>
+            <div class="col" >
 
-
-{% block Part2 %}
-    <div class="container-fluid "  id="firstPartHome">
-
-        <div class="row  justify-content-around ">
-            <div class="col-lg-6 ">
-                <h2>Connexion</h2>
-
-                <form action="adminverif.html" method="post">
-                    <label>Pseudo</label>
-                    <input type="text" name="login" /><br />
-
-                    <label>Mot de passe</label>
-                    <input type="password" name="pass" /><br /><br />
-
-                    <input type="submit" value="Connexion" />
-                </form>
-
+                <div class="row">
+                    <div class="col  " >
+                     <h2 class="text-center">Connexion</h2>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col  " >
+                        <form  action="adminverif.html" method="post">
+                            <div class="row">
+                                <div class="col  " >
+                                    <label>Pseudo</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col  " >
+                                    <input type="text" name="login" /><br />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col" >
+                                    <label>Mot de passe</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col  " >
+                                    <input type="password" name="pass" /><br /><br />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col  " >
+                                    <input type="submit" value="Connexion" />
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
+            <div class="col"></div>
+        </div>
+
+
         </div>
     </div>
+{% endblock %}
+
+{% block Part2 %}
+
 {% endblock %}
