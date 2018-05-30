@@ -42,17 +42,11 @@ class Routeur
         'adminUpdateRecipemiseajours.html'      => ['controller' => 'CookController', 'method' => 'adminUpdateRecipeView'],
         'adminSendUpdateRecipe2.html'           => ['controller' => 'CookController', 'method' => 'adminUpdateStatusRecipe'],
 
-        //'adminUpdateStatusRecipe.html'          => ['controller' => 'CookController', 'method' => 'adminUpdateStatusRecipe'],
-        //'adminUpdateDifficultyRecipe.html'      => ['controller' => 'CookController', 'method' => 'adminUpdateDifficultyRecipe'],
-        //'adminUpdatePortionRecipe.html'         => ['controller' => 'CookController', 'method' => 'adminUpdatePortionRecipe'],
-        //'adminUpdateOriginRecipe.html'          => ['controller' => 'CookController', 'method' => 'adminUpdateOriginRecipe'],
-        //'adminUpdateCategoryRecipe.html'        => ['controller' => 'CookController', 'method' => 'adminUpdateCategoryRecipe'],
-
 
         'recipe.html'                     => ['controller' => 'CookController', 'method' => 'showDish'],
         'category.html'                     => ['controller' => 'CookController', 'method' => 'showCategory'],
 
-        // 'admin.html'                    => ['controller' => 'MemberController', 'method' => 'loginSession'],
+
         'deconnection.html'              => ['controller' => 'MemberController', 'method' => 'deconnection'],
         'error.html'         => ['controller' =>'PostsController', 'method' => 'error']
     ];
