@@ -89,7 +89,6 @@ class CookController extends lib
             }else{
                 $manager = new CookManager();
                 $recipes= $manager->findDishesFromStatus("R");
-
                 $myView = new View('home');
                 $myView->build( array('recipes'=> $recipes ,'ingredients'=>null,'comments'=>null,'warningList' => null ,'message'=>'Il n\'y a pas encore de recette dans cette categorie !','HOST'=>HOST ,'adminLevel'=> $_SESSION['adminLevel']));
 
@@ -99,6 +98,9 @@ class CookController extends lib
             $myView->build( array('recipes'=>null ,'ingredients'=>null,'comments'=>null,'warningList' => null ,'message'=>null,'HOST'=>HOST ,'adminLevel'=> $_SESSION['adminLevel']));
         }
     }
+
+
+
     public function adminBoard()
     {
         $myView = new View('adminBoard');
@@ -135,7 +137,7 @@ class CookController extends lib
             $recipe= $manager->findDish($_GET['dishId']);
             $IngredientsList=$manager->findIngredientsList();// list of ingredie,t in db
             $IngredientsRecipes=$manager->findIngredientsRecipe($_GET['dishId']);
-            var_dump($IngredientsRecipes);
+
             $ArrayOfIngredients = array();
             $ArrayOfIngredients = [$IngredientsList,$IngredientsRecipes];
             $myView = new View('adminUpdateRecipe');
