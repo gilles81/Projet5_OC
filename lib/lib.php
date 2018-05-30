@@ -68,8 +68,9 @@ class lib
     public function recipeIngredientsRowInArray($row)
     {
         $donnees = array();
+
         $donnees = [
-           // 'Id' => $row['IngredientId'],
+            'Id' => $row['Id'],
             'RecipeId' => $row['RecipeId'],
             'IngredientId' => $row['IngredientId'],
             'Name' => $row['Name'],
