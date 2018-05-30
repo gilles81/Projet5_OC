@@ -17,7 +17,7 @@ class MiscController
     public function showAbout()
     {
         $myView = new View('about');
-        $myView->build(array('chapters'=> null ,'comments'=>null,'warningList' => null,'HOST'=>HOST ,'adminLevel'=>$_SESSION['adminLevel'] ));
+        $myView->build(array('chapters'=> null ,'ingredients'=>null,'comments'=>null,'warningList' => null,'HOST'=>HOST ,'adminLevel'=>$_SESSION['adminLevel'] ));
     }
 
     /**
@@ -30,7 +30,7 @@ class MiscController
     public function showContact()
     {
         $myView = new View('contact');
-        $myView->build(array('recipes' => null, 'comments' => null,'warningList' => null ,'message'=> null,'HOST' => HOST, 'adminLevel' =>$_SESSION['adminLevel']));
+        $myView->build(array('recipes' => null,'ingredients'=>null, 'comments' => null,'warningList' => null ,'message'=> null,'HOST' => HOST, 'adminLevel' =>$_SESSION['adminLevel']));
     }
 
     /**
@@ -79,7 +79,7 @@ class MiscController
     {
 
         $myView = new View('legalMentions');
-        $myView->build(array('recipes' => null, 'comments' => null,'warningList' => null ,'message'=> null,'HOST' => HOST, 'adminLevel' =>$_SESSION['adminLevel']));
+        $myView->build(array('recipes' => null,'ingredients'=>null, 'comments' => null,'warningList' => null ,'message'=> null,'HOST' => HOST, 'adminLevel' =>$_SESSION['adminLevel']));
     }
 
 }
