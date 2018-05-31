@@ -145,6 +145,47 @@ class CookController extends lib
 
            }
     }
+    public function adminNewPictureRecipeInDB()
+    {
+
+        if (isset($_FILES['customFile'])) {
+
+
+        };
+
+        if (isset($_FILES['customFile']) ) {
+            // $dossier="C:\wamp64\www\Projet5\assets\pics/";
+            $dossier=ROOT."assets\pics/";
+            $time = time();
+            $fichier =  $time.'_'.basename(  $_FILES['customFile'].'');
+            echo $dossier . $fichier;
+            if(move_uploaded_file($_FILES['customFile']['tmp_name'], $dossier . $fichier)) //Si la fonction renvoie TRUE, c'est que ça a fonctionné...
+            {
+                echo 'Upload effectué avec succès !';
+            }
+            else //Sinon (la fonction renvoie FALSE).
+            {
+                echo 'Echec de l\'upload !';
+            }
+        }
+        /*
+        if (isset($_FILES['customFile']) AND isset($_POST['customhiden'])) {
+            // $dossier="C:\wamp64\www\Projet5\assets\pics/";
+            $dossier=ROOT."assets\pics/";
+            $time = time();
+            $fichier =  $time.'_'.basename(  $_FILES['customFile']['name'].'');
+            echo $dossier . $fichier;
+            if(move_uploaded_file($_FILES['customFile']['tmp_name'], $dossier . $fichier)) //Si la fonction renvoie TRUE, c'est que ça a fonctionné...
+            {
+                echo 'Upload effectué avec succès !';
+            }
+            else //Sinon (la fonction renvoie FALSE).
+            {
+                echo 'Echec de l\'upload !';
+            }
+        }
+        */
+    }
 
 
     public function adminSendNewRecipe() {
@@ -355,5 +396,42 @@ class CookController extends lib
 
         }
     }
+// Zone de test
+
+    public function testuploadview() {
+
+        $myView = new View('test');
+        $myView->build(array('recipes' => null,'ingredients'=>null, 'comments' => null, 'warningList' => null, 'message' => null, 'HOST' => HOST, 'adminLevel' => $_SESSION['adminLevel']));
+
+
+
+
+    }
+    public function testupload() {
+
+        if(isset($_FILES['icone']))
+        {
+           // $dossier="C:\wamp64\www\Projet5\assets\pics/";
+            $dossier=ROOT."assets\pics/";
+           $time = time();
+            $fichier =  $time.'_'.basename(  $_FILES['icone']['name'].'');
+
+            echo $dossier . $fichier;
+            if(move_uploaded_file($_FILES['icone']['tmp_name'], $dossier . $fichier)) //Si la fonction renvoie TRUE, c'est que ça a fonctionné...
+            {
+                echo 'Upload effectué avec succès !';
+            }
+            else //Sinon (la fonction renvoie FALSE).
+            {
+                echo 'Echec de l\'upload !';
+            }
+
+
+        }
+
+
+    }
+
+
 
 }

@@ -445,6 +445,20 @@ class CookManager extends BackManager
         }
     }
 
+    public function addNewPictureRecipeInDB($dishId,$pics)
+    {
+
+      $bdd = $this->bdd;
+
+      $query = "UPDATE dish SET ImagePathName=:ImagePathName WHERE DishId=:DishId" ;
+
+      $req = $bdd->prepare($query);
+      $req->bindValue(':DishId',$dishId,PDO::PARAM_INT);
+      $req->bindValue(':ImagePathName',$pics,PDO::PARAM_STR);
+      $req->execute();
+    }
+
+
     public function addDish($values)
     {
         $bdd = $this->bdd;
