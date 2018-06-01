@@ -34,6 +34,7 @@
                                 <div style="height: 200px";>
                                     {% if not PicsName  %}
                                         <img style="height: auto;border:1px solid red;" class="card-img-top rounded" src="{{ HOST }}{{ PicsRecipeDir }}{{ PicsReplacement}}" alt="image de remplacement">
+                                        <div class="card-img-overlay"><a href="#">Pas d'image disponible<i class="far fa-edit"></i> </a></div>
                                     {% else %}
                                         <img style="height: auto;border:1px solid red;" class="card-img-top rounded" src="{{ HOST }}{{ PicsRecipeDir }}{{ PicsName }}" alt="{{ recipe.getImagePathName }}">
 
