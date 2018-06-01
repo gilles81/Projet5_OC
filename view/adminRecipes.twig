@@ -1,5 +1,9 @@
 {% extends '_layout_new.twig' %}
 
+{% set PicsRecipeDir ='assets/pics/' %}
+  {% set PicsReplacement = 'NoPictures_1920_1080.jpg'  %}
+
+
 
 
 {% block Part1 %}
@@ -24,16 +28,25 @@
         <div class="row">
 
                 {% for recipe in recipes['dishes'] %}
+                    {% set PicsName = recipe.getImagePathName %}
                     <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item mx-auto">
-                            <div class="card w-100">
-                                <img class="card-img-top rounded" src="./assets/pics/1584_700_400.jpg" alt="">
-                                <!--<div class="card-img-overlay"><a href="#"><i class="far fa-edit"></i> </a></div>-->
-                                <div class="card-title"  >
-                                    <h5 class="card-title" > {{ recipe.getName }} </h5>
-                                </div>
+                            <div class="card w-100" style="height:250px;">
+                                <div style="height: 200px";>
+                                    {% if not PicsName  %}
+                                        <img style="height: auto;border:1px solid red;" class="card-img-top rounded" src="{{ HOST }}{{ PicsRecipeDir }}{{ PicsReplacement}}" alt="image de remplacement">
+                                    {% else %}
+                                        <img style="height: auto;border:1px solid red;" class="card-img-top rounded" src="{{ HOST }}{{ PicsRecipeDir }}{{ PicsName }}" alt="{{ recipe.getImagePathName }}">
 
+                                    {% endif %}
+
+                                    <!--<div class="card-img-overlay"><a href="#"><i class="far fa-edit"></i> </a></div>-->
+                                        <div class="card-title" style="height:100px;" >
+                                        <h5 clas="title" > {{ recipe.getName }} </h5>
+                                    </div>
+                                </div>
+                                {{ HOST }}{{ PicsRecipeDir }}{{ recipe.getImagePathName}}
                                 <div class="card-footer " style="height: 50px;">
-                                    <button type="button" class="btn btn-link "
+                                    <button  type="button" class="btn btn-link "
                                             id ="bt_eraser_receipe_{{ recipe.getDishId }}"
                                             data-toggle="modal"
                                             data-target="#modalDelete_{{ recipe.getDishId }}"

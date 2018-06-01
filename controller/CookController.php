@@ -119,6 +119,7 @@ class CookController extends lib
         $manager = new CookManager();
         $recipes= $manager->findDishes();//all status are called
         $myView = new View('adminRecipes');
+
         $myView->build( array('recipes'=> $recipes ,'ingredients'=>null,'comments'=>null,'warningList' => null ,'message'=>null,'HOST'=>HOST ,'adminLevel'=> $_SESSION['adminLevel']));
 
     }
@@ -127,6 +128,7 @@ class CookController extends lib
         $manager = new CookManager();
         $recipes= $manager->createEmptyRecipe();
         $recipes= $manager->findDishes();
+
         $myView = new View('adminRecipes');
         $myView->build( array('recipes'=> $recipes ,'ingredients'=>null,'comments'=>null,'warningList' => null ,'message'=>null,'HOST'=>HOST ,'adminLevel'=> $_SESSION['adminLevel']));
     }

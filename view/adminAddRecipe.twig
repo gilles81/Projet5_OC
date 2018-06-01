@@ -1,4 +1,6 @@
 {% extends '_layout_new.twig' %}
+   {% set PicsRecipeDir ='/assets/pics/' %}
+   {% set ReplacementPics ='NoPictures_1920_1080.jpg' %}
 
 {% block Part1 %}
 <div class="container-fluid  "  >
@@ -15,7 +17,7 @@
         <div class="row">
             <div class="col-md-8">
                 <!-- <img class="img-fluid" src="http://placehold.it/600x350" alt="">-->
-                <img class="img-fluid" src="./assets/pics/1584_600_350.png" alt="">
+                <img class="img-fluid" src="{{ HOST }}{{ PicsRecipeDir }}{{ ReplacementPics}}}" alt="Pas de photo disponible">
             </div>
             <div class="col-md-4">
                 <h3 class="my-3">Ingredients</h3>

@@ -34,16 +34,17 @@
     <!-- End of Content of Modal Loadind box -->
     <!-- Content of page  -->
     <div class="container-fluid " id="firstPartHome">
-
+        {% set PicsRecipeDir ='/assets/pics/' %}
         <form action="adminSendUpdateRecipe.html?dishId={{ recipes.getDishId  }}" method="post"  enctype="multipart/form-data" >
             <!-- Row with image and status block-->
            <div class="row "  >
                <!-- Recipe picture-->
                 <div class="col-lg-6  mx-auto">
-                    <img class="img-fluid" src="{{ recipes.getImagePathName}}" alt="{{ recipes.getImagePathName}}">
+                    <img class="img-fluid" src="{{ HOST }}{{ PicsRecipeDir }}{{ recipes.getImagePathName}}" alt="{{ recipes.getImagePathName}}">
                     <!--<img class="img-fluid" src="http://placehold.it/500x250" alt=""> -->
                    <!-- <img class="img-fluid" src="./assets/pics/1584_600_350.png" alt=""> -->
                     <div class="card-img-overlay ">
+
                     <button type="button" class="btn btn-link "
                             id ="modalLoadingImage"
                             data-toggle="modal"
