@@ -425,7 +425,7 @@ class CookController extends lib
         if (isset($_FILES['customFile']) ) {
             $dossier=ROOT."assets\pics/";
             $time = time();
-            $fichier =  $time.'_'.basename(  $_FILES['customFile'].'');
+            $fichier =  $time.'_'.basename(  $_FILES['customFile']['name'].'');
             echo $dossier . $fichier;
             if(move_uploaded_file($_FILES['customFile']['tmp_name'], $dossier . $fichier)) //Si la fonction renvoie TRUE, c'est que ça a fonctionné...
             {
