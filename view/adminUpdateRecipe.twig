@@ -22,7 +22,6 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal"> Annulation {{ recipes.getDishId  }} </button>
-                            <!--  <button class ="btn btn-group-sm btn-primary " id="bt_loading_picture" type="submit" >validation</button>-->
                             <input class ="btn btn-group-sm btn-primary" type="submit" name="ValidationLoadingPic"/>
                         </div>
                    </form>
@@ -41,8 +40,7 @@
                <!-- Recipe picture-->
                 <div class="col-lg-6  mx-auto">
                     <img class="img-fluid" src="{{ HOST }}{{ PicsRecipeDir }}{{ recipes.getImagePathName}}" alt="{{ recipes.getImagePathName}}">
-                    <!--<img class="img-fluid" src="http://placehold.it/500x250" alt=""> -->
-                   <!-- <img class="img-fluid" src="./assets/pics/1584_600_350.png" alt=""> -->
+
                     <div class="card-img-overlay ">
 
                     <button type="button" class="btn btn-link "
