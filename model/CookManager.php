@@ -372,7 +372,7 @@ class CookManager extends BackManager
                   VALUES (NULL, 'Nouvelle recette ', '1', '', now(), '', '0' , :ImagePathName, '', '0', '0', '', '0', '0', 'D', '0');";
 
         $req = $bdd->prepare($query);
-        $req->bindValue(':ImagePathName','NoPictures-1920_1080.jpg',PDO::PARAM_INT);
+        $req->bindValue(':ImagePathName','NoPictures_1920_1080.jpg',PDO::PARAM_INT);
         $req->execute();
     }
 
