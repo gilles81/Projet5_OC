@@ -11,12 +11,12 @@
                        <h5 class="modal-title" id="exampleModalLabel">Choix d'une image
                        </h5>
                    </div>
-                    <form action="adminNewPictureRecipeInDB.html" method="post" enctype="multipart/form-data">-->
+                    <form action="adminNewPictureRecipeInDB.html" method="post" enctype="multipart/form-data">
                         <div class="modal-body">
                             <div class="custom-file">
                                 <input type="file" class="custom-file-input" id="customFile" name="customFile">
                                 <label class="custom-file-label" for="customFile">Choose file</label>
-                                <input type="hidden" id="customhiden" name ="customhiden" value={{ recipes.getDishId  }}>
+                                <input type="hidden" id="customHiddenDishId" name ="customHiddenDishId" value={{ recipes.getDishId  }}>
                                 <input type="hidden" name="MAX_FILE_SIZE" value="1048576" />
                             </div>
                         </div>
@@ -29,6 +29,10 @@
                 </div>
             </div>
         </div>
+
+
+    <!-- End of Content of Modal Loadind box -->
+    <!-- Content of page  -->
     <div class="container-fluid " id="firstPartHome">
 
         <form action="adminSendUpdateRecipe.html?dishId={{ recipes.getDishId  }}" method="post"  enctype="multipart/form-data" >
@@ -37,10 +41,9 @@
                <!-- Recipe picture-->
                 <div class="col-lg-6  mx-auto">
                     <img class="img-fluid" src="{{ recipes.getImagePathName}}" alt="{{ recipes.getImagePathName}}">
-                    <!--<img class="img-fluid" src="http://placehold.it/500x250" alt="">-->
-                   <!-- <img class="img-fluid" src="./assets/pics/1584_600_350.png" alt="">-->
+                    <!--<img class="img-fluid" src="http://placehold.it/500x250" alt=""> -->
+                   <!-- <img class="img-fluid" src="./assets/pics/1584_600_350.png" alt=""> -->
                     <div class="card-img-overlay ">
-                        <!--  <a class="btn-link" href="" ><i class="far fa-image fa-2x"></i></a>-->
                     <button type="button" class="btn btn-link "
                             id ="modalLoadingImage"
                             data-toggle="modal"
