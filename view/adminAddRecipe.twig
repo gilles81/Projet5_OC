@@ -4,59 +4,46 @@
 <div class="container-fluid  "  >
     <form class="form-group" action="adminSendNewRecipe.html" method="post">
     <!-- Page Content -->
-
-            <!-- Portfolio Item Heading -->
-            <h1 class="my-4">{{ recipes.getName }}
-            </h1>
-            <div>
-                <label for="comment">Title : </label><br />
-                <textarea rows="1"  id="newRecipeTitle" name="newRecipeTitle">Title</textarea>
+        <!-- Portfolio Item Heading -->
+        <h1 class="my-4">{{ recipes.getName }}
+        </h1>
+        <div>
+            <label for="comment">Title : </label><br />
+            <textarea rows="1"  id="newRecipeTitle" name="newRecipeTitle">Title</textarea>
+        </div>
+        <!-- Portfolio Item Row -->
+        <div class="row">
+            <div class="col-md-8">
+                <!-- <img class="img-fluid" src="http://placehold.it/600x350" alt="">-->
+                <img class="img-fluid" src="./assets/pics/1584_600_350.png" alt="">
             </div>
-
-            <!-- Portfolio Item Row -->
-            <div class="row">
-
-                <div class="col-md-8">
-            <!-- <img class="img-fluid" src="http://placehold.it/600x350" alt="">-->
-                    <img class="img-fluid" src="./assets/pics/1584_600_350.png" alt="">
-
+            <div class="col-md-4">
+                <h3 class="my-3">Ingredients</h3>
+                <div>
+                    <button>associer des ingredients></button>
                 </div>
-                <div class="col-md-4">
-
-                        <h3 class="my-3">Ingredients</h3>
-
-
-
-                    <div>
-                        <button>associer des ingredients></button>
-                    </div>
-                </div>
-
             </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <h3 class="my-3">Préparation :</h3>
                 <div class="row">
-                    <div class="col-md-12">
-                        <h3 class="my-3">Préparation :</h3>
-                                <div class="row">
-                                    <div class="col-lg-8 col-md-10 mx-auto">
+                    <div class="col-lg-8 col-md-10 mx-auto">
 
-                                            <div>
-                                                <label for="comment">Préparation :</label><br />
-                                                <textarea rows="10"  id="newRecipePreparation" name="newRecipePreparation"></textarea>
-                                            </div>
+                        <div>
+                            <label for="comment">Préparation :</label><br />
+                            <textarea rows="10"  id="newRecipePreparation" name="newRecipePreparation"></textarea>
+                        </div>
 
-                                            <div>
-                                                </br>
-
-                                            </div>
-
-                                    </div>
-                                </div>
+                        <div>
+                            </br>
+                        </div>
                     </div>
-
-                    <input class="btn btn-group-sm btn-primary" type="submit" value="Valider la recette" name="validAddRecipe" />
-                    <input class="btn btn-group-sm btn-primary" type="submit" value="Annulation"  name="AnnulAddRecipe"/>
                 </div>
-
+            </div>
+            <input class="btn btn-group-sm btn-primary" type="submit" value="Valider la recette" name="validAddRecipe" />
+            <input class="btn btn-group-sm btn-primary" type="submit" value="Annulation"  name="AnnulAddRecipe"/>
+        </div>
     </form>
 </div>
         <!-- /.row -->

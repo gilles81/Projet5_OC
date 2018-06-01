@@ -145,47 +145,6 @@ class CookController extends lib
 
            }
     }
-    public function adminNewPictureRecipeInDB()
-    {
-
-        if (isset($_FILES['customFile'])) {
-
-
-        };
-
-        if (isset($_FILES['customFile']) ) {
-            // $dossier="C:\wamp64\www\Projet5\assets\pics/";
-            $dossier=ROOT."assets\pics/";
-            $time = time();
-            $fichier =  $time.'_'.basename(  $_FILES['customFile'].'');
-            echo $dossier . $fichier;
-            if(move_uploaded_file($_FILES['customFile']['tmp_name'], $dossier . $fichier)) //Si la fonction renvoie TRUE, c'est que ça a fonctionné...
-            {
-                echo 'Upload effectué avec succès !';
-            }
-            else //Sinon (la fonction renvoie FALSE).
-            {
-                echo 'Echec de l\'upload !';
-            }
-        }
-        /*
-        if (isset($_FILES['customFile']) AND isset($_POST['customhiden'])) {
-            // $dossier="C:\wamp64\www\Projet5\assets\pics/";
-            $dossier=ROOT."assets\pics/";
-            $time = time();
-            $fichier =  $time.'_'.basename(  $_FILES['customFile']['name'].'');
-            echo $dossier . $fichier;
-            if(move_uploaded_file($_FILES['customFile']['tmp_name'], $dossier . $fichier)) //Si la fonction renvoie TRUE, c'est que ça a fonctionné...
-            {
-                echo 'Upload effectué avec succès !';
-            }
-            else //Sinon (la fonction renvoie FALSE).
-            {
-                echo 'Echec de l\'upload !';
-            }
-        }
-        */
-    }
 
 
     public function adminSendNewRecipe() {
@@ -263,6 +222,31 @@ class CookController extends lib
 
     public function  adminUpdateStatusRecipe()
     {
+        /*
+       echo 'on est dans le adminUpdateStatusRecipe <php>';
+        echo ' post : </br>';
+       var_dump($_POST);
+        echo ' files : </br>';
+        var_dump($_FILES);
+        echo ' </br>';
+*/
+        if (isset($_FILES['customFile']) ) {
+            $dossier=ROOT."assets\pics/";
+            $time = time();
+            $fichier =  $time.'_'.basename(  $_FILES['customFile']['name']);
+            echo $dossier . $fichier;
+            if(move_uploaded_file($_FILES['customFile']['tmp_name'], $dossier . $fichier)) //Si la fonction renvoie TRUE, c'est que ça a fonctionné...
+            {
+                echo 'Upload effectué avec succès !';
+            }
+            else //Sinon (la fonction renvoie FALSE).
+            {
+                echo 'Echec de l\'upload !';
+            }
+        }
+
+
+
         if ( (isset($_GET['dishId'] )) AND ($_GET['dishId'] >=(int)0)  AND (ctype_digit($_GET['dishId']) ==1 )) {
             $data = array();
             $newRecipe= new BasicDish($data);
@@ -432,6 +416,27 @@ class CookController extends lib
 
     }
 
+    public function adminNewPictureRecipeInDB() {
+
+        echo 'on est dans le adminNewPictureRecipeInDB ';
+        var_dump($_POST);
+        var_dump($_FILES);
+        if (isset($_FILES['customFile']) ) {
+            $dossier=ROOT."assets\pics/";
+            $time = time();
+            $fichier =  $time.'_'.basename(  $_FILES['customFile'].'');
+            echo $dossier . $fichier;
+            if(move_uploaded_file($_FILES['customFile']['tmp_name'], $dossier . $fichier)) //Si la fonction renvoie TRUE, c'est que ça a fonctionné...
+            {
+                echo 'Upload effectué avec succès !';
+            }
+            else //Sinon (la fonction renvoie FALSE).
+            {
+                echo 'Echec de l\'upload !';
+            }
+        }
+
+    }
 
 
 }
