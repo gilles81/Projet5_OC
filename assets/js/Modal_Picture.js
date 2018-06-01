@@ -5,13 +5,14 @@ $(function() {
         $(".bd-eraserReceipe-modal-lg").modal('show');
     });
     */
+
     $('#bt_loading_picturexx').click(function() {
         //$(".bd-eraserReceipe-modal-lg").modal('show');
         $.ajax({
             url : 'adminUpdateRecipePic.html',
             type : 'POST',
             data: {test : $("#customFile").val(), dishId : $("#customhiden").val() },
-
+           // beforeSend: function(){},
             success : function(code_html, statut){ console.log('succes')
                 console.log('hiep');
 
