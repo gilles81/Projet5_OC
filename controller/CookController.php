@@ -81,6 +81,7 @@ class CookController extends lib
     public function showCategory()
     {
         if (isset($_GET['category']) and $_GET['category']>0){
+            $this->sessionStatus();//determine status admin or not
             $manager = new CookManager();
             $recipes= $manager->findCategory($_GET['category'],'R');
             if (!empty($recipes)){
