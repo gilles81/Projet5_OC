@@ -10,12 +10,12 @@
             <!-- Row with image and status block-->
             <div class="row "  >
                 <!-- Recipe picture-->
-                <div class="col-lg-6  mx-auto">
+                <div class="col-lg-6  mx-auto mt-5">
                     <img class="img-fluid" src="{{ HOST }}{{ PicsRecipeDir }}{{ recipes.getImagePathName}}" alt="{{ recipes.getImagePathName}}">
                 </div>
 
                 <!-- Recipe options -->
-                <div class="col-lg-6  mx-auto" style="border:1px solid black">
+                <div class="col-lg-6  mx-auto mt-5" style="border:1px solid black">
                     <div class="row " style="border : 1px solid black;background-color:grey;opacity: 0.5;" >
                         <h3 class="col my-3 mx-auto" >Détails</h3>
                     </div>
@@ -23,108 +23,83 @@
                     <div class="row">
                         <!-- Recipe Diffiulty in database-->
                         <div class="col-lg-6  ">
-                            {% set Difficulty = recipes.getDifficulty %}
-                            <!-- Difficulty parametrage-->
-                            <div class="form-group">
-                                <label for="formControlRangeDiff">Difficulty </label>
-                                <input type="range" class="form-control-range" name="DifficultyFormValue" id="formControlRange" min="0" max="3" step="1" value= {{  Difficulty }}  >
-                            </div>
+                            <p> Difficulté: <span> <i class="fas fa-hand-paper"></i>  {{recipes.getDifficulty}} </span> </p>
                         </div>
                         <!-- Recipe  Portion-->
                         <div class="col-lg-6 mx-auto ">
                             {% set Portion = recipes.getPortion %}
-                            <div class="form-group">
-                                <label for="formControlRangePortion">Portion </label>
-                                <input  type="number" class="form-control-range" name="PortionFormValue" id="number" value = {{ Portion }}>
-                            </div>
+                            <p> Portion(s) :  <span> <i class="fas fa-hand-paper"></i>  {{recipes.getPortion}} </span> </p>
                         </div>
                     </div>
+
                     <div class="row">
                         <div class="col-lg-12 mx-auto ">
+
+
+                        </div>
+                    </div>
+                    <div class="row border">
+                        <div class="col-lg-12 mx-auto  ">
+                            <h4>Catégotie(s):</h4>
+
                         </div >
-                        <!-- Recipe  Category-->
+                        <!-- Recipe  Catego
+                        ry-->
                         <div class="col-lg-12 mx-auto ">
                             <div class="form-check form-check-inline">
-                                <label class="form-check-label" for="inlineCheckboxCat">Entrées</label>
+
                                 {% if recipes.getCat1==1 %}
-                                    <input class="form-check-input" type="checkbox" id="inlineCheckboxCat1" value="1" name="CategoryValueCatchoix[]" checked>
-                                {% else %}
-                                    <input class="form-check-input" type="checkbox" id="inlineCheckboxCat1" value="1" name="CategoryValueCatchoix[]" >
+                                    <p>Entrées</p>
                                 {% endif %}
                             </div>
                             <div class="form-check form-check-inline">
-                                <label class="form-check-label" for="inlineCheckboxCat">Plats </label>
                                 {% if recipes.getCat2==1 %}
-                                    <input class="form-check-input" type="checkbox" id="inlineCheckboxCat2" value="2" name="CategoryValueCatchoix[]" checked>
-                                {% else %}
-                                    <input class="form-check-input" type="checkbox" id="inlineCheckboxCat2" value="2" name="CategoryValueCatchoix[]" >
+                                    <p>Plats</p>
                                 {% endif %}
                             </div>
                             <div class="form-check form-check-inline">
-                                <label class="form-check-label" for="inlineCheckboxCat">Desserts </label>
                                 {% if recipes.getCat3==1 %}
-                                    <input class="form-check-input" type="checkbox" id="inlineCheckboxCat3" value="3" name="CategoryValueCatchoix[]" checked>
-                                {% else %}
-                                    <input class="form-check-input" type="checkbox" id="inlineCheckboxCat3" value="3" name="CategoryValueCatchoix[]" >
+                                    <p>Desserts</p>
                                 {% endif %}
                             </div>
                             <div class="form-check form-check-inline">
-                                <label class="form-check-label" for="inlineCheckboxCat">Sélection </label>
                                 {% if recipes.getCat4==1 %}
-                                    <input class="form-check-input" type="checkbox" id="inlineCheckboxCat4" value="4" name="CategoryValueCatchoix[]" checked>
-                                {% else %}
-                                    <input class="form-check-input" type="checkbox" id="inlineCheckboxCat4" value="4" name="CategoryValueCatchoix[]" >
+                                    <p>Nôtre sélection </p>
                                 {% endif %}
                             </div>
                         </div>
                     </div>
-                    <!-- Origin-->
+                    <!-- Origin-- and portion >-->
                     <div class="row">
                         <div class="col-lg-12 mx-auto ">
-                            {% set Origin = recipes.getOrigin %}
-                            <div class="form-group">
-                                <label for="formControlRangeOrigin">Origin </label>
-                                <input  type="text" class="form-control-range" name="OriginFormValue" id="formOriginForm"  value = {{ Origin }}>
-                            </div>
+                            <p> Origine(s) :  <span> <i class="fas fa-hand-paper"></i>  {{recipes.getOrigin}} </span> </p>
                         </div>
                         <div class="col-lg-12 mx-auto ">
-                            {% set Time = recipes.PreparationTime %}
-                            <div class="form-group">
-                                <label for="formControlRangeOrigin">Temps </label>
-                                <input  type="text" class="form-control-range" name="OriginFormValue" id="formOriginForm"  value = {{ Time }}>
-                            </div>
+                            <p class="mb-0"> Temps de Preparation :  <span> <i class="fas fa-hand-paper"></i>  {{recipes.PreparationTime}} </span> </p>
+                            <p class="" > Temps de cuisson :  <span> <i class="fas fa-hand-paper"></i>  {{recipes.CookingTime}} </span> </p>
                         </div>
+
                     </div>
                 </div>
             </div><!-- END Recipe options -->
-            <div class="col-lg-6  mx-auto">
-                <label for="Name"></label><br />
-                <input type="text" id="newName" name="newName" value="{{ recipes.getName }}" />
+            <div class="col-lg-6  mx-auto mt-5 mb-5">
+                <h2 class="" > {{ recipes.getName }}  </h2>
             </div>
             <div class="row mx-2"  >
                 <div class="col-lg-7 mx-auto">
-                    <div>
-                        <label for="comment"></label><br />
-                        <textarea id="newRecipePreparation" name="newRecipe" cols="200" rows="15" >{{ recipes.getRecipe}}</textarea>
+                    <div class="text-body">
+                        {{ recipes.getRecipe | raw }}
                     </div>
                 </div>
                 <div class="col-md-5 " >
                     <div class="row mx-2" style="border : 1px solid black;background-color:grey;opacity: 0.5;" >
                         <h3 class="my-3 mx-auto" >Ingredients</h3>
                     </div>
-                    <div class="row mx-2 " style="border : 1px solid black" >
-                        <select class="IngedientsSelect " name="NewRecipeIngredient" >
-                            {% for ingredient in ingredients[0] %}
-                                <option value="{{ ingredient.getId }}">{{ ingredient.getName }}</option>
-                            {% endfor %}
-                            <input class ="btn btn-group-sm btn-primary " type="submit" />
-                        </select>
-                    </div>
-                    <div  class="row mx-2 align-content-start "  style="border : 1px solid black;height :350px;overflow-y: scroll" >
+
+                    <div  class="row mx-2 align-content-start text-body "  style="border : 1px solid black;height :350px;overflow-y: scroll" >
                         {% for ingredient in ingredients[1] %}
-                            <p class="mt-0 mb-0 pt-0 pb-0  "> <a href="adminRemoveIngredientRecipe.html?IngredientId={{ ingredient.getId }}&amp;RecipeId={{ ingredient.RecipeId }}" class="btn btn-link ">
-                                    <i class="fas fa-eraser"></i>
-                                </a>{{ ingredient.Name }},</p>
+                            <p class="mt-1 mb-1 pt-1 pb-1  ">
+                                {{ ingredient.Name }} , </p>
                         {% endfor %}
                     </div>
                 </div>
@@ -139,7 +114,7 @@
         <div class="row text-center  "  >
             <div class="col-lg-12 my-5 " >
 
-                <a href="adminRecipes.html" class ="btn btn-group-sm btn-primary"> Retour aux recettes</a>
+                <a href="home.html" class ="btn btn-group-sm btn-primary"> Retour aux recettes</a>
             </div>
         </div>
 
