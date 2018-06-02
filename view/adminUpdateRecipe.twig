@@ -3,17 +3,46 @@
 {% block Part1 %}
 {% endblock %}
 {% block Part2 %}
+    <!-- Content of Modal Loadind box -->
+       <div class="modal fade bd-LoadingPicture-modal-lg" id="modalLoadPicture" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+           <div class="modal-dialog modal-lg">
+               <div class="modal-content">
+                   <div class="modal-header">
+                       <h5 class="modal-title" id="exampleModalLabel">Choix d'une image
+                       </h5>
+                   </div>
+                    <form action="adminNewPictureRecipeInDB.html" method="post" enctype="multipart/form-data">
+                        <div class="modal-body">
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" id="customFile" name="customFile">
+                                <label class="custom-file-label" for="customFile">Choose file</label>
+                                <input type="hidden" id="customHiddenDishId" name ="customHiddenDishId" value={{ recipes.getDishId  }}>
+                                <input type="hidden" name="MAX_FILE_SIZE" value="1048576" />
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal"> Annulation {{ recipes.getDishId  }} </button>
+                            <input class ="btn btn-group-sm btn-primary" type="submit" name="ValidationLoadingPic"/>
+                        </div>
+                   </form>
+                </div>
+            </div>
+        </div>
+
+
+    <!-- End of Content of Modal Loadind box -->
+    <!-- Content of page  -->
     <div class="container-fluid " id="firstPartHome">
+        {% set PicsRecipeDir ='/assets/pics/' %}
         <form action="adminSendUpdateRecipe.html?dishId={{ recipes.getDishId  }}" method="post"  enctype="multipart/form-data" >
             <!-- Row with image and status block-->
            <div class="row "  >
                <!-- Recipe picture-->
                 <div class="col-lg-6  mx-auto">
-                    <img class="img-fluid" src="{{ recipes.getImagePathName}}" alt="{{ recipes.getImagePathName}}">
-                    <!--<img class="img-fluid" src="http://placehold.it/500x250" alt="">-->
-                   <!-- <img class="img-fluid" src="./assets/pics/1584_600_350.png" alt="">-->
+                    <img class="img-fluid" src="{{ HOST }}{{ PicsRecipeDir }}{{ recipes.getImagePathName}}" alt="{{ recipes.getImagePathName}}">
+
                     <div class="card-img-overlay ">
-                        <!--  <a class="btn-link" href="" ><i class="far fa-image fa-2x"></i></a>-->
+
                     <button type="button" class="btn btn-link "
                             id ="modalLoadingImage"
                             data-toggle="modal"
@@ -21,31 +50,7 @@
                         <i class="far fa-image fa-2x"></i></button>
                     </div>
                 </div>
-               <div class="modal fade bd-LoadingPicture-modal-lg" id="modalLoadPicture" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-                   <div class="modal-dialog modal-lg">
-                       <div class="modal-content">
-                           <div class="modal-header">
-                               <h5 class="modal-title" id="exampleModalLabel">Choix d'une image
-                               </h5>
-                           </div>
-                           <!-- <form action="adminNewPictureRecipeInDB.html"  enctype="multipart/form-data">-->
-                               <div class="modal-body">
-                                   <div class="custom-file">
-                                       <input type="file" class="custom-file-input" id="customFile" name="customFile">
-                                       <label class="custom-file-label" for="customFile">Choose file</label>
-                                       <input type="hidden" id="customhiden" name ="customhiden" value={{ recipes.getDishId  }}>
-                                       <input type="hidden" name="MAX_FILE_SIZE" value="1048576" />
-                                   </div>
-                               </div>
-                               <div class="modal-footer">
-                                   <button type="button" class="btn btn-secondary" data-dismiss="modal"> Annulation {{ recipes.getDishId  }} </button>
-                                   <!--  <button class ="btn btn-group-sm btn-primary " id="bt_loading_picture" type="submit" >validation</button>-->
-                                  <input class ="btn btn-group-sm btn-primary" type="submit" name="ValidationLoadingPic"/>
-                              </div>
-                           <!--</form>-->
-                      </div>
-                  </div>
-              </div>
+
               <!-- Recipe options -->
                 <div class="col-lg-6  mx-auto" style="border:1px solid black">
                     <div class="row " style="border : 1px solid black;background-color:grey;opacity: 0.5;" >

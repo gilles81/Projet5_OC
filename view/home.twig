@@ -1,5 +1,5 @@
 {% extends '_layout_new.twig' %}
-
+{% set PicsSelectPath ="assets/pics/select/"%}
 {% block Part1 %}
     <div class="container-fluid  " id="firstPartHome" >
         <!--Select of cat 1-->
@@ -7,7 +7,7 @@
             <div class="mt-3 col-lg-3 col-md-4 col-sm-6 portfolio-item card-deck  ">
                 <a href="category.html?category=1#RecipeList">
                     <div class="card bg-dark text-white">
-                        <img class="card-img" src= "{{ HOST }}assets/pics/entree_1920_1080.jpg" alt="Entrées">
+                        <img class="card-img" src= "{{ HOST }}{{ PicsSelectPath }}entree_1920_1080.jpg" alt="Entrées">
                          <!--<img class="card-img" src="http://placehold.it/700x400" alt="Plats_Principal">-->
                         <div class="card-img-overlay">
                             <h5 class="card-title">Entrées</h5>
@@ -19,7 +19,7 @@
             <div class="mt-3 col-lg-3 col-md-4 col-sm-6 portfolio-item card-deck ">
                 <a href="category.html?category=2#RecipeList">
                     <div class="card bg-dark text-white">
-                        <img class="card-img" src= "{{ HOST }}assets/pics/Main_1920_1080.jpg" alt="Plats">
+                        <img class="card-img" src= "{{ HOST }}{{ PicsSelectPath }}Main_1920_1080.jpg" alt="Plats">
                         <!--<img class="card-img" src="http://placehold.it/700x400" alt="Plats_Principal">-->
                         <div class="card-img-overlay">
                             <h5 class="card-title">Plats</h5>
@@ -33,7 +33,7 @@
             <div class=" mt-3 col-lg-3 col-md-4 col-sm-6 portfolio-item card-deck "  >
                 <a  href="category.html?category=3#RecipeList">
                     <div class="card bg-dark text-white">
-                        <img class="card-img" src= "{{ HOST }}assets/pics/dessert_1920_1080.jpg" alt="Desserts">
+                        <img class="card-img" src= "{{ HOST }}{{ PicsSelectPath }}dessert_1920_1080.jpg" alt="Desserts">
                         <!--<img class="card-img" src="http://placehold.it/700x400" alt="Plats_Principal">-->
                         <div class="card-img-overlay">
                             <h5 class="card-title">Desserts</h5>
@@ -45,7 +45,7 @@
             <div class="mt-3 col-lg-3 col-md-4 col-sm-6 portfolio-item card-deck  ">
                 <a href="category.html?category=4#RecipeList">
                     <div class="card bg-dark text-white">
-                        <img class="card-img" src= "{{ HOST }}assets/pics/selection_1920_1080.jpg" alt="Selection">
+                        <img class="card-img" src= "{{ HOST }}{{ PicsSelectPath }}selection_1920_1080.jpg" alt="Selection">
                         <!--<img class="card-img" src="http://placehold.it/700x400" alt="Plats_Principal">-->
                         <div class="card-img-overlay">
                             <h5 class="card-title">Selections</h5>

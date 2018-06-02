@@ -369,9 +369,10 @@ class CookManager extends BackManager
 
         $query = "INSERT INTO `dish` (`DishId`, `Title`, `Category`, `Author`, `CreationDate`, `Recipe`, `Portion`, `ImagePathName`, `Origin`, `CookingTime`,
  `PreparationTime`, `Ingredients`, `Difficulty`, `Featured`, `Status`, `lke`)
-                  VALUES (NULL, 'Nouvelle recette ', '1', '', now(), 'rrr', '5', 'rrr', 'FRANCE', '0:00:00', '0:00:00', '', '0', '0', 'D', '0');";
+                  VALUES (NULL, 'Nouvelle recette ', '1', '', now(), '', '0' , :ImagePathName, '', '0', '0', '', '0', '0', 'D', '0');";
 
         $req = $bdd->prepare($query);
+        $req->bindValue(':ImagePathName','NoPictures_1920_1080.jpg',PDO::PARAM_INT);
         $req->execute();
     }
 

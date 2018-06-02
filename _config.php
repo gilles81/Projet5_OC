@@ -35,6 +35,8 @@ class MyAutoload
         define('ENTITIES', ROOT .'model/entities/');
 
         define('ASSETS', HOST . 'assets/');
+        define('SELECT', HOST . 'assets/pics/Select/');
+        define('PICS', HOST . 'assets/pics/');
 
         include_once('./administration/admin.php');
 

@@ -23,7 +23,6 @@ class Routeur
     private $routes = [
         'contact.html'                  => ['controller' => 'MiscController', 'method' => 'ShowContact'],
         'contactMail.html'              => ['controller' => 'MiscController', 'method' => 'ContactMail'],
-
         //'about.html'                    => ['controller' => 'MiscController', 'method' => 'ShowAbout'],
         'home.html'                             => ['controller' => 'CookController', 'method' => 'showHome'],
         'admin.html'                            => ['controller' => 'MemberController', 'method' => 'loginSession'],
@@ -39,9 +38,7 @@ class Routeur
         'adminRemoveRecipe.html'                => ['controller' => 'CookController', 'method' => 'adminRemoveDish'],
         'adminRemoveIngredientRecipe.html'      => ['controller' => 'CookController', 'method' => 'adminRemoveIngredientRecipe'],
 
-        //'adminNewPictureRecipeInDB.html'      => ['controller' => 'CookController', 'method' => 'adminNewPictureRecipeInDB'], // Ne fonctionne pas a supprimer a pres debug
-       // 'adminUpdateRecipePic.html'                      => ['controller' => 'CookController', 'method' => 'adminNewPictureRecipeInDB'],
-
+        'adminNewPictureRecipeInDB.html'      => ['controller' => 'CookController', 'method' => 'adminNewPictureRecipeInDB'], // Ne fonctionne pas a supprimer a pres debug
 
         'adminUpdateRecipe.html'      => ['controller' => 'CookController', 'method' => 'adminUpdateRecipeView'],
 

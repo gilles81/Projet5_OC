@@ -1,17 +1,21 @@
 {% extends '_layout_new.twig' %}
 
+{% set PicsRecipeDir ='assets/pics/' %}
+  {% set PicsReplacement = 'NoPictures_1920_1080.jpg'  %}
+
+
 
 
 {% block Part1 %}
     <div class="container-fluid  "  id="firstPartHome">
         <div class="row  ">
-            <div class="col-lg-6  text-center ">
+            <div class="col-lg-6  text-center mt-3">
                 <form class="form-inline my-2 my-lg-0 mx-auto">
                     <input class="form-control mr-sm-2" type="search" placeholder="Recettes , Ingredients , ..." aria-label="Search">
                     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Recherche</button>
                 </form>
             </div>
-            <div class="col-lg-6  text-center ">
+            <div class="col-lg-6  text-center mt-3 ">
                 <a class ="btn btn-dark" href="adminAddCardRecipe.html"> Ajouter une carte</a>
             </div>
         </div>
@@ -21,19 +25,27 @@
                 <a  class = "btn btn-dark " href="adminRecipes.html?page={{ recipes['cPage']-1  }}" > << </a><a class = "btn btn-dark " href="" > {{ recipes['cPage'] }} / {{ recipes['nbPage'] }}  </a><a  class = "btn btn-dark " href="adminRecipes.html?page={{ recipes['cPage']+1  }}"  >>> </a>
             </div>
         </div>
-        <div class="row">
+        <div class="row card-group">
 
                 {% for recipe in recipes['dishes'] %}
-                    <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item mx-auto">
-                            <div class="card w-100">
-                                <img class="card-img-top rounded" src="./assets/pics/1584_700_400.jpg" alt="">
-                                <!--<div class="card-img-overlay"><a href="#"><i class="far fa-edit"></i> </a></div>-->
-                                <div class="card-title"  >
-                                    <h5 class="card-title" > {{ recipe.getName }} </h5>
+                    {% set PicsName = recipe.getImagePathName %}
+                    <div class="col-lg-3 col-md-4 col-sm-5 portfolio-item mx-auto mt-3">
+                            <div class="card  CardInAdminRecipes" >
+                                <div Class="PicsInadminRecipes" >
+                                    {% if not PicsName  %}
+                                        <img  class="card-img-top rounded " src="{{ HOST }}{{ PicsRecipeDir }}{{ PicsReplacement}}" alt="image de remplacement">
+                                        <div class="card-img-overlay"><a href="#">Pas d'image disponible<i class="far fa-edit"></i> </a></div>
+                                    {% else %}
+                                        <img  class="card-img-top rounded" src="{{ HOST }}{{ PicsRecipeDir }}{{ PicsName }}" alt="{{ recipe.getImagePathName }}">
+                                    {% endif %}
+
+                                </div>
+                                <div class="card-title text-center cardRecipeTitle"  >
+                                    <h5 clas="title " > {{ recipe.getName }} </h5>
                                 </div>
 
-                                <div class="card-footer " style="height: 50px;">
-                                    <button type="button" class="btn btn-link "
+                                <div class="card-footer CardFooterInAdminRecipes " >
+                                    <button  type="button" class="btn btn-link  "
                                             id ="bt_eraser_receipe_{{ recipe.getDishId }}"
                                             data-toggle="modal"
                                             data-target="#modalDelete_{{ recipe.getDishId }}"

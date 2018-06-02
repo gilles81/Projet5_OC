@@ -119,6 +119,7 @@ class CookController extends lib
         $manager = new CookManager();
         $recipes= $manager->findDishes();//all status are called
         $myView = new View('adminRecipes');
+
         $myView->build( array('recipes'=> $recipes ,'ingredients'=>null,'comments'=>null,'warningList' => null ,'message'=>null,'HOST'=>HOST ,'adminLevel'=> $_SESSION['adminLevel']));
 
     }
@@ -127,6 +128,7 @@ class CookController extends lib
         $manager = new CookManager();
         $recipes= $manager->createEmptyRecipe();
         $recipes= $manager->findDishes();
+
         $myView = new View('adminRecipes');
         $myView->build( array('recipes'=> $recipes ,'ingredients'=>null,'comments'=>null,'warningList' => null ,'message'=>null,'HOST'=>HOST ,'adminLevel'=> $_SESSION['adminLevel']));
     }
@@ -235,7 +237,9 @@ class CookController extends lib
             $dossier=ROOT."assets\pics/";
             $time = time();
             $fichier =  $time.'_'.basename(  $_FILES['customFile']['name']);
-            echo $dossier . $fichier;
+
+
+
             if(move_uploaded_file($_FILES['customFile']['tmp_name'], $dossier . $fichier)) //Si la fonction renvoie TRUE, c'est que ça a fonctionné...
             {
                 echo 'Upload effectué avec succès !';
@@ -381,63 +385,45 @@ class CookController extends lib
 
         }
     }
-// Zone de test
 
-    public function testuploadview() {
-
-        $myView = new View('test');
-        $myView->build(array('recipes' => null,'ingredients'=>null, 'comments' => null, 'warningList' => null, 'message' => null, 'HOST' => HOST, 'adminLevel' => $_SESSION['adminLevel']));
-
-
-
-
-    }
-    public function testupload() {
-
-        if(isset($_FILES['icone']))
-        {
-           // $dossier="C:\wamp64\www\Projet5\assets\pics/";
-            $dossier=ROOT."assets\pics/";
-           $time = time();
-            $fichier =  $time.'_'.basename(  $_FILES['icone']['name'].'');
-
-            echo $dossier . $fichier;
-            if(move_uploaded_file($_FILES['icone']['tmp_name'], $dossier . $fichier)) //Si la fonction renvoie TRUE, c'est que ça a fonctionné...
-            {
-                echo 'Upload effectué avec succès !';
-            }
-            else //Sinon (la fonction renvoie FALSE).
-            {
-                echo 'Echec de l\'upload !';
-            }
-
-
-        }
-
-
-    }
-
-    public function adminNewPictureRecipeInDB() {
-
-        echo 'on est dans le adminNewPictureRecipeInDB ';
-        var_dump($_POST);
-        var_dump($_FILES);
-        if (isset($_FILES['customFile']) ) {
-            $dossier=ROOT."assets\pics/";
+    public function adminNewPictureRecipeInDB()
+    {
+        /*
+                echo 'on est dans le adminNewPictureRecipeInDB ';
+                var_dump($_POST);
+                var_dump($_FILES);
+        */
+        // Picture loadind and copy into Pics File on serveur
+        if (isset($_FILES['customFile']) AND isset($_POST['customHiddenDishId'])) {
+            $dossier = ROOT . "assets\pics/";
             $time = time();
-            $fichier =  $time.'_'.basename(  $_FILES['customFile'].'');
-            echo $dossier . $fichier;
-            if(move_uploaded_file($_FILES['customFile']['tmp_name'], $dossier . $fichier)) //Si la fonction renvoie TRUE, c'est que ça a fonctionné...
+            $fichier = $time . '_' . basename($_FILES['customFile']['name'] . '');
+
+            if (move_uploaded_file($_FILES['customFile']['tmp_name'], $dossier . $fichier)) //Si la fonction renvoie TRUE, c'est que ça a fonctionné...
             {
-                echo 'Upload effectué avec succès !';
-            }
-            else //Sinon (la fonction renvoie FALSE).
+                //echo 'Upload effectué avec succès !';
+                //addNewPictureRecipeInDB($dishId,$pics);
+                $manager = new CookManager();
+                $currentDish = $manager->addNewPictureRecipeInDB($_POST['customHiddenDishId'], $fichier);
+                /*
+                $myView = new View('');
+                $myView->redirect('adminRecipes.html');
+                */
+                $Recipe = $manager->findDish($_POST['customHiddenDishId']);
+                $IngredientsList=$manager->findIngredientsList();
+                $IngredientsRecipes=$manager->findIngredientsRecipe($_POST['customHiddenDishId']);
+                $ArrayOfIngredients = array();
+                $ArrayOfIngredients = [$IngredientsList,$IngredientsRecipes];
+
+                $myView = new View('adminUpdateRecipe');
+                $myView->build(array('recipes' => $Recipe,'ingredients'=>$ArrayOfIngredients, 'comments' => null, 'warningList' => null, 'message' => null, 'HOST' => HOST, 'adminLevel' => $_SESSION['adminLevel']));
+
+
+            } else //Sinon (la fonction renvoie FALSE).
             {
+                // TODO : Gerer erreur ;
                 echo 'Echec de l\'upload !';
             }
         }
-
     }
-
-
 }
