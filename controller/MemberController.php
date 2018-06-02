@@ -33,9 +33,9 @@ class MemberController extends lib
         $_SESSION['adminLevel']=0;
         session_destroy();
         // redirect to Home Page
-        $myView = new View('home');
-        $myView->build( array('recipes'=> null ,'ingredients'=>null,'comments'=>null,'warningList' => null,'message'=>null,'HOST'=>HOST,'adminLevel'=> 0));
 
+        $myView= $myView = new View('');
+        $myView->redirect('home.html');
     }
 
     /**

@@ -119,6 +119,39 @@
 
 /*Large devices (desktops, 992px and up)*/
  @media (min-width: 992px) {
+
+
+     /*Home Recipes Card  Style */
+     .CardInhome{
+         height:auto;
+
+
+     }
+     /*div of img*/
+     .PicsInHomeRecipes{
+         height:auto;
+
+     }
+     /*pics*/
+     .PicsInHomeRecipes img {
+         height:auto;
+
+     }
+
+
+     .cardRecipehomeTitle{
+         height:80px;
+     }
+     .CardFooterInHome {
+         height:40px;
+         text-align: center;
+
+
+     }
+
+
+
+     /*AdminRecipesUpdate CARD  Style */
      /*allthecard*/
      .CardInAdminRecipes{
          height:auto;
