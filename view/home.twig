@@ -1,5 +1,9 @@
 {% extends '_layout_new.twig' %}
 {% set PicsSelectPath ="assets/pics/select/"%}
+
+{% set PicsRecipeDir ='assets/pics/' %}
+  {% set PicsReplacement = 'NoPictures_1920_1080.jpg'  %}
+
 {% block Part1 %}
     <div class="container-fluid  " id="firstPartHome" >
         <!--Select of cat 1-->
@@ -67,35 +71,46 @@
 
 
 {% block Part2 %}
+
+
+
     <div class="container " id="secondPartHome">
-
-        <div class="row justify-content-center ">
-            <div class="col-lg-12">
-                {{ message }}
-            </div>
+        <div class="row text-center">
+        <div class="col-lg-12">
+            {{ message }}
         </div>
-            <div class="row" id="RecipeList">
-                {% for recipe in recipes %}
-                    <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item mx-auto   " >
-                        <a class="nav-link" href="recipe.html?dishId={{ recipe.getDishId }}">
-                            <div class="card ">
-                               <img class="card-img-top" src="http://placehold.it/700x400" alt="">
-                                <div class="card-body">
-                                    <h4 class="card-title" >
-                                        {{recipe.getName }}
-                                    </h4>
-                                    <h6>Difficulté : {{ recipe.getDifficulty }}</h6>
-                                    <h6>Préparation :{{ recipe.getPreparationTime }} </h6>
-                                    <h6>Cuisson : {{ recipe.getCookingTime }} </h6>
+        </div>
+        <div class="row card-group">
 
-                                    <h6>Origine  : {{ recipe.getOrigine }} </h6>
-                                    <h6>Avis : </h6>
-                                </div>
-                            </div>
-                        </a>
+            {% for recipe in recipes %}
+                {% set PicsName = recipe.getImagePathName %}
+                <div class="col-lg-3 col-md-4 col-sm-5 portfolio-item mx-auto mt-3">
+                    <div class="card CardInhome" >
+                        <div Class="PicsInHomeRecipes" >
+                            {% if not PicsName  %}
+                                <img  class="card-img-top rounded " src="{{ HOST }}{{ PicsRecipeDir }}{{ PicsReplacement}}" alt="image de remplacement">
+                                <div class="card-img-overlay"><a href="#">Pas d'image disponible<i class="far fa-edit"></i> </a></div>
+                            {% else %}
+                                <img  class="card-img-top rounded" src="{{ HOST }}{{ PicsRecipeDir }}{{ PicsName }}" alt="{{ recipe.getImagePathName }}">
+                            {% endif %}
+
+                        </div>
+                        <div class="card-title text-center cardRecipehomeTitle"  >
+                            <h5 clas="title " > {{ recipe.getName }} </h5>
+                        </div>
+
+                        <div class="card-footer CardFooterInHome " >
+                            <p> <span><i class="fas fa-hand-paper"></i> : {{ recipe.getDifficulty }}/4 </span>
+                                <span><i class="fab fa-algolia"></i> : {{ recipe.getPreparationTime }}</span> </p>
+                        </div>
                     </div>
-                {% endfor %}
-            </div>
+
+                </div>
+
+            {% endfor %}
+        </div>
+    </div>
+
     </div>
 
 {% endblock %}
