@@ -28,7 +28,6 @@ class CookController extends lib
         $manager = new CookManager();
         $recipes= $manager->findCategory('4','R');
         $message ="Selection";
-        var_dump($recipes);
         if (empty($recipes)){
             $recipes= $manager->findDishesfromStatus('R'); // R = ready to display
             $message ="Toutes nos recettes";
