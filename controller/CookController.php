@@ -23,15 +23,19 @@ class CookController extends lib
     public function showHome()
     {
         $this->sessionStatus();//determine status admin or not
+
         // Call of manager to get all recipes
         $manager = new CookManager();
-        $recipes= $manager->findFeaturedDishes();
+        $recipes= $manager->findCategory('4','R');
+        $message ="Selection";
+        var_dump($recipes);
         if (empty($recipes)){
             $recipes= $manager->findDishesfromStatus('R'); // R = ready to display
+            $message ="Toutes nos recettes";
         }
 
         $myView = new View('home');
-        $myView->build( array('recipes'=> $recipes ,'comments'=>null,'ingredients'=>null,'warningList' => null ,'message'=>null,'HOST'=>HOST ,'adminLevel'=> $_SESSION['adminLevel']));
+        $myView->build( array('recipes'=> $recipes ,'comments'=>null,'ingredients'=>null,'warningList' => null ,'message'=>$message,'HOST'=>HOST ,'adminLevel'=> $_SESSION['adminLevel']));
     }
 
     /**
