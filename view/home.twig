@@ -85,6 +85,7 @@
             {% for recipe in recipes %}
                 {% set PicsName = recipe.getImagePathName %}
                 <div class="col-lg-3 col-md-4 col-sm-5 portfolio-item mx-auto mt-3">
+                    <a class="nav-link" href="recipe.html?dishId={{ recipe.getDishId }}">
                     <div class="card CardInhome" >
                         <div Class="PicsInHomeRecipes" >
                             {% if not PicsName  %}
@@ -104,7 +105,7 @@
                                 <span><i class="fab fa-algolia"></i> : {{ recipe.getPreparationTime }}</span> </p>
                         </div>
                     </div>
-
+                    </a>
                 </div>
 
             {% endfor %}
