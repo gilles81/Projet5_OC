@@ -48,6 +48,30 @@
         height: auto;
         background-color:whitesmoke;
     }
+    /*Home Recipes Card  Style */
+    .CardInhome{
+        height:auto;
+        border :1px solid red;
+    }
+    /*div of img*/
+    .PicsInHomeRecipes{
+        height:auto;
+    }
+    /*pics*/
+    .PicsInHomeRecipes img {
+        height:auto;
+    }
+    .cardRecipehomeTitle{
+        height:80px;
+    }
+    .CardFooterInHome {
+        height:100px;
+        text-align: center;
+        font-size: 0.8em;
+    }
+
+
+
     .CardInAdminRecipes{
         height:auto;
     }
@@ -78,6 +102,33 @@
     #secondPartHome{
         height: auto;
     }
+
+
+
+    /*Home Recipes Card  Style */
+    .CardInhome{
+        height:auto;
+        border :1px solid red;
+    }
+    /*div of img*/
+    .PicsInHomeRecipes{
+        height:auto;
+    }
+    /*pics*/
+    .PicsInHomeRecipes img {
+        height:auto;
+    }
+    .cardRecipehomeTitle{
+        height:80px;
+    }
+    .CardFooterInHome {
+        height:100px;
+        text-align: center;
+        font-size: 0.8em;
+    }
+
+
+
     .CardInAdminRecipes{
         height:auto;
     }
@@ -94,6 +145,11 @@
         height:40px;
         text-align: center;
     }
+    .CardInhome{
+        height:auto;
+        border :1px solid blue;
+    }
+
 }
 
 /*Large devices (desktops, 992px and up)*/
@@ -101,6 +157,7 @@
      /*Home Recipes Card  Style */
      .CardInhome{
          height:auto;
+         border :1px solid red;
      }
      /*div of img*/
      .PicsInHomeRecipes{
@@ -114,8 +171,9 @@
          height:80px;
      }
      .CardFooterInHome {
-         height:40px;
+         height:100px;
          text-align: center;
+         font-size: 0.8em;
      }
      /*AdminRecipesUpdate CARD  Style */
      /*allthecard*/
