@@ -6,36 +6,21 @@
 
     <!-- Content of page  -->
     <div class="container-fluid " id="firstPartHome">
-        {% set PicsRecipeDir ='/assets/pics/' %}
-            <!-- Row with image and status block-->
-            <div class="row "  >
-                <!-- Recipe picture-->
+        {% set PicsRecipeDir ='/assets/pics/'%}
+            <div class="row mr-1">
+                <!-- Recipe picture -->
                 <div class="col-lg-6  mx-auto mt-5">
                     <img class="img-fluid" src="{{ HOST }}{{ PicsRecipeDir }}{{ recipes.getImagePathName}}" alt="{{ recipes.getImagePathName}}">
                 </div>
 
                 <!-- Recipe options -->
-                <div class="col-lg-6  mx-auto mt-5" style="border:1px solid black">
-                    <div class="row " style="border : 1px solid black;background-color:grey;opacity: 0.5;" >
+                <div class="col-lg-6  mx-auto mt-5  border border-dark " >
+                    <div class="row border border-dark detailRecipe "  >
                         <h3 class="col my-3 mx-auto" >Détails</h3>
                     </div>
-
-                    <div class="row">
-                        <!-- Recipe Diffiulty in database-->
-                        <div class="col-lg-6  ">
-                            <p> Difficulté: <span> <i class="fas fa-hand-paper"></i>  {{recipes.getDifficulty}} </span> </p>
-                        </div>
-                        <!-- Recipe  Portion-->
-                        <div class="col-lg-6 mx-auto ">
-                            {% set Portion = recipes.getPortion %}
-                            <p> Portion(s) :  <span> <i class="fas fa-hand-paper"></i>  {{recipes.getPortion}} </span> </p>
-                        </div>
-                    </div>
-
-                    <div class="row border">
-                        <div class="col-lg-12 mx-auto  ">
-                            <h4>Catégotie(s):</h4>
-
+                    <div  >
+                        <div class="col-lg-12 mx-auto border  ">
+                            <h5>Catégotie(s):</h5>
                         </div >
                         <!-- Recipe  Catego
                         ry-->
@@ -63,14 +48,27 @@
                             </div>
                         </div>
                     </div>
+                    <div class="row">
+                        <!-- Recipe Diffiulty in database-->
+                        <div class="col-lg-6  ">
+                            <p> Difficulté: <span> <i class="fas fa-hand-paper"></i>  {{recipes.getDifficulty}} </span> </p>
+                        </div>
+                        <!-- Recipe  Portion-->
+                        <div class="col-lg-6 mx-auto ">
+                            {% set Portion = recipes.getPortion %}
+                            <p> Portion(s) :  <span> <i class="fas fa-chart-pie"></i>  {{recipes.getPortion}} </span> </p>
+                        </div>
+                    </div>
+
+
                     <!-- Origin-- and portion >-->
                     <div class="row">
                         <div class="col-lg-12 mx-auto ">
-                            <p> Origine(s) :  <span> <i class="fas fa-hand-paper"></i>  {{recipes.getOrigin}} </span> </p>
+                            <p> Origine(s) :  <span> <i class="fas fa-globe"></i> {{recipes.getOrigin}} </span> </p>
                         </div>
                         <div class="col-lg-12 mx-auto ">
-                            <p class="mb-0"> Temps de Preparation :  <span> <i class="fas fa-hand-paper"></i>  {{recipes.PreparationTime}} </span> </p>
-                            <p class="" > Temps de cuisson :  <span> <i class="fas fa-hand-paper"></i>  {{recipes.CookingTime}} </span> </p>
+                            <p class="mb-0"> Temps de Preparation :  <span> <i class="far fa-clock"></i></i>  {{recipes.PreparationTime}} </span> </p>
+                            <p class="" > Temps de cuisson :  <span> <i class="far fa-clock"></i>  {{recipes.CookingTime}} </span> </p>
                         </div>
 
                     </div>
@@ -86,7 +84,7 @@
                     </div>
                 </div>
                 <div class="col-md-5 " >
-                    <div class="row mx-2" style="border : 1px solid black;background-color:grey;opacity: 0.5;" >
+                    <div class="row mx-2 border border-dark ingredientsRecipe"  >
                         <h3 class="my-3 mx-auto" >Ingredients</h3>
                     </div>
                     <div  class="row mx-2 align-content-start text-body "  style="border : 1px solid black;height :350px;overflow-y: scroll" >
