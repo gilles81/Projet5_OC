@@ -1,5 +1,8 @@
+/* Java script for */
+
 $(function() {
+    console.log('JS select2');
     $(document).ready(function() {
-        $('.IngedientsSelect').select2();
+        $('#NewRecipeIngredient').select2();
     });
 });
