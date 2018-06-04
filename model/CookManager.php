@@ -125,7 +125,7 @@ class CookManager extends BackManager
 
 
 
-
+/** findFeaturedDishes() not used */
     public function findFeaturedDishes()
     {
         $bdd = $this->bdd;
@@ -458,7 +458,7 @@ class CookManager extends BackManager
       $req->bindValue(':ImagePathName',$pics,PDO::PARAM_STR);
       $req->execute();
     }
-
+/*
 
     public function addDish($values)
     {
@@ -471,7 +471,7 @@ class CookManager extends BackManager
 
         $req->bindValue(':Title',$values['Name'],PDO::PARAM_STR);
         $req->bindValue(':Category',1,PDO::PARAM_INT);
-        $req->bindValue(':Author','Gilles',PDO::PARAM_STR);
+        $req->bindValue(':Author','Admin',PDO::PARAM_STR);
         $req->bindValue(':Recipe',$values['Preparation'],PDO::PARAM_STR);
         $req->bindValue(':Portion',4,PDO::PARAM_INT);
         $req->bindValue(':ImagePathName','',PDO::PARAM_STR);
@@ -486,6 +486,10 @@ class CookManager extends BackManager
         $req->execute();
 
     }
+*/
+
+
+
     /**
      *  removePost
      *
@@ -558,12 +562,30 @@ class CookManager extends BackManager
         $req->execute();
     }
 
+    public function UpdateRecipeCookingTime($newRecipe)
+    {
+        $bdd = $this->bdd;
+        $req = $bdd->prepare('UPDATE dish SET  CookingTime =:CookingTime WHERE DishId = :DishId ');
+        $req->bindValue(':DishId',$newRecipe->getDishId(),PDO::PARAM_INT);
+        $req->bindValue(':CookingTime',$newRecipe->getCookingTime(),PDO::PARAM_STR);
+        $req->execute();
+    }
+    public function UpdateRecipePreparationTime($newRecipe)
+    {
+        $bdd = $this->bdd;
+        $req = $bdd->prepare('UPDATE dish SET  PreparationTime =:PreparationTime WHERE DishId = :DishId ');
+        $req->bindValue(':DishId',$newRecipe->getDishId(),PDO::PARAM_INT);
+        $req->bindValue(':PreparationTime',$newRecipe->getPreparationTime(),PDO::PARAM_STR);
+        $req->execute();
+    }
+
+
     public function UpdateRecipeDifficulty($newRecipe)
     {
         $bdd = $this->bdd;
         $req = $bdd->prepare('UPDATE dish SET  Difficulty =:Difficulty WHERE DishId = :DishId ');
         $req->bindValue(':DishId',$newRecipe->getDishId(),PDO::PARAM_INT);
-        $req->bindValue(':Difficulty',$newRecipe->getStatus(),PDO::PARAM_STR);
+        $req->bindValue(':Difficulty',$newRecipe->getDifficulty(),PDO::PARAM_INT);
         $req->execute();
     }
     public function UpdateRecipeCategory($newRecipe)
