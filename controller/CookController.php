@@ -279,9 +279,8 @@ class CookController extends lib
             }
 
             // Difficulty
-
             if ((isset($_POST['DifficultyFormValue'])))   {
-                $newRecipe->setStatus($_POST['DifficultyFormValue']);
+                $newRecipe->setDifficulty($_POST['DifficultyFormValue']);
                 $manager->UpdateRecipeDifficulty($newRecipe);
             }
             // Portion
@@ -326,17 +325,17 @@ class CookController extends lib
 
             }
 
-            if ((isset($_POST['CookingTime'])) )  {
+            if ((isset($_POST['CookingTimeFormValue'])) )  {
                 // Get Bdd ident
 
-                $newRecipe->setCookingTime($_POST['CookingTime']);
-                $manager->UpdateRecipeName($newRecipe);
+                $newRecipe->setCookingTime($_POST['CookingTimeFormValue']);
+                $manager->UpdateRecipeCookingTime($newRecipe);
             }
 
-            if ((isset($_POST['PreparationTime'])) )  {
+            if ((isset($_POST['PreparationTimeFormValue'])) )  {
                 // Get Bdd ident
-                $newRecipe->setCookingTime($_POST['PreparationTime']);
-                $manager->UpdateRecipeName($newRecipe);
+                $newRecipe->setPreparationTime($_POST['PreparationTimeFormValue']);
+                $manager->UpdateRecipePreparationTime($newRecipe);
             }
 
             if ((isset($_POST['NewRecipeIngredient'])) )  {
