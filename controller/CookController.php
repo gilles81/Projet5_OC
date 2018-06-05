@@ -58,6 +58,7 @@ class CookController extends lib
                 $IngredientsRecipes=$manager->findIngredientsRecipe($_GET['dishId']);
                 $ArrayOfIngredients = array();
                 $ArrayOfIngredients = ["",$IngredientsRecipes];
+
                 $myView = new View('recipe');
                 $myView->build( array('recipes'=> $recipe ,'ingredients'=>$ArrayOfIngredients,'comments'=>null,'warningList' => null ,'message'=>null,'HOST'=>HOST ,'adminLevel'=> $_SESSION['adminLevel']));
             }else{
