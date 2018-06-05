@@ -403,7 +403,6 @@ class CookManager extends BackManager
     public function findIngredientsRecipe($idrecipe){
 
 
-
         $bdd = $this->bdd;
 
         $query =  "SELECT  recipe_ingredients.RecipeId,
