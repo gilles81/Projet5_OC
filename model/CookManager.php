@@ -125,7 +125,7 @@ class CookManager extends BackManager
 
 
 
-
+/** findFeaturedDishes() not used */
     public function findFeaturedDishes()
     {
         $bdd = $this->bdd;
@@ -376,14 +376,25 @@ class CookManager extends BackManager
         $req->execute();
     }
 
-
-    public function createRecipeIngredient($RecetteId, $IngredientsId){
+    /**
+     * createRecipeIngredient
+     *
+     * Create a line in dataBase for a recipe from IdIngredients
+     *
+     * @param $RecetteId
+     * @param $IngredientsId
+     */
+    public function createRecipeIngredient($RecetteId, $IngredientsId,$quantity,$unit){
+        var_dump($RecetteId);
+        var_dump($IngredientsId);
         $bdd = $this->bdd;
-        $query = "INSERT INTO `recipe_ingredients` (`Id`, `RecipeId`, `IngredientsId`)
-                  VALUES (NULL, :RecipeId, :IngredientsId);";
+        $query = "INSERT INTO `recipe_ingredients` (`RecipeId`, `IngredientId`,`quantity`,`unit`)
+                  VALUES ( :RecipeId, :IngredientId,:quantity,:unit);";
         $req = $bdd->prepare($query);
         $req->bindValue(':RecipeId',$RecetteId,PDO::PARAM_INT);
-        $req->bindValue(':IngredientsId',$IngredientsId,PDO::PARAM_INT);
+        $req->bindValue(':IngredientId',$IngredientsId,PDO::PARAM_INT);
+        $req->bindValue(':quantity',$quantity,PDO::PARAM_INT);
+        $req->bindValue(':unit',$unit,PDO::PARAM_STR);
 
         $req->execute();
     }
@@ -391,12 +402,16 @@ class CookManager extends BackManager
 
     public function findIngredientsRecipe($idrecipe){
 
+
+
         $bdd = $this->bdd;
 
         $query =  "SELECT  recipe_ingredients.RecipeId,
                            recipe_ingredients.IngredientId,
-                           recipe_ingredients.Id , 
-                           ingredients.Name 
+                           recipe_ingredients.quantity,
+                           recipe_ingredients.unit,
+                           ingredients.Name
+                           
                     FROM recipe_ingredients 
                     LEFT JOIN ingredients 
                     ON recipe_ingredients.IngredientId=ingredients.Id 
@@ -408,7 +423,6 @@ class CookManager extends BackManager
         $recipeIngredients=array();
 
 
-
         while ($row = $req-> fetch(PDO::FETCH_ASSOC)) {
             $RecipeIngredientData = array();
 
@@ -416,8 +430,16 @@ class CookManager extends BackManager
             $recipeIngredient = new RecipeIngredient($RecipeIngredientData);
             $recipeIngredients[] = $recipeIngredient;
         }
+
+
         return $recipeIngredients;
     }
+
+    //findIngredientsListAlreadySelectioned( $IngredientsList, $IngredientsRecipes);
+
+
+
+    /**
     public function addIngredientInRecipe($id,$newIngredient)
     {
         $bdd = $this->bdd;
@@ -432,17 +454,23 @@ class CookManager extends BackManager
 
 
     }
+*/
 
-    public function removeIngredientRecipe($Id)
+    /**
+     * removeIngredientRecipe
+     *
+     * remove ingredients from recipeId and IngredientId In database recipe_ingredients
+     *
+     * @param $recipeId
+     * @param $ingredientId
+     */
+    public function removeIngredientRecipe($recipeId,$ingredientId)
     {
 
         $bdd = $this->bdd;
-        $req = $bdd->exec("DELETE FROM `recipe_ingredients` WHERE `Id` = $Id");
-
+        $req = $bdd->exec("DELETE FROM `recipe_ingredients` WHERE `RecipeId` = $recipeId AND `IngredientId` = $ingredientId" );
         if (!$req) {
-
             echo 'Erreur a la suppression du chapitre';
-
         }
     }
 
@@ -458,7 +486,7 @@ class CookManager extends BackManager
       $req->bindValue(':ImagePathName',$pics,PDO::PARAM_STR);
       $req->execute();
     }
-
+/*
 
     public function addDish($values)
     {
@@ -471,7 +499,7 @@ class CookManager extends BackManager
 
         $req->bindValue(':Title',$values['Name'],PDO::PARAM_STR);
         $req->bindValue(':Category',1,PDO::PARAM_INT);
-        $req->bindValue(':Author','Gilles',PDO::PARAM_STR);
+        $req->bindValue(':Author','Admin',PDO::PARAM_STR);
         $req->bindValue(':Recipe',$values['Preparation'],PDO::PARAM_STR);
         $req->bindValue(':Portion',4,PDO::PARAM_INT);
         $req->bindValue(':ImagePathName','',PDO::PARAM_STR);
@@ -486,6 +514,10 @@ class CookManager extends BackManager
         $req->execute();
 
     }
+*/
+
+
+
     /**
      *  removePost
      *
@@ -558,12 +590,30 @@ class CookManager extends BackManager
         $req->execute();
     }
 
+    public function UpdateRecipeCookingTime($newRecipe)
+    {
+        $bdd = $this->bdd;
+        $req = $bdd->prepare('UPDATE dish SET  CookingTime =:CookingTime WHERE DishId = :DishId ');
+        $req->bindValue(':DishId',$newRecipe->getDishId(),PDO::PARAM_INT);
+        $req->bindValue(':CookingTime',$newRecipe->getCookingTime(),PDO::PARAM_STR);
+        $req->execute();
+    }
+    public function UpdateRecipePreparationTime($newRecipe)
+    {
+        $bdd = $this->bdd;
+        $req = $bdd->prepare('UPDATE dish SET  PreparationTime =:PreparationTime WHERE DishId = :DishId ');
+        $req->bindValue(':DishId',$newRecipe->getDishId(),PDO::PARAM_INT);
+        $req->bindValue(':PreparationTime',$newRecipe->getPreparationTime(),PDO::PARAM_STR);
+        $req->execute();
+    }
+
+
     public function UpdateRecipeDifficulty($newRecipe)
     {
         $bdd = $this->bdd;
         $req = $bdd->prepare('UPDATE dish SET  Difficulty =:Difficulty WHERE DishId = :DishId ');
         $req->bindValue(':DishId',$newRecipe->getDishId(),PDO::PARAM_INT);
-        $req->bindValue(':Difficulty',$newRecipe->getStatus(),PDO::PARAM_STR);
+        $req->bindValue(':Difficulty',$newRecipe->getDifficulty(),PDO::PARAM_INT);
         $req->execute();
     }
     public function UpdateRecipeCategory($newRecipe)

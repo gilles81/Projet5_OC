@@ -70,10 +70,12 @@ class lib
         $donnees = array();
 
         $donnees = [
-            'Id' => $row['Id'],
+            //'Id' => $row['Id'],
             'RecipeId' => $row['RecipeId'],
             'IngredientId' => $row['IngredientId'],
             'Name' => $row['Name'],
+            'Quantity'=> $row['quantity'],
+            'Unit'=> $row['unit']
         ];
 
         return $donnees;
@@ -146,6 +148,27 @@ class lib
         //Déplacement
         return move_uploaded_file($_FILES[$index]['tmp_name'],$destination);
     }
+
+    function findIngredientsListAlreadySelectioned($ingredientsList, $ingredientsRecipes){
+        $ingredientsAvailables =  array();
+        foreach ($ingredientsList as $ingredient){
+
+            $ingredientInList =false;
+            foreach ($ingredientsRecipes as $ingredientInRecipe)
+            {
+                if ($ingredient->getId() == $ingredientInRecipe->getIngredientId()) {
+                    $ingredientInList=true;
+                }
+            }
+            if (!$ingredientInList){
+                $IngredientsAvailables[]=$ingredient;
+            }
+        }
+
+    return $IngredientsAvailables;
+    }
+
+
 
 
 }
