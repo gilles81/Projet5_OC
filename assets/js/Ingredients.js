@@ -1,8 +1,10 @@
 /* Java script for */
 
 $(function() {
-    console.log('JS select2');
     $(document).ready(function() {
-        $('#NewRecipeIngredient').select2();
+
+        $('#NewRecipeIngredient').select2({ placeholder: "Select ingredient",
+            allowClear: true  });
+
     });
 });

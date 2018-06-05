@@ -8,10 +8,61 @@
 
 class RecipeIngredient
 {
-    private $Id;
+    private $Id;//to delette after debug
     private $RecipeId;
     private $IngredientId;
     private $Name;
+    private $Quantity;
+    private $Unit;
+
+    /**
+     * @return mixed
+     */
+    public function getUnit()
+    {
+        return $this->Unit;
+    }
+
+    /**
+     * @param mixed $Unit
+     */
+    public function setUnit($Unit)
+    {
+        $this->Unit = $Unit;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getQuantity()
+    {
+        return $this->Quantity;
+    }
+
+    /**
+     * @param mixed $Quantity
+     */
+    public function setQuantity($Quantity)
+    {
+        $this->Quantity = $Quantity;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUnity()
+    {
+        return $this->Unity;
+    }
+
+    /**
+     * @param mixed $Unity
+     */
+    public function setUnity($Unity)
+    {
+        $this->Unity = $Unity;
+    }
+    private $Unity;
 
 
 
