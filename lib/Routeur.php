@@ -48,9 +48,19 @@ class Routeur
         'recipe.html'                     => ['controller' => 'CookController', 'method' => 'showDish'],
         'category.html'                     => ['controller' => 'CookController', 'method' => 'showCategory'],
 
+        // Zone de test
+        'homeRecipesCat1.html'                     => ['controller' => 'CookController', 'method' => 'homeRecipesCat1View'],
+        'homeRecipesCat2.html'                     => ['controller' => 'CookController', 'method' => 'homeRecipesCat2View'],
+        'homeRecipesCat3.html'                     => ['controller' => 'CookController', 'method' => 'homeRecipesCat3View'],
+        'homeRecipesCat4.html'                     => ['controller' => 'CookController', 'method' => 'homeRecipesCat4View'],
 
+
+        //
         'deconnection.html'              => ['controller' => 'MemberController', 'method' => 'deconnection'],
         'error.html'         => ['controller' =>'PostsController', 'method' => 'error']
+
+
+
     ];
 
 
@@ -69,6 +79,7 @@ class Routeur
     {
         $request = $this->request;
 
+
         if (key_exists($request , $this->routes))
         {
             $controller = $this->routes[$request]['controller'];
@@ -78,7 +89,7 @@ class Routeur
             $currentController ->$method();
         }else{
             $myView = new View('error');
-            $myView->build( array('recipes'=> null ,'comments'=>null,'warningList' => null,'message'=>null,'HOST'=>HOST, 'adminLevel' => $_SESSION['adminLevel']));
+            $myView->build( array('recipes'=> null ,'ingredients'=>null,'comments'=>null,'warningList' => null,'message'=>null,'HOST'=>HOST, 'adminLevel' => $_SESSION['adminLevel']));
         }
     }
 
