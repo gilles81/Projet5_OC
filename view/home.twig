@@ -1,15 +1,16 @@
 {% extends '_layout_new.twig' %}
-{% set PicsSelectPath ="assets/pics/select/"%}
 
-{% set PicsRecipeDir ='assets/pics/' %}
-  {% set PicsReplacement = 'NoPictures_1920_1080.jpg'  %}
+   {% set PicsSelectPath ="assets/pics/select/"%}
+    {% set PicsRecipeDir ='assets/pics/' %}
+    {% set PicsReplacement = 'NoPictures_1920_1080.jpg'  %}
 
 {% block Part1 %}
     <div class="container-fluid  " id="firstPartHome" >
         <!--Select of cat 1-->
         <div class="row mt-0 justify-content-center " >
-            <div class="mt-3 col-lg-3 col-md-4 col-sm-6 portfolio-item card-deck  ">
-                <a href="category.html?category=1#RecipeList">
+            <div class="mt-3  col-lg-3 col-md-4 col-sm-6 portfolio-item card-deck   ">
+                 <!-- <a  id="cat" href="category.html?category=1#RecipeList">-->
+                <a  id="cat1"  class ='catRecipe' href="#RecipeList" >
                     <div class="card bg-dark text-white">
                         <img class="card-img" src= "{{ HOST }}{{ PicsSelectPath }}entree_1920_1080.jpg" alt="Entrées">
                          <!--<img class="card-img" src="http://placehold.it/700x400" alt="Plats_Principal">-->
@@ -21,7 +22,8 @@
             </div>
             <!--Select of cat 2-->
             <div class="mt-3 col-lg-3 col-md-4 col-sm-6 portfolio-item card-deck ">
-                <a href="category.html?category=2#RecipeList">
+                <!--<a href="category.html?category=2#RecipeList">-->
+                 <a  id="cat2" class ='catRecipe' href="#RecipeList" >
                     <div class="card bg-dark text-white">
                         <img class="card-img" src= "{{ HOST }}{{ PicsSelectPath }}Main_1920_1080.jpg" alt="Plats">
                         <!--<img class="card-img" src="http://placehold.it/700x400" alt="Plats_Principal">-->
@@ -35,7 +37,8 @@
         <div class="row mt-3 justify-content-center">
             <!--Select of cat 3-->
             <div class=" mt-3 col-lg-3 col-md-4 col-sm-6 portfolio-item card-deck "  >
-                <a  href="category.html?category=3#RecipeList">
+               <!-- <a id="cat3" href="category.html?category=3#RecipeList">-->
+                <a  id="cat3" class ='catRecipe' href="#RecipeList" >
                     <div class="card bg-dark text-white">
                         <img class="card-img" src= "{{ HOST }}{{ PicsSelectPath }}dessert_1920_1080.jpg" alt="Desserts">
                         <!--<img class="card-img" src="http://placehold.it/700x400" alt="Plats_Principal">-->
@@ -47,7 +50,8 @@
             </div>
             <!--Select of cat 4-->
             <div class="mt-3 col-lg-3 col-md-4 col-sm-6 portfolio-item card-deck  ">
-                <a href="category.html?category=4#RecipeList">
+                <!--<a href="category.html?category=4#RecipeList">-->
+                <a  id="cat4" class ='catRecipe' href="#RecipeList" >
                     <div class="card bg-dark text-white">
                         <img class="card-img" src= "{{ HOST }}{{ PicsSelectPath }}selection_1920_1080.jpg" alt="Selection">
                         <!--<img class="card-img" src="http://placehold.it/700x400" alt="Plats_Principal">-->
@@ -55,7 +59,7 @@
                             <h5 class="card-title">Selections</h5>
                         </div>
                     </div>
-                </a>
+              </a>
             </div>
         </div>
         <div class="row justify-content-center " id="RecipeList">
@@ -71,57 +75,8 @@
 
 
 {% block Part2 %}
-
-
-
     <div class="container " id="secondPartHome">
-        <div class="row text-center">
-        <div class="col-lg-12">
-            {{ message }}
-        </div>
-        </div>
-        <div class="row card-group">
-
-            {% for recipe in recipes %}
-                {% set PicsName = recipe.getImagePathName %}
-                <div class="col-lg-3 col-md-4 col-sm-5 portfolio-item mx-auto mt-3">
-                    <a class="nav-link" href="recipe.html?dishId={{ recipe.getDishId }}">
-                    <div class="card CardInhome" >
-                        <div Class="PicsInHomeRecipes" >
-                            {% if not PicsName  %}
-                                <img  class="card-img-top rounded " src="{{ HOST }}{{ PicsRecipeDir }}{{ PicsReplacement}}" alt="image de remplacement">
-                                <div class="card-img-overlay"><a href="#">Pas d'image disponible<i class="far fa-edit"></i> </a></div>
-                            {% else %}
-                                <img  class="card-img-top rounded" src="{{ HOST }}{{ PicsRecipeDir }}{{ PicsName }}" alt="{{ recipe.getImagePathName }}">
-                            {% endif %}
-
-                        </div>
-                        <div class="card-title text-center cardRecipehomeTitle"  >
-                            <h5 clas="title " > {{ recipe.getName }} </h5>
-                        </div>
-
-                        <div class="card-footer CardFooterInHome " >
-                            <div class="row  mx-auto">
-                                <div class="col-lg-12"  >
-                                    <p> <span><i class="fas fa-hand-paper"></i> : {{ recipe.getDifficulty }}/4 </span>
-                                </div>
-                            </div>
-                            <div class="row  mx-auto">
-                                <div class="col-lg-12"  >
-                                    <p><span><i class="fab fa-algolia"></i> : {{ recipe.getPreparationTime }}</span> </p>
-                                </div>
-                            </div>
-
-
-                        </div>
-                    </div>
-                    </a>
-                </div>
-
-            {% endfor %}
-        </div>
+           <!-- <img  src="{{ HOST }}/assets/pics/ajax-loader.gif" />-->
     </div>
-
-    </div>
-
 {% endblock %}
+
