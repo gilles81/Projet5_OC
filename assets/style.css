@@ -1,4 +1,4 @@
-/**/
+/* base css */
     Body{
         background-color: ghostwhite;
     }
@@ -52,7 +52,7 @@
     /*Home Recipes Card  Style */
     .CardInhome{
         height:auto;
-        border :1px solid red;
+
     }
     /*div of img*/
     .PicsInHomeRecipes{
@@ -107,7 +107,7 @@
     /*Home Recipes Card  Style */
     .CardInhome{
         height:auto;
-        border :1px solid red;
+
     }
     /*div of img*/
     .PicsInHomeRecipes{
@@ -146,7 +146,7 @@
     }
     .CardInhome{
         height:auto;
-        border :1px solid blue;
+
     }
 
 }
@@ -156,7 +156,7 @@
      /*Home Recipes Card  Style */
      .CardInhome{
          height:auto;
-         border :1px solid red;
+
      }
      /*div of img*/
      .PicsInHomeRecipes{
