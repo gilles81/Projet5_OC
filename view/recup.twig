@@ -1,0 +1,54 @@
+{% block Part8 %}
+
+
+
+    <div class="container " id="tttsecondPartHome">
+
+
+        <div class="row text-center">
+            <div class="col-lg-12">
+                {{ message }}
+            </div>
+        </div>
+        <div class="row card-group">
+
+            {% for recipe in recipes %}
+                {% set PicsName = recipe.getImagePathName %}
+                <div class="col-lg-3 col-md-4 col-sm-5 portfolio-item mx-auto mt-3">
+                    <a class="nav-link " href="recipe.html?dishId={{ recipe.getDishId }}">
+                        <div class="card CardInhome" >
+                            <div Class="PicsInHomeRecipes" >
+                                {% if not PicsName  %}
+                                    <img  class="card-img-top rounded " src="{{ HOST }}{{ PicsRecipeDir }}{{ PicsReplacement}}" alt="image de remplacement">
+                                    <div class="card-img-overlay"><a href="#">Pas d'image disponible<i class="far fa-edit"></i> </a></div>
+                                {% else %}
+                                    <img  class="card-img-top rounded" src="{{ HOST }}{{ PicsRecipeDir }}{{ PicsName }}" alt="{{ recipe.getImagePathName }}">
+                                {% endif %}
+                            </div>
+                            <div class="card-title text-center cardRecipehomeTitle"  >
+                                <h5 clas="title " > {{ recipe.getName }} </h5>
+                            </div>
+
+                            <div class="card-footer CardFooterInHome " >
+                                <div class="row  mx-auto">
+                                    <div class="col-lg-12"  >
+                                        <p> <span><i class="fas fa-hand-paper"></i> : {{ recipe.getDifficulty }}/4 </span>
+                                    </div>
+                                </div>
+                                <div class="row  mx-auto">
+                                    <div class="col-lg-12"  >
+                                        <p><span><i class="fab fa-algolia"></i> : {{ recipe.getPreparationTime }}</span> </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+            {% endfor %}
+        </div>
+    </div>
+
+    </div>
+
+{% endblock %}
