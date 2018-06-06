@@ -1,7 +1,26 @@
 $(function() {
 
+    $( '#Bt_Search_Home').click(function(e) {
+        e.preventDefault();
+        $.ajax({
+            type: 'post',
+            url: 'findInDb.html',
+            timeout: 3000,
+            data :{ 'SearchFormHome' : $('#SearchFormHome').val()},
+           //data :{ SearchFormHome : $('#SearchFormHome').name()},
+            beforeSend: function(){},
+            success: function(data) {
 
+                $('#secondPartHome').html(data); },
+            error: function() {
+                alert('La requête n\'a pas abouti'); }
+        });
+
+    });
+
+    //data :{ 'SearchFormHome' : $('#SearchFormHome').val()},
     $('#cat1').click(function(e) {
+
 
         $.ajax({
             type: 'post',
@@ -9,6 +28,7 @@ $(function() {
             timeout: 3000,
             beforeSend: function(){},
             success: function(data) {
+                console.log('cat1');
                 $('#secondPartHome').html(data); },
             error: function() {
                 alert('La requête n\'a pas abouti'); }
@@ -83,5 +103,6 @@ $(function() {
         });
 
     });
+
 
 });

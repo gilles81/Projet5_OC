@@ -479,4 +479,23 @@ class CookController extends lib
         $myView = new View('homeRecipes');
         $myView->build( array('recipes'=> $recipes ,'comments'=>null,'ingredients'=>null,'warningList' => null ,'message'=>$message,'HOST'=>HOST ,'adminLevel'=> $_SESSION['adminLevel']));
     }
+
+
+    public function findInDb()
+    {
+
+           if (isset($_POST['SearchFormHome']) AND (!empty($_POST['SearchFormHome']))) {
+
+               $manager = new CookManager();
+               $recipes= $manager->findInDb($_POST['SearchFormHome']);
+               $message =  'Voici les résultats pour la recherche :  ' . $_POST['SearchFormHome'] ;
+               $myView = new View('homeRecipes');
+               $myView->build( array('recipes'=> $recipes ,'comments'=>null,'ingredients'=>null,'warningList' => null ,'message'=>$message,'HOST'=>HOST ,'adminLevel'=> $_SESSION['adminLevel']));
+
+
+           }
+    }
+
+
+
 }

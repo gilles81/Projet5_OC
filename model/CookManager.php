@@ -677,4 +677,25 @@ class CookManager extends BackManager
     }
 
 
+
+    public function findInDb($term){
+        $bdd = $this->bdd;
+        $Dishes=  array();
+                $termToFind = '%'.$term.'%' ;
+
+            $query = "SELECT * FROM dish 
+                      WHERE Title LIKE  '$termToFind'  AND Status ='R'  
+                      
+                      ";
+            $req = $bdd->prepare($query);
+            $req->execute();
+            while ($row = $req-> fetch(PDO::FETCH_ASSOC))
+            {
+                $data = $this->RowInArray($row);
+                $dish = new BasicDish($data);
+                $Dishes[]= $dish;
+            }
+            return $Dishes;
+    }
+
 }
