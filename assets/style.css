@@ -100,9 +100,7 @@
         background-size: cover;
         background-attachment: unset;
     }
-    #secondPartHome{
-        height: auto;
-    }
+
 
 
 
@@ -197,9 +195,7 @@
        text-align: center;
      }
 
-     #secondPartHome{
-         height: auto;
-     }
+
  }
 
 /* Extra large devices (large desktops, 1200px and up)*/
