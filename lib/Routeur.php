@@ -52,7 +52,7 @@ class Routeur
         'homeRecipesCat1.html'                     => ['controller' => 'CookController', 'method' => 'homeRecipesCat1View'],
         'homeRecipesCat2.html'                     => ['controller' => 'CookController', 'method' => 'homeRecipesCat2View'],
         'homeRecipesCat3.html'                     => ['controller' => 'CookController', 'method' => 'homeRecipesCat3View'],
-
+        'homeRecipesCat4.html'                     => ['controller' => 'CookController', 'method' => 'homeRecipesCat4View'],
 
 
 
