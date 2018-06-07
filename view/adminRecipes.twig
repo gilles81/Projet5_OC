@@ -10,8 +10,8 @@
     <div class="container-fluid  "  id="firstPartHome">
         <div class="row  ">
             <div class="col-lg-6  text-center mt-3">
-                <form class="form-inline my-2 my-lg-0 mx-auto">
-                    <input class="form-control mr-sm-2" type="search" placeholder="Recettes , Ingredients , ..." aria-label="Search">
+                <form action='adminRecipesSearch.html' method="post" class="form-inline my-2 my-lg-0 mx-auto">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Recettes " aria-label="Search" name="adminRecipesFormSearch">
                     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Recherche</button>
                 </form>
             </div>
@@ -22,7 +22,7 @@
 
         <div class="row">
             <div class="mx-auto my-1 ">
-                <a  class = "btn btn-dark " href="adminRecipes.html?page={{ recipes['cPage']-1  }}" > << </a><a class = "btn btn-dark " href="" > {{ recipes['cPage'] }} / {{ recipes['nbPage'] }}  </a><a  class = "btn btn-dark " href="adminRecipes.html?page={{ recipes['cPage']+1  }}"  >>> </a>
+                <a  class = "btn btn-dark " href="adminRecipes.html?page={{ recipes['cPage']-1  }}"> << </a><a class = "btn btn-dark " href="" > {{ recipes['cPage'] }} / {{ recipes['nbPage'] }}  </a><a  class = "btn btn-dark " href="adminRecipes.html?page={{ recipes['cPage']+1  }}"  >>> </a>
             </div>
         </div>
         <div class="row card-group">
@@ -77,6 +77,10 @@
                 {% endfor %}
             </div>
     </div>
+
+
+
+
 {% endblock %}
 {% block Part2 %}
 {% endblock %}

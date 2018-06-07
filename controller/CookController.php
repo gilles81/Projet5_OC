@@ -26,15 +26,15 @@ class CookController extends lib
 
         // Call of manager to get all recipes
         $manager = new CookManager();
-        $recipes= $manager->findCategory('4','R');
-        $message ="Selection";
-        if (empty($recipes)){
-            $recipes= $manager->findDishesfromStatus('R'); // R = ready to display
-            $message ="Toutes nos recettes";
+        $recipes = $manager->findCategory('4', 'R');
+        $message = "Selection";
+        if (empty($recipes)) {
+            $recipes = $manager->findDishesfromStatus('R'); // R = ready to display
+            $message = "Toutes nos recettes";
         }
 
         $myView = new View('home');
-        $myView->build( array('recipes'=> $recipes ,'comments'=>null,'ingredients'=>null,'warningList' => null ,'message'=>$message,'HOST'=>HOST ,'adminLevel'=> $_SESSION['adminLevel']));
+        $myView->build(array('recipes' => $recipes, 'comments' => null, 'ingredients' => null, 'warningList' => null, 'message' => $message, 'HOST' => HOST, 'adminLevel' => $_SESSION['adminLevel']));
     }
 
     /**
@@ -45,28 +45,28 @@ class CookController extends lib
 
     public function showDish()
     {
-        if (isset($_GET['dishId']) AND ($_GET['dishId'] >0) ) {
+        if (isset($_GET['dishId']) AND ($_GET['dishId'] > 0)) {
             $manager = new CookManager();
-            $recipe= $manager->findDish($_GET['dishId']);
-            if (!empty($recipe)){
+            $recipe = $manager->findDish($_GET['dishId']);
+            if (!empty($recipe)) {
 
                 $manager = new CookManager();
                 $recipe = $manager->findDish($_GET['dishId']);
 
-                $IngredientsRecipes=$manager->findIngredientsRecipe($_GET['dishId']);
+                $IngredientsRecipes = $manager->findIngredientsRecipe($_GET['dishId']);
                 $ArrayOfIngredients = array();
-                $ArrayOfIngredients = ["",$IngredientsRecipes];
+                $ArrayOfIngredients = ["", $IngredientsRecipes];
 
                 $myView = new View('recipe');
-                $myView->build( array('recipes'=> $recipe ,'ingredients'=>$ArrayOfIngredients,'comments'=>null,'warningList' => null ,'message'=>null,'HOST'=>HOST ,'adminLevel'=> $_SESSION['adminLevel']));
-            }else{
+                $myView->build(array('recipes' => $recipe, 'ingredients' => $ArrayOfIngredients, 'comments' => null, 'warningList' => null, 'message' => null, 'HOST' => HOST, 'adminLevel' => $_SESSION['adminLevel']));
+            } else {
                 $myView = new View('error');
-                $myView->build( array('recipes'=>null ,'ingredients'=>null,'comments'=>null,'warningList' => null, 'message'=>null,'HOST'=>HOST ,'adminLevel'=> $_SESSION['adminLevel']));
+                $myView->build(array('recipes' => null, 'ingredients' => null, 'comments' => null, 'warningList' => null, 'message' => null, 'HOST' => HOST, 'adminLevel' => $_SESSION['adminLevel']));
             }
-        }else {
+        } else {
 
             $myView = new View('error');
-            $myView->build( array('recipes'=>null ,'ingredients'=>null,'comments'=>null,'warningList' => null ,'message'=>null,'HOST'=>HOST ,'adminLevel'=> $_SESSION['adminLevel']));
+            $myView->build(array('recipes' => null, 'ingredients' => null, 'comments' => null, 'warningList' => null, 'message' => null, 'HOST' => HOST, 'adminLevel' => $_SESSION['adminLevel']));
         }
 
     }
@@ -81,77 +81,76 @@ class CookController extends lib
      */
     public function showCategory()
     {
-        if (isset($_GET['category']) and $_GET['category']>0){
+        if (isset($_GET['category']) and $_GET['category'] > 0) {
             $this->sessionStatus();//determine status admin or not
             $manager = new CookManager();
-            $recipes= $manager->findCategory($_GET['category'],'R');
-            if (!empty($recipes)){
+            $recipes = $manager->findCategory($_GET['category'], 'R');
+            if (!empty($recipes)) {
                 $myView = new View('home');
-                $myView->build( array('recipes'=> $recipes ,'ingredients'=>null,'comments'=>null,'warningList' => null ,'message'=>null ,'HOST'=>HOST ,'adminLevel'=> $_SESSION['adminLevel']));
-            }else{
+                $myView->build(array('recipes' => $recipes, 'ingredients' => null, 'comments' => null, 'warningList' => null, 'message' => null, 'HOST' => HOST, 'adminLevel' => $_SESSION['adminLevel']));
+            } else {
                 $manager = new CookManager();
-                $recipes= $manager->findDishesFromStatus("R");
+                $recipes = $manager->findDishesFromStatus("R");
                 $myView = new View('home');
-                $myView->build( array('recipes'=> $recipes ,'ingredients'=>null,'comments'=>null,'warningList' => null ,'message'=>'Il n\'y a pas encore de recette dans cette categorie !','HOST'=>HOST ,'adminLevel'=> $_SESSION['adminLevel']));
+                $myView->build(array('recipes' => $recipes, 'ingredients' => null, 'comments' => null, 'warningList' => null, 'message' => 'Il n\'y a pas encore de recette dans cette categorie !', 'HOST' => HOST, 'adminLevel' => $_SESSION['adminLevel']));
             }
-        }else {
+        } else {
             $myView = new View('error');
-            $myView->build( array('recipes'=>null ,'ingredients'=>null,'comments'=>null,'warningList' => null ,'message'=>null,'HOST'=>HOST ,'adminLevel'=> $_SESSION['adminLevel']));
+            $myView->build(array('recipes' => null, 'ingredients' => null, 'comments' => null, 'warningList' => null, 'message' => null, 'HOST' => HOST, 'adminLevel' => $_SESSION['adminLevel']));
         }
     }
-
 
 
     public function adminBoard()
     {
         $myView = new View('adminBoard');
-        $myView->build( array('recipes'=> null ,'ingredients'=>null,'comments'=>null,'warningList' => null ,'message'=>null,'HOST'=>HOST ,'adminLevel'=> $_SESSION['adminLevel']));
+        $myView->build(array('recipes' => null, 'ingredients' => null, 'comments' => null, 'warningList' => null, 'message' => null, 'HOST' => HOST, 'adminLevel' => $_SESSION['adminLevel']));
     }
+
 
     /**
-     * adminRecipes
+     * public function adminRecipesSearch()
+     * {
      *
-     * call manager to find all recipes (all status) and call the view display them.
+     * $manager = new CookManager();
+     * $recipes= $manager->findDishesSearch();//all status are called
+     * $myView = new View('adminRecipes');
      *
-     */
-    public function adminRecipes()
-    {
-        $manager = new CookManager();
-        $recipes= $manager->findDishes();//all status are called
-        $myView = new View('adminRecipes');
+     * $myView->build( array('recipes'=> $recipes ,'ingredients'=>null,'comments'=>null,'warningList' => null ,'message'=>null,'HOST'=>HOST ,'adminLevel'=> $_SESSION['adminLevel']));
+     *
+     * }**/
 
-        $myView->build( array('recipes'=> $recipes ,'ingredients'=>null,'comments'=>null,'warningList' => null ,'message'=>null,'HOST'=>HOST ,'adminLevel'=> $_SESSION['adminLevel']));
-
-    }
     public function adminAddCardRecipeView()
     {
         $manager = new CookManager();
-        $recipes= $manager->createEmptyRecipe();
-        $recipes= $manager->findDishes();
+        $recipes = $manager->createEmptyRecipe();
+        $recipes = $manager->findDishes();
 
         $myView = new View('adminRecipes');
-        $myView->build( array('recipes'=> $recipes ,'ingredients'=>null,'comments'=>null,'warningList' => null ,'message'=>null,'HOST'=>HOST ,'adminLevel'=> $_SESSION['adminLevel']));
+        $myView->build(array('recipes' => $recipes, 'ingredients' => null, 'comments' => null, 'warningList' => null, 'message' => null, 'HOST' => HOST, 'adminLevel' => $_SESSION['adminLevel']));
     }
 
-    public function adminUpdateRecipeView() {
-        if (isset($_GET['dishId'])&& (ctype_digit($_GET['dishId']) ==1 ) && $_GET['dishId']>0 ) {
+    public function adminUpdateRecipeView()
+    {
+        if (isset($_GET['dishId']) && (ctype_digit($_GET['dishId']) == 1) && $_GET['dishId'] > 0) {
             $manager = new CookManager();
-            $recipe= $manager->findDish($_GET['dishId']);
-            $IngredientsList=$manager->findIngredientsList();// list of ingredient in db
-            $IngredientsRecipes=$manager->findIngredientsRecipe($_GET['dishId']);
-            $IngredientsListNotSelected=$this->findIngredientsListAlreadySelectioned( $IngredientsList, $IngredientsRecipes);
+            $recipe = $manager->findDish($_GET['dishId']);
+            $IngredientsList = $manager->findIngredientsList();// list of ingredient in db
+            $IngredientsRecipes = $manager->findIngredientsRecipe($_GET['dishId']);
+            $IngredientsListNotSelected = $this->findIngredientsListAlreadySelectioned($IngredientsList, $IngredientsRecipes);
             $ArrayOfIngredients = array();
-            $ArrayOfIngredients = [$IngredientsListNotSelected,$IngredientsRecipes];
+            $ArrayOfIngredients = [$IngredientsListNotSelected, $IngredientsRecipes];
             $myView = new View('adminUpdateRecipe');
-            $myView->build(array('recipes' => $recipe,'ingredients'=>$ArrayOfIngredients, 'comments' => null, 'warningList' => null, 'message' => null, 'HOST' => HOST, 'adminLevel' => $_SESSION['adminLevel']));
+            $myView->build(array('recipes' => $recipe, 'ingredients' => $ArrayOfIngredients, 'comments' => null, 'warningList' => null, 'message' => null, 'HOST' => HOST, 'adminLevel' => $_SESSION['adminLevel']));
 
-           }
+        }
     }
 
 
-    public function adminSendNewRecipe() {
+    public function adminSendNewRecipe()
+    {
         if (isset($_POST['newRecipePreparation']) AND isset($_POST['newRecipeTitle'])) {
-            if (!empty($_POST['newRecipeTitle']) AND (!empty($_POST['newRecipePreparation']))  ) {
+            if (!empty($_POST['newRecipeTitle']) AND (!empty($_POST['newRecipePreparation']))) {
                 $values = array('Title' => $_POST['newRecipeTitle'], 'Preparation' => $_POST['newRecipePreparation']);
                 $manager = new CookManager();
                 $manager->addDish($values);
@@ -159,7 +158,7 @@ class CookController extends lib
                 //myView->build(array('recipes' => null, 'comments' => null, 'warningList' => null, 'message' => null, 'HOST' => HOST, 'adminLevel' => $_SESSION['adminLevel']));
             } else {
                 $myView = new View('error');
-                $myView->build(array('recipes' => null,'ingredients'=>null, 'comments' => null, 'warningList' => null, 'message' => null, 'HOST' => HOST, 'adminLevel' => $_SESSION['adminLevel']));
+                $myView->build(array('recipes' => null, 'ingredients' => null, 'comments' => null, 'warningList' => null, 'message' => null, 'HOST' => HOST, 'adminLevel' => $_SESSION['adminLevel']));
             }
         }
     }
@@ -176,7 +175,7 @@ class CookController extends lib
             //myView->build(array('recipes' => null, 'comments' => null, 'warningList' => null, 'message' => null, 'HOST' => HOST, 'adminLevel' => $_SESSION['adminLevel']));
         } else {
             $myView = new View('error');
-            $myView->build(array('recipes' => null, 'ingredients'=>null,'comments'=> null, 'warningList'=> null, 'message' => null, 'HOST' => HOST, 'adminLevel' => $_SESSION['adminLevel']));
+            $myView->build(array('recipes' => null, 'ingredients' => null, 'comments' => null, 'warningList' => null, 'message' => null, 'HOST' => HOST, 'adminLevel' => $_SESSION['adminLevel']));
         }
     }
 
@@ -187,81 +186,79 @@ class CookController extends lib
             isset($_GET['RecipeId']) AND ($_GET['RecipeId'] > 0)) {
 
             $manager = new CookManager();
-            $manager->removeIngredientRecipe($_GET['RecipeId'] ,$_GET['IngredientId']);
+            $manager->removeIngredientRecipe($_GET['RecipeId'], $_GET['IngredientId']);
 
-            $recipe= $manager->findDish($_GET['RecipeId']);
-            $IngredientsList=$manager->findIngredientsList();// list of ingredient in db
-            $IngredientsRecipes=$manager->findIngredientsRecipe($_GET['RecipeId']);
-            $IngredientsListNotSelected=$this->findIngredientsListAlreadySelectioned( $IngredientsList, $IngredientsRecipes);
+            $recipe = $manager->findDish($_GET['RecipeId']);
+            $IngredientsList = $manager->findIngredientsList();// list of ingredient in db
+            $IngredientsRecipes = $manager->findIngredientsRecipe($_GET['RecipeId']);
+            $IngredientsListNotSelected = $this->findIngredientsListAlreadySelectioned($IngredientsList, $IngredientsRecipes);
             $ArrayOfIngredients = array();
-            $ArrayOfIngredients = [$IngredientsListNotSelected,$IngredientsRecipes];
+            $ArrayOfIngredients = [$IngredientsListNotSelected, $IngredientsRecipes];
             $myView = new View('adminUpdateRecipe');
-            $myView->build(array('recipes' => $recipe,'ingredients'=>$ArrayOfIngredients, 'comments' => null, 'warningList' => null, 'message' => null, 'HOST' => HOST, 'adminLevel' => $_SESSION['adminLevel']));
+            $myView->build(array('recipes' => $recipe, 'ingredients' => $ArrayOfIngredients, 'comments' => null, 'warningList' => null, 'message' => null, 'HOST' => HOST, 'adminLevel' => $_SESSION['adminLevel']));
 
         } else {
             $myView = new View('error');
-           $myView->build(array('recipes' => null, 'ingredients'=>null,'comments'=> null, 'warningList'=> null, 'message' => null, 'HOST' => HOST, 'adminLevel' => $_SESSION['adminLevel']));
+            $myView->build(array('recipes' => null, 'ingredients' => null, 'comments' => null, 'warningList' => null, 'message' => null, 'HOST' => HOST, 'adminLevel' => $_SESSION['adminLevel']));
 
         }
     }
 
 
-    public function  adminUpdateStatusRecipe()
+    public function adminUpdateStatusRecipe()
     {
 
-        if (isset($_FILES['customFile']) ) {
-            $dossier=ROOT."assets\pics/";
+        if (isset($_FILES['customFile'])) {
+            $dossier = ROOT . "assets\pics/";
             $time = time();
-            $fichier =  $time.'_'.basename(  $_FILES['customFile']['name']);
+            $fichier = $time . '_' . basename($_FILES['customFile']['name']);
 
-            if(move_uploaded_file($_FILES['customFile']['tmp_name'], $dossier . $fichier)) //Si la fonction renvoie TRUE, c'est que ça a fonctionné...
+            if (move_uploaded_file($_FILES['customFile']['tmp_name'], $dossier . $fichier)) //Si la fonction renvoie TRUE, c'est que ça a fonctionné...
             {
                 echo 'Upload effectué avec succès !';
-            }
-            else //Sinon (la fonction renvoie FALSE).
+            } else //Sinon (la fonction renvoie FALSE).
             {
                 echo 'Echec de l\'upload !';
             }
         }
 
 
-
-        if ( (isset($_GET['dishId'] )) AND ($_GET['dishId'] >=(int)0)  AND (ctype_digit($_GET['dishId']) ==1 )) {
+        if ((isset($_GET['dishId'])) AND ($_GET['dishId'] >= (int)0) AND (ctype_digit($_GET['dishId']) == 1)) {
             $data = array();
-            $newRecipe= new BasicDish($data);
+            $newRecipe = new BasicDish($data);
             $newRecipe->setDishId($_GET['dishId']);
             $manager = new CookManager();
 
-            if ((isset($_POST['newName'])) )  {
+            if ((isset($_POST['newName']))) {
                 // Get Bdd ident
 
                 $newRecipe->setName($_POST['newName']);
                 $manager->UpdateRecipeName($newRecipe);
             }
-            if ((isset($_POST['newRecipe'])) )  {
+            if ((isset($_POST['newRecipe']))) {
                 // Get Bdd ident
                 $newRecipe->setRecipe($_POST['newRecipe']);
                 $manager->UpdateRecipePreparation($newRecipe);
             }
-            if ((isset($_POST['customRadioInline1'])) )  {
+            if ((isset($_POST['customRadioInline1']))) {
                 // Get Bdd ident
                 $newRecipe->setStatus($_POST['customRadioInline1']);
                 $manager->UpdateRecipeStatus($newRecipe);
             }
 
             // Difficulty
-            if ((isset($_POST['DifficultyFormValue'])))   {
+            if ((isset($_POST['DifficultyFormValue']))) {
                 $newRecipe->setDifficulty($_POST['DifficultyFormValue']);
                 $manager->UpdateRecipeDifficulty($newRecipe);
             }
             // Portion
-            if ((isset($_POST['PortionFormValue'])) )  {
+            if ((isset($_POST['PortionFormValue']))) {
                 $newRecipe->setPortion($_POST['PortionFormValue']);
                 $manager->UpdateRecipePortion($newRecipe);
             }
 
             // Origin
-            if ((isset($_POST['OriginFormValue'])) )  {
+            if ((isset($_POST['OriginFormValue']))) {
                 $newRecipe->setOrigin($_POST['OriginFormValue']);
                 $manager->UpdateRecipeOrigin($newRecipe);
             }
@@ -275,10 +272,18 @@ class CookController extends lib
 
             if (isset($_POST['CategoryValueCatchoix'])) {
                 foreach ($_POST['CategoryValueCatchoix'] as $cat) {
-                    if ($cat == 1) {$cat1check=1;}
-                    if ($cat == 2) {$cat2check=1;}
-                    if ($cat == 3) {$cat3check=1;}
-                    if ($cat == 4) {$cat4check=1;}
+                    if ($cat == 1) {
+                        $cat1check = 1;
+                    }
+                    if ($cat == 2) {
+                        $cat2check = 1;
+                    }
+                    if ($cat == 3) {
+                        $cat3check = 1;
+                    }
+                    if ($cat == 4) {
+                        $cat4check = 1;
+                    }
                 }
                 $newRecipe->setCat1($cat1check);
                 $newRecipe->setCat2($cat2check);
@@ -296,55 +301,54 @@ class CookController extends lib
 
             }
 
-            if ((isset($_POST['CookingTimeFormValue'])) )  {
+            if ((isset($_POST['CookingTimeFormValue']))) {
                 // Get Bdd ident
 
                 $newRecipe->setCookingTime($_POST['CookingTimeFormValue']);
                 $manager->UpdateRecipeCookingTime($newRecipe);
             }
 
-            if ((isset($_POST['PreparationTimeFormValue'])) )  {
+            if ((isset($_POST['PreparationTimeFormValue']))) {
                 // Get Bdd ident
                 $newRecipe->setPreparationTime($_POST['PreparationTimeFormValue']);
                 $manager->UpdateRecipePreparationTime($newRecipe);
             }
 
-            if ((isset($_POST['NewRecipeIngredient'])) )  {
-                if ((isset($_POST['UnitFormValue']))  ){
-                   $Unit =$_POST['UnitFormValue'];
-                }else {
-                    $Unit="";
+            if ((isset($_POST['NewRecipeIngredient']))) {
+                if ((isset($_POST['UnitFormValue']))) {
+                    $Unit = $_POST['UnitFormValue'];
+                } else {
+                    $Unit = "";
                 }
-                if ((isset($_POST['QuantityFormValue']) AND (!empty($_POST['QuantityFormValue'])) )) {
-                    $manager->createRecipeIngredient($_GET['dishId'], $_POST['NewRecipeIngredient'] ,$_POST['QuantityFormValue'] ,$Unit);
-                 }
-                $manager->createRecipeIngredient($_GET['dishId'], $_POST['NewRecipeIngredient'] ,$_POST['QuantityFormValue'] ,$Unit);
+                if ((isset($_POST['QuantityFormValue']) AND (!empty($_POST['QuantityFormValue'])))) {
+                    $manager->createRecipeIngredient($_GET['dishId'], $_POST['NewRecipeIngredient'], $_POST['QuantityFormValue'], $Unit);
+                }
+                $manager->createRecipeIngredient($_GET['dishId'], $_POST['NewRecipeIngredient'], $_POST['QuantityFormValue'], $Unit);
             }
-        }else { // If not a good  dish ID
+        } else { // If not a good  dish ID
 
             // todo : refaire vers une page d'eeror
             $manager = new CookManager();
-            $recipe= $manager->findDish($_GET['dishId']);
-            $IngredientsList=$manager->findIngredientsList();// list of ingredient in db
-            $IngredientsRecipes=$manager->findIngredientsRecipe($_GET['dishId']);
-            $IngredientsListNotSelected=$this->findIngredientsListAlreadySelectioned( $IngredientsList, $IngredientsRecipes);
+            $recipe = $manager->findDish($_GET['dishId']);
+            $IngredientsList = $manager->findIngredientsList();// list of ingredient in db
+            $IngredientsRecipes = $manager->findIngredientsRecipe($_GET['dishId']);
+            $IngredientsListNotSelected = $this->findIngredientsListAlreadySelectioned($IngredientsList, $IngredientsRecipes);
             $ArrayOfIngredients = array();
-            $ArrayOfIngredients = [$IngredientsListNotSelected,$IngredientsRecipes];
+            $ArrayOfIngredients = [$IngredientsListNotSelected, $IngredientsRecipes];
             $myView = new View('adminUpdateRecipe');
-            $myView->build(array('recipes' => $recipe,'ingredients'=>$ArrayOfIngredients, 'comments' => null, 'warningList' => null, 'message' => null, 'HOST' => HOST, 'adminLevel' => $_SESSION['adminLevel']));
+            $myView->build(array('recipes' => $recipe, 'ingredients' => $ArrayOfIngredients, 'comments' => null, 'warningList' => null, 'message' => null, 'HOST' => HOST, 'adminLevel' => $_SESSION['adminLevel']));
 
         }
         $manager = new CookManager();
-        $recipe= $manager->findDish($_GET['dishId']);
-        $IngredientsList=$manager->findIngredientsList();// list of ingredient in db
-        $IngredientsRecipes=$manager->findIngredientsRecipe($_GET['dishId']);
-        $IngredientsListNotSelected=$this->findIngredientsListAlreadySelectioned( $IngredientsList, $IngredientsRecipes);
+        $recipe = $manager->findDish($_GET['dishId']);
+        $IngredientsList = $manager->findIngredientsList();// list of ingredient in db
+        $IngredientsRecipes = $manager->findIngredientsRecipe($_GET['dishId']);
+        $IngredientsListNotSelected = $this->findIngredientsListAlreadySelectioned($IngredientsList, $IngredientsRecipes);
         $ArrayOfIngredients = array();
-        $ArrayOfIngredients = [$IngredientsListNotSelected,$IngredientsRecipes];
+        $ArrayOfIngredients = [$IngredientsListNotSelected, $IngredientsRecipes];
         $myView = new View('adminUpdateRecipe');
-        $myView->build(array('recipes' => $recipe,'ingredients'=>$ArrayOfIngredients, 'comments' => null, 'warningList' => null, 'message' => null, 'HOST' => HOST, 'adminLevel' => $_SESSION['adminLevel']));
+        $myView->build(array('recipes' => $recipe, 'ingredients' => $ArrayOfIngredients, 'comments' => null, 'warningList' => null, 'message' => null, 'HOST' => HOST, 'adminLevel' => $_SESSION['adminLevel']));
     }
-
 
 
     public function duplicDish()
@@ -363,7 +367,7 @@ class CookController extends lib
             //myView->build(array('recipes' => null, 'comments' => null, 'warningList' => null, 'message' => null, 'HOST' => HOST, 'adminLevel' => $_SESSION['adminLevel']));
         } else {
             $myView = new View('error');
-            $myView->build(array('recipes' => null, 'ingredients'=>null,'comments' => null, 'warningList' => null, 'message' => null, 'HOST' => HOST, 'adminLevel' => $_SESSION['adminLevel']));
+            $myView->build(array('recipes' => null, 'ingredients' => null, 'comments' => null, 'warningList' => null, 'message' => null, 'HOST' => HOST, 'adminLevel' => $_SESSION['adminLevel']));
 
         }
     }
@@ -393,13 +397,13 @@ class CookController extends lib
                 $myView->redirect('adminRecipes.html');
                 */
                 $Recipe = $manager->findDish($_POST['customHiddenDishId']);
-                $IngredientsList=$manager->findIngredientsList();
-                $IngredientsRecipes=$manager->findIngredientsRecipe($_POST['customHiddenDishId']);
+                $IngredientsList = $manager->findIngredientsList();
+                $IngredientsRecipes = $manager->findIngredientsRecipe($_POST['customHiddenDishId']);
                 $ArrayOfIngredients = array();
-                $ArrayOfIngredients = [$IngredientsList,$IngredientsRecipes];
+                $ArrayOfIngredients = [$IngredientsList, $IngredientsRecipes];
 
                 $myView = new View('adminUpdateRecipe');
-                $myView->build(array('recipes' => $Recipe,'ingredients'=>$ArrayOfIngredients, 'comments' => null, 'warningList' => null, 'message' => null, 'HOST' => HOST, 'adminLevel' => $_SESSION['adminLevel']));
+                $myView->build(array('recipes' => $Recipe, 'ingredients' => $ArrayOfIngredients, 'comments' => null, 'warningList' => null, 'message' => null, 'HOST' => HOST, 'adminLevel' => $_SESSION['adminLevel']));
 
 
             } else //Sinon (la fonction renvoie FALSE).
@@ -409,21 +413,22 @@ class CookController extends lib
             }
         }
     }
+
     public function homeRecipesCat1View()
     {
         // Call of manager to get all recipes
         $manager = new CookManager();
-        $recipes= $manager->findCategory('1','R');
+        $recipes = $manager->findCategory('1', 'R');
 
-        $message =  ' Voici nos entrées ' ;
+        $message = ' Voici nos entrées ';
 
-        if (empty($recipes)){
-            $recipes= $manager->findDishesfromStatus('R'); // R = ready to display
-            $message ="Nous n'avons pas de recette pour cette categorie - Voici toutes nos recettes";
+        if (empty($recipes)) {
+            $recipes = $manager->findDishesfromStatus('R'); // R = ready to display
+            $message = "Nous n'avons pas de recette pour cette categorie - Voici toutes nos recettes";
         }
 
         $myView = new View('homeRecipes');
-        $myView->build( array('recipes'=> $recipes ,'comments'=>null,'ingredients'=>null,'warningList' => null ,'message'=>$message,'HOST'=>HOST ,'adminLevel'=> $_SESSION['adminLevel']));
+        $myView->build(array('recipes' => $recipes, 'comments' => null, 'ingredients' => null, 'warningList' => null, 'message' => $message, 'HOST' => HOST, 'adminLevel' => $_SESSION['adminLevel']));
     }
 
 
@@ -431,17 +436,17 @@ class CookController extends lib
     {
         // Call of manager to get all recipes
         $manager = new CookManager();
-        $recipes= $manager->findCategory('2','R');
+        $recipes = $manager->findCategory('2', 'R');
 
-        $message =  ' Voici nos Plats ' ;
+        $message = ' Voici nos Plats ';
 
-        if (empty($recipes)){
-            $recipes= $manager->findDishesfromStatus('R'); // R = ready to display
-            $message ="Nous n'avons pas de recette pour cette categorie - Voici toutes nos recettes";
+        if (empty($recipes)) {
+            $recipes = $manager->findDishesfromStatus('R'); // R = ready to display
+            $message = "Nous n'avons pas de recette pour cette categorie - Voici toutes nos recettes";
         }
 
         $myView = new View('homeRecipes');
-        $myView->build( array('recipes'=> $recipes ,'comments'=>null,'ingredients'=>null,'warningList' => null ,'message'=>$message,'HOST'=>HOST ,'adminLevel'=> $_SESSION['adminLevel']));
+        $myView->build(array('recipes' => $recipes, 'comments' => null, 'ingredients' => null, 'warningList' => null, 'message' => $message, 'HOST' => HOST, 'adminLevel' => $_SESSION['adminLevel']));
     }
 
 
@@ -449,17 +454,17 @@ class CookController extends lib
     {
         // Call of manager to get all recipes
         $manager = new CookManager();
-        $recipes= $manager->findCategory('3','R');
+        $recipes = $manager->findCategory('3', 'R');
 
-        $message =  ' Voici nos desserts  ' ;
+        $message = ' Voici nos desserts  ';
 
-        if (empty($recipes)){
-            $recipes= $manager->findDishesfromStatus('R'); // R = ready to display
-            $message ="Nous n'avons pas de recette pour cette categorie - Voici toutes nos recettes";
+        if (empty($recipes)) {
+            $recipes = $manager->findDishesfromStatus('R'); // R = ready to display
+            $message = "Nous n'avons pas de recette pour cette categorie - Voici toutes nos recettes";
         }
 
         $myView = new View('homeRecipes');
-        $myView->build( array('recipes'=> $recipes ,'comments'=>null,'ingredients'=>null,'warningList' => null ,'message'=>$message,'HOST'=>HOST ,'adminLevel'=> $_SESSION['adminLevel']));
+        $myView->build(array('recipes' => $recipes, 'comments' => null, 'ingredients' => null, 'warningList' => null, 'message' => $message, 'HOST' => HOST, 'adminLevel' => $_SESSION['adminLevel']));
     }
 
 
@@ -467,51 +472,99 @@ class CookController extends lib
     {
         // Call of manager to get all recipes
         $manager = new CookManager();
-        $recipes= $manager->findCategory('4','R');
+        $recipes = $manager->findCategory('4', 'R');
 
-        $message =  ' Nôtre sélection ' ;
+        $message = ' Nôtre sélection ';
 
-        if (empty($recipes)){
-            $recipes= $manager->findDishesfromStatus('R'); // R = ready to display
-            $message ="Nous n'avons pas de recette pour cette categorie - Voici toutes nos recettes";
+        if (empty($recipes)) {
+            $recipes = $manager->findDishesfromStatus('R'); // R = ready to display
+            $message = "Nous n'avons pas de recette pour cette categorie - Voici toutes nos recettes";
         }
 
         $myView = new View('homeRecipes');
-        $myView->build( array('recipes'=> $recipes ,'comments'=>null,'ingredients'=>null,'warningList' => null ,'message'=>$message,'HOST'=>HOST ,'adminLevel'=> $_SESSION['adminLevel']));
+        $myView->build(array('recipes' => $recipes, 'comments' => null, 'ingredients' => null, 'warningList' => null, 'message' => $message, 'HOST' => HOST, 'adminLevel' => $_SESSION['adminLevel']));
     }
 
 
     public function findInDb()
     {
 
-           if (isset($_POST['SearchFormHome']) AND (!empty($_POST['SearchFormHome']))) {
+        if (isset($_POST['SearchFormHome']) AND (!empty($_POST['SearchFormHome']))) {
 
-               $manager = new CookManager();
-               $recipes= $manager->findInDb($_POST['SearchFormHome']);
+            $manager = new CookManager();
+            $recipes = $manager->findInDb($_POST['SearchFormHome']);
 
-               if (empty($recipes)){
-                   $recipes= $manager->findDishesfromStatus('R'); // R = ready to display
-                   $message ="Nous n'avons pas pu trouver de recette - Voici toutes nos recettes";
-               }else {
-                   $message =  'Voici les résultats pour la recherche :  ' . $_POST['SearchFormHome'] ;
+            if (empty($recipes)) {
+                $recipes = $manager->findDishesfromStatus('R'); // R = ready to display
+                $message = "Nous n'avons pas pu trouver de recette - Voici toutes nos recettes";
+            } else {
+                $message = 'Voici les résultats pour la recherche :  ' . $_POST['SearchFormHome'];
 
-               }
+            }
 
-               $myView = new View('homeRecipes');
-               $myView->build( array('recipes'=> $recipes ,'comments'=>null,'ingredients'=>null,'warningList' => null ,'message'=>$message,'HOST'=>HOST ,'adminLevel'=> $_SESSION['adminLevel']));
+            $myView = new View('homeRecipes');
+            $myView->build(array('recipes' => $recipes, 'comments' => null, 'ingredients' => null, 'warningList' => null, 'message' => $message, 'HOST' => HOST, 'adminLevel' => $_SESSION['adminLevel']));
 
 
+        } elseif (isset($_POST['SearchFormHome']) AND (empty($_POST['SearchFormHome']))) {
+            $manager = new CookManager();
 
-           }elseif (isset($_POST['SearchFormHome']) AND (empty($_POST['SearchFormHome']))){
-               $manager = new CookManager();
+            $recipes = $manager->findDishesfromStatus('R'); // R = ready to display
+            $message = "Nous n'avons pas pu trouver de recette - Voici toutes nos recettes";
+            $myView = new View('homeRecipes');
+            $myView->build(array('recipes' => $recipes, 'comments' => null, 'ingredients' => null, 'warningList' => null, 'message' => $message, 'HOST' => HOST, 'adminLevel' => $_SESSION['adminLevel']));
 
-               $recipes= $manager->findDishesfromStatus('R'); // R = ready to display
-               $message ="Nous n'avons pas pu trouver de recette - Voici toutes nos recettes";
-               $myView = new View('homeRecipes');
-               $myView->build( array('recipes'=> $recipes ,'comments'=>null,'ingredients'=>null,'warningList' => null ,'message'=>$message,'HOST'=>HOST ,'adminLevel'=> $_SESSION['adminLevel']));
-
-           }
+        }
     }
+
+
+    public function adminRecipesSearch()
+    {
+
+        if (isset($_POST['adminRecipesFormSearch'])) {
+
+
+
+            $manager = new CookManager();
+            $recipes = $manager->findDishesSearch();//all status are called
+
+
+            $myView = new View('adminRecipesSearch');
+
+            $myView->build(array('recipes' => $recipes, 'ingredients' => null, 'comments' => null, 'warningList' => null, 'message' => null, 'HOST' => HOST, 'adminLevel' => $_SESSION['adminLevel']));
+        } else {
+            $manager = new CookManager();
+            $recipes = $manager->findDishesSearch();//all status are called
+
+
+            $myView = new View('adminRecipesSearch');
+
+            $myView->build(array('recipes' => $recipes, 'ingredients' => null, 'comments' => null, 'warningList' => null, 'message' => null, 'HOST' => HOST, 'adminLevel' => $_SESSION['adminLevel']));
+
+        }
+    }
+
+
+
+
+
+        /**
+         * adminRecipes
+         *
+         * call manager to find all recipes (all status) and call the view display them.
+         *
+         */
+        public function adminRecipes()
+    {
+
+        $manager = new CookManager();
+        $recipes= $manager->findDishes();//all status are called
+        $myView = new View('adminRecipes');
+
+        $myView->build( array('recipes'=> $recipes ,'ingredients'=>null,'comments'=>null,'warningList' => null ,'message'=>null,'HOST'=>HOST ,'adminLevel'=> $_SESSION['adminLevel']));
+
+    }
+
 
 
 

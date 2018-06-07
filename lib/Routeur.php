@@ -52,12 +52,14 @@ class Routeur
         'homeRecipesCat1.html'                     => ['controller' => 'CookController', 'method' => 'homeRecipesCat1View'],
         'homeRecipesCat2.html'                     => ['controller' => 'CookController', 'method' => 'homeRecipesCat2View'],
         'homeRecipesCat3.html'                     => ['controller' => 'CookController', 'method' => 'homeRecipesCat3View'],
-        'homeRecipesCat4.html'                     => ['controller' => 'CookController', 'method' => 'homeRecipesCat4View'],
-// Zone de test
+
+
+
+
 
          'findInDb.html'                     => ['controller' => 'CookController', 'method' => 'findInDb'],
-
-
+// Zone de test
+        'adminRecipesSearch.html'                     => ['controller' => 'CookController', 'method' => 'adminRecipesSearch'],
         //
         'deconnection.html'              => ['controller' => 'MemberController', 'method' => 'deconnection'],
         'error.html'         => ['controller' =>'PostsController', 'method' => 'error']

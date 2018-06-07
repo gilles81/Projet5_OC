@@ -32,9 +32,78 @@ class CookManager extends BackManager
     public function findDishes()
     {
         $bdd = $this->bdd;
-
         $perPage=8;
-        $req=$bdd->query('SELECT COUNT(*) AS total FROM dish');
+        if (!isset($_POST['adminRecipesFormSearch'])) {
+
+            $req=$bdd->query('SELECT COUNT(*) AS total FROM dish');
+            $result=$req->fetch();
+            $total = $result['total'];
+
+            $nbPage = ceil($total/$perPage);
+
+            if ((isset ($_GET['page'])) &&  (!empty($_GET['page'])) && (ctype_digit($_GET['page']) ==1 )){
+                if ($_GET['page'] > $nbPage) {
+                    $current = $nbPage;
+                }else {
+                    $current = $_GET['page'];
+                }
+            }else {
+                $current = 1;
+            }
+            $firstOfPage = ($current-1)*$perPage;
+
+
+            /**
+             * model access
+             * */
+            $query = "SELECT * FROM dish LIMIT $firstOfPage,$perPage ";
+            $req = $bdd->prepare($query);
+            $req->execute();
+            $Dishes=  array();
+
+            while ($row = $req-> fetch(PDO::FETCH_ASSOC))
+            {
+                $data = $this->rowInArray($row);
+                $dish = new BasicDish( $data);
+                $Dishes[] = $dish;
+            }
+            $dishToDisplay = array();
+            $dishToDisplay = ['dishes'=>$Dishes ,'cPage'=> $current ,'nbPage'=>$nbPage ];
+
+        }else {
+
+        }
+
+
+
+
+
+        return  $dishToDisplay;
+    }
+
+    public function findDishesSearch()
+    {
+        $bdd = $this->bdd;
+        $perPage=8;
+            if (isset($_POST['adminRecipesFormSearch'])) {
+                $_SESSION['adminTermSearch']=$_POST['adminRecipesFormSearch'];
+                $term= $_SESSION['adminTermSearch'];
+
+            }else {
+
+                if (isset($_SESSION['adminTermSearch'])) {
+                    $term= $_SESSION['adminTermSearch'];
+                }else {
+                    $term = "";
+                }
+
+            }
+
+
+        $termToFind = '%'.$term.'%' ;
+        $query="SELECT COUNT(*) AS total FROM dish  WHERE Title LIKE '$termToFind'";
+
+        $req=$bdd->query($query);
         $result=$req->fetch();
         $total = $result['total'];
 
@@ -44,7 +113,6 @@ class CookManager extends BackManager
             if ($_GET['page'] > $nbPage) {
                 $current = $nbPage;
             }else {
-
                 $current = $_GET['page'];
             }
         }else {
@@ -52,11 +120,9 @@ class CookManager extends BackManager
         }
         $firstOfPage = ($current-1)*$perPage;
 
-
-        /**
-         * model access
-         * */
-        $query = "SELECT * FROM dish LIMIT $firstOfPage,$perPage ";
+        //$term= $_POST['adminRecipesFormSearch'];
+        $termToFind = '%'.$term.'%' ;
+        $query = "SELECT * FROM dish WHERE Title LIKE '$termToFind'  LIMIT $firstOfPage,$perPage ";
         $req = $bdd->prepare($query);
         $req->execute();
         $Dishes=  array();
@@ -69,8 +135,11 @@ class CookManager extends BackManager
         }
         $dishToDisplay = array();
         $dishToDisplay = ['dishes'=>$Dishes ,'cPage'=> $current ,'nbPage'=>$nbPage ];
+
+
         return  $dishToDisplay;
     }
+
 
     public function findIngredientsList()
     {
@@ -337,7 +406,7 @@ class CookManager extends BackManager
 
         $query = "INSERT INTO `dish` (`DishId`, `Title`, `Category`, `Author`, `CreationDate`, `Recipe`, `Portion`, `ImagePathName`, `Origin`, `CookingTime`,
  `PreparationTime`, `Ingredients`, `Difficulty`, `Featured`, `Status`, `lke`,)
-                  VALUES (NULL, 'Nouvelle recette ', :Category, '', now(), 'rrr', '5', 'rrr', 'FRANCE', '0:00:00', '0:00:00', '', '0', '0', 'D', '0');";
+                  VALUES (NULL, ' Nouvelle recette ', :Category, '', now(), 'rrr', '5', 'rrr', 'FRANCE', '0:00:00', '0:00:00', '', '0', '0', 'D', '0');";
 
 
         $req = $bdd->prepare($query);
