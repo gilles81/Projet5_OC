@@ -17,7 +17,7 @@ class MiscController
     public function showAbout()
     {
         $myView = new View('about');
-        $myView->build(array('chapters'=> null ,'ingredients'=>null,'comments'=>null,'warningList' => null,'HOST'=>HOST ,'adminLevel'=>$_SESSION['adminLevel'] ));
+        $myView->build(array('recipes' => null,'ingredients'=>null, 'comments' => null,'warningList' => null ,'message'=> null,'HOST' => HOST, 'adminLevel' =>$_SESSION['adminLevel']));
     }
 
     /**

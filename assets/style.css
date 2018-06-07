@@ -194,8 +194,10 @@
          height:40px;
        text-align: center;
      }
+     #AboutPage {
+         height:550px;
 
-
+     }
  }
 
 /* Extra large devices (large desktops, 1200px and up)*/
