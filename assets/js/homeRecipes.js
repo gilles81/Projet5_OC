@@ -1,19 +1,24 @@
 $(function() {
 
-
-    $('#cat1').click(function(e) {
-
+    $( '#Bt_Search_Home').click(function(e) {
+        e.preventDefault();
         $.ajax({
             type: 'post',
-            url: 'homeRecipesCat1.html',
+            url: 'findInDb.html',
             timeout: 3000,
+            data :{ 'SearchFormHome' : $('#SearchFormHome').val()},
+           //data :{ SearchFormHome : $('#SearchFormHome').name()},
             beforeSend: function(){},
             success: function(data) {
+
                 $('#secondPartHome').html(data); },
             error: function() {
                 alert('La requête n\'a pas abouti'); }
         });
+
     });
+
+
 
 
         $('#cat1').click(function(e) {
@@ -68,6 +73,7 @@ $(function() {
                 alert('La requête n\'a pas abouti'); }
         });
     });
+
     $( window ).ready(function() {
         // Run code
 
@@ -83,5 +89,6 @@ $(function() {
         });
 
     });
+
 
 });

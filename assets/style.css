@@ -1,4 +1,4 @@
-/**/
+/* base css */
     Body{
         background-color: ghostwhite;
     }
@@ -21,7 +21,8 @@
 
     }
     #secondPartHome{
-        height: 900px;
+        /*height: 900px;*/
+        height: auto;
         background-color:whitesmoke;
     }
 
@@ -52,7 +53,7 @@
     /*Home Recipes Card  Style */
     .CardInhome{
         height:auto;
-        border :1px solid red;
+
     }
     /*div of img*/
     .PicsInHomeRecipes{
@@ -100,16 +101,14 @@
         background-size: cover;
         background-attachment: unset;
     }
-    #secondPartHome{
-        height: auto;
-    }
+
 
 
 
     /*Home Recipes Card  Style */
     .CardInhome{
         height:auto;
-        border :1px solid red;
+
     }
     /*div of img*/
     .PicsInHomeRecipes{
@@ -148,7 +147,7 @@
     }
     .CardInhome{
         height:auto;
-        border :1px solid blue;
+
     }
 
 }
@@ -159,7 +158,7 @@
      /*Home Recipes Card  Style */
      .CardInhome{
          height:auto;
-         border :1px solid red;
+
      }
      /*div of img*/
      .PicsInHomeRecipes{
@@ -197,6 +196,8 @@
          height:40px;
        text-align: center;
      }
+
+
  }
 
 /* Extra large devices (large desktops, 1200px and up)*/
