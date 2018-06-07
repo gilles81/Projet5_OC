@@ -75,11 +75,12 @@ class MiscController
      */
 
 
-    public function displayMentions()
-    {
-
+    public function legalMentions() {
         $myView = new View('legalMentions');
-        $myView->build(array('recipes' => null,'ingredients'=>null, 'comments' => null,'warningList' => null ,'message'=> null,'HOST' => HOST, 'adminLevel' =>$_SESSION['adminLevel']));
+
+        $myView->build( array('recipes'=> null ,'ingredients'=>null,'comments'=>null,'warningList' => null ,'message'=>null,'HOST'=>HOST ,'adminLevel'=> $_SESSION['adminLevel']));
+
+
     }
 
 }
