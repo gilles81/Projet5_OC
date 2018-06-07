@@ -23,6 +23,7 @@ class Routeur
     private $routes = [
         'contact.html'                  => ['controller' => 'MiscController', 'method' => 'ShowContact'],
         'contactMail.html'              => ['controller' => 'MiscController', 'method' => 'ContactMail'],
+        'LegalMentions.html'                    => ['controller' => 'MiscController', 'method' => 'legalMentions'],
         //'about.html'                    => ['controller' => 'MiscController', 'method' => 'ShowAbout'],
         'home.html'                             => ['controller' => 'CookController', 'method' => 'showHome'],
         'admin.html'                            => ['controller' => 'MemberController', 'method' => 'loginSession'],
