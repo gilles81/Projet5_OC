@@ -3,9 +3,6 @@
 {% set PicsRecipeDir ='assets/pics/' %}
   {% set PicsReplacement = 'NoPictures_1920_1080.jpg'  %}
 
-
-
-
 {% block Part1 %}
     <div class="container-fluid  "  id="firstPartHome">
         <div class="row  ">
@@ -51,7 +48,7 @@
                                             data-target="#modalDelete_{{ recipe.getDishId }}"
                                     > <i class="fas fa-eraser"></i></button>
                                     <a href ="adminUpdateRecipe.html?dishId={{ recipe.getDishId }}"><i class="far fa-edit"></i></a>
-                                    <a href =""><i class="far fa-copy"></i></a>
+                                    <a href ="adminCopyRecipe.html?dishId={{ recipe.getDishId }}"><i class="far fa-copy"></i></a>
                                 </div>
                             </div>
 

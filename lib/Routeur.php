@@ -25,7 +25,7 @@ class Routeur
         'homeRecipesCat1.html'                  => ['controller' => 'CookController', 'method' => 'homeRecipesCat1View'],
         'homeRecipesCat2.html'                  => ['controller' => 'CookController', 'method' => 'homeRecipesCat2View'],
         'homeRecipesCat3.html'                  => ['controller' => 'CookController', 'method' => 'homeRecipesCat3View'],
-        'homeRecipesCat4.html'                     => ['controller' => 'CookController', 'method' => 'homeRecipesCat4View'],
+        'homeRecipesCat4.html'                  => ['controller' => 'CookController', 'method' => 'homeRecipesCat4View'],
         'error.html'                            => ['controller' =>'PostsController', 'method' => 'error'],
         // Recipe Administration
         'adminBoard.html'                       => ['controller' => 'CookController', 'method' => 'adminBoard'],
@@ -41,9 +41,10 @@ class Routeur
         'adminSendUpdateRecipe.html'            => ['controller' => 'CookController', 'method' => 'adminUpdateStatusRecipe'],
         'findInDb.html'                         => ['controller' => 'CookController', 'method' => 'findInDb'],
         'adminRecipesSearch.html'               => ['controller' => 'CookController', 'method' => 'adminRecipesSearch'],
+        'adminCopyRecipe.html'                  => ['controller' => 'CookController', 'method' => 'adminCopyRecipe'],
         'deconnection.html'                     => ['controller' => 'MemberController', 'method' => 'deconnection'],
 // Zone de test
-        'test.html'                             => ['controller' => 'CookController', 'method' => 'deconnection']
+        'adminSearchComputeList.html'           => ['controller' => 'CookController', 'method' => 'adminSearchComputeList']
     ];
 
 
