@@ -44,7 +44,9 @@ class Routeur
         'adminCopyRecipe.html'                  => ['controller' => 'CookController', 'method' => 'adminCopyRecipe'],
         'deconnection.html'                     => ['controller' => 'MemberController', 'method' => 'deconnection'],
 // Zone de test
-        'adminSearchComputeList.html'           => ['controller' => 'CookController', 'method' => 'adminSearchComputeList']
+        'adminSearchComputeList.html'           => ['controller' => 'CookController', 'method' => 'adminSearchComputeList'],
+
+
     ];
 
 
