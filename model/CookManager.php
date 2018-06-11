@@ -454,8 +454,7 @@ WHERE id = 1;*/
      * @param $IngredientsId
      */
     public function createRecipeIngredient($RecetteId, $IngredientsId,$quantity,$unit){
-        var_dump($RecetteId);
-        var_dump($IngredientsId);
+
         $bdd = $this->bdd;
         $query = "INSERT INTO `recipe_ingredients` (`RecipeId`, `IngredientId`,`quantity`,`unit`)
                   VALUES ( :RecipeId, :IngredientId,:quantity,:unit);";
@@ -783,5 +782,8 @@ WHERE id = 1;*/
             }
             return $Dishes;
     }
+
+
+
 
 }
