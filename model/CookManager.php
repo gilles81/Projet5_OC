@@ -3,7 +3,7 @@
  *
  *Class CookManager
  *
- * Manage
+ * M
  */
 
 
@@ -81,6 +81,14 @@ class CookManager extends BackManager
         return  $dishToDisplay;
     }
 
+    /*
+     * findDishesSearch()
+     *
+     * find dish for research block
+     *
+     */
+
+
     public function findDishesSearch()
     {
         $bdd = $this->bdd;
@@ -140,7 +148,11 @@ class CookManager extends BackManager
         return  $dishToDisplay;
     }
 
-
+/*
+ * findIngredientsList()
+ *
+ * Find ingredients list in database
+ */
     public function findIngredientsList()
     {
         $bdd = $this->bdd;
@@ -167,6 +179,11 @@ class CookManager extends BackManager
 
 
     /**
+     * findDishesFromStatus($)
+     *
+     * find a list of dishes from a  status
+     *
+     *
      * @return array
      */
     public function findDishesFromStatus($status)
@@ -193,8 +210,16 @@ class CookManager extends BackManager
     }
 
 
-
-/** findFeaturedDishes() not used */
+    /**
+     * findFeaturedDishes
+     *
+     * find Featured dishes
+     *
+     * Featured is  dishes  for a special day or week : Halloween , Noel , Mother day ..
+     *
+     * @return array
+     *
+     */
     public function findFeaturedDishes()
     {
         $bdd = $this->bdd;
@@ -249,6 +274,15 @@ class CookManager extends BackManager
         return $dish;
     }
 
+    /**
+     * findCategory
+     *
+     * find in db dishes from a categoprie and status
+     *
+     * @param $category
+     * @param $status
+     * @return array
+     */
     public function findCategory($category ,$status )    {
         $bdd = $this->bdd;
         if ((!isset($status)) AND (($status ='D')  OR ($status ='R') OR ($status ='W') )) {
@@ -330,50 +364,6 @@ class CookManager extends BackManager
 
     }
 
-    /**
-     * addComment
-     *
-     * @param $values
-     */
-
-
-    public function addComment($values)
-    {
-        $bdd = $this->bdd;
-        $query = "INSERT INTO Comments (CommentId , DishId , Author,CreationDate,ModificationDate,CommentContent,Answ) VALUES (NULL, :DishID ,:Author, NOW(), NOW(),:CommentContent,'');";
-        $req = $bdd->prepare($query);
-
-
-        $req->bindValue(':Dishid', $values['DishId'], PDO::PARAM_INT);
-        $req->bindValue(':Author', $values['Author'], PDO::PARAM_STR);
-        $req->bindValue(':CommentContent', $values['Topic'], PDO::PARAM_STR);
-
-        $req->execute();
-
-    }
-    /**
-     * addanswer
-     *
-     * @param $values
-     */
-
-    public function addAnswer($values)
-    {
-        $bdd = $this->bdd;
-        $query = "INSERT INTO Comments (CommentId , DishId , Author,CreationDate,ModificationDate,CommentContent,Answ,AnswerId) VALUES (NULL, :Dishid ,:Author, NOW(), NOW(),:CommentContent,:Answ,:AnswerId);";
-        $req = $bdd->prepare($query);
-
-        //
-        $req->bindValue(':Dishid',  $values['DishId'], PDO::PARAM_INT);
-        //
-        $req->bindValue(':CommentContent', 'NA', PDO::PARAM_STR);
-        //
-        $req->bindValue(':Author', $values['Author'], PDO::PARAM_STR);
-        $req->bindValue(':AnswerId', $values['AnswerId'], PDO::PARAM_INT);
-        $req->bindValue(':Answ', $values['Answ'], PDO::PARAM_STR);
-
-        $req->execute();
-    }
 
     /**
      *  remove
@@ -393,44 +383,50 @@ class CookManager extends BackManager
     }
 
     /**
-     * addDish
+     *
+     * adminCopyRecipe
+     *
+     * copy a recipe in db
      *
      *
-     *
-     * @param Post $post
+     * @param $currentDish
      */
-
-    public function duplicRecipe( $currentDish)
+    public function adminCopyRecipe($currentDish)
     {
         $bdd = $this->bdd;
 
-        $query = "INSERT INTO `dish` (`DishId`, `Title`, `Category`, `Author`, `CreationDate`, `Recipe`, `Portion`, `ImagePathName`, `Origin`, `CookingTime`,
- `PreparationTime`, `Ingredients`, `Difficulty`, `Featured`, `Status`, `lke`,)
-                  VALUES (NULL, ' Nouvelle recette ', :Category, '', now(), 'rrr', '5', 'rrr', 'FRANCE', '0:00:00', '0:00:00', '', '0', '0', 'D', '0');";
-
+        $query= "INSERT INTO `dish` (`DishId`, `Title`, `Category`,`Author`, `CreationDate`, `Recipe`, `Portion`, `ImagePathName`, `Origin`, `CookingTime`, `PreparationTime`, `Ingredients`, `Difficulty`, `Featured`, `Status`, `lke`, `Cat1`, `Cat2`, `Cat3`, `Cat4`) 
+                  VALUES (NULL, :Title,:Category,:Author, now(),:Recipe, :Portion, :ImagePathName, :Origin, :CookingTime, :PreparationTime, '', :Difficulty, '0', 'D', '0', :Cat1, :Cat2, :Cat3, :Cat4);";
 
         $req = $bdd->prepare($query);
-        $req->execute();
 
-        //$req->bindValue(':Title',$values['Name'],PDO::PARAM_STR);
+        $req->bindValue(':Title',$currentDish->getName(),PDO::PARAM_STR);
         $req->bindValue(':Category',$currentDish->getCategory(),PDO::PARAM_INT);
         $req->bindValue(':Author',$currentDish->getAuthor(),PDO::PARAM_STR);
         $req->bindValue(':Recipe',$currentDish->getRecipe(),PDO::PARAM_STR);
-        $req->bindValue(':Portion',4,PDO::PARAM_INT);
-        $req->bindValue(':ImagePathName','',PDO::PARAM_STR);
-        $req->bindValue(':Origin','FRANCE',PDO::PARAM_STR);
-        //$req->bindValue(':CookingTime','',PDO::PARAM_STR );
-        //$req->bindValue(':PreparationTime','',PDO::PARAM_STR);
-        $req->bindValue(':Ingredients','ffff',PDO::PARAM_STR);
-        $req->bindValue(':Difficulty',1,PDO::PARAM_INT);
-        $req->bindValue(':Featured',0,PDO::PARAM_INT);
-        $req->bindValue(':Status','D',PDO::PARAM_STR);
-        $req->bindValue(':Likes',0,PDO::PARAM_INT);
-        $req->execute();
 
+        $req->bindValue(':Portion',$currentDish->getPortion(),PDO::PARAM_INT);
+        $req->bindValue(':ImagePathName',$currentDish->getImagePathName(),PDO::PARAM_STR);
+
+        $req->bindValue(':Origin',$currentDish->getOrigin(),PDO::PARAM_STR);
+        $req->bindValue(':CookingTime',$currentDish->getCookingTime(),PDO::PARAM_STR);
+        $req->bindValue(':PreparationTime',$currentDish->getPreparationTime(),PDO::PARAM_STR);
+
+        $req->bindValue(':Difficulty',$currentDish->getDifficulty(),PDO::PARAM_INT);
+        $req->bindValue(':Cat1',$currentDish->getCat1(),PDO::PARAM_INT);
+        $req->bindValue(':Cat2',$currentDish->getCat2(),PDO::PARAM_INT);
+        $req->bindValue(':Cat3',$currentDish->getCat3(),PDO::PARAM_INT);
+        $req->bindValue(':Cat4',$currentDish->getCat4(),PDO::PARAM_INT);
+        $req->execute();
     }
 
-
+    /**
+     * createEmptyRecipe
+     *
+     * create a new recipe in db
+     *
+     *
+     */
 
     public function createEmptyRecipe()
     {
@@ -441,7 +437,7 @@ class CookManager extends BackManager
                   VALUES (NULL, 'Nouvelle recette ', '1', '', now(), '', '0' , :ImagePathName, '', '0', '0', '', '0', '0', 'D', '0');";
 
         $req = $bdd->prepare($query);
-        $req->bindValue(':ImagePathName','NoPictures_1920_1080.jpg',PDO::PARAM_INT);
+        $req->bindValue(':ImagePathName','NoPictures_1920_1080.jpg',PDO::PARAM_STR);
         $req->execute();
     }
 
@@ -454,8 +450,7 @@ class CookManager extends BackManager
      * @param $IngredientsId
      */
     public function createRecipeIngredient($RecetteId, $IngredientsId,$quantity,$unit){
-        var_dump($RecetteId);
-        var_dump($IngredientsId);
+
         $bdd = $this->bdd;
         $query = "INSERT INTO `recipe_ingredients` (`RecipeId`, `IngredientId`,`quantity`,`unit`)
                   VALUES ( :RecipeId, :IngredientId,:quantity,:unit);";
@@ -468,6 +463,17 @@ class CookManager extends BackManager
         $req->execute();
     }
 
+    /**
+     *
+     * findIngredientsRecipe
+     *
+     *
+     * find an ingredients for a recipe in db
+     *
+     *
+     * @param $idrecipe
+     * @return array
+     */
 
     public function findIngredientsRecipe($idrecipe){
 
@@ -503,26 +509,6 @@ class CookManager extends BackManager
         return $recipeIngredients;
     }
 
-    //findIngredientsListAlreadySelectioned( $IngredientsList, $IngredientsRecipes);
-
-
-
-    /**
-    public function addIngredientInRecipe($id,$newIngredient)
-    {
-        $bdd = $this->bdd;
-        $query = "INSERT INTO recipe_ingredients (Id,RecipeId,IngredientId)
-                  VALUES (NULL ,:RecipeId,:IngredientId);";
-        $req = $bdd->prepare($query);
-
-        $req->bindValue(':RecipeId',$id,PDO::PARAM_INT);
-        $req->bindValue(':IngredientId',$newIngredient,PDO::PARAM_INT);
-
-        $req->execute();
-
-
-    }
-*/
 
     /**
      * removeIngredientRecipe
@@ -542,6 +528,15 @@ class CookManager extends BackManager
         }
     }
 
+    /**
+     *  addNewPictureRecipeInDB
+     *
+     *  add a new pics in in relcipe
+     *
+     * @param $dishId
+     * @param $pics
+     */
+
     public function addNewPictureRecipeInDB($dishId,$pics)
     {
 
@@ -554,36 +549,6 @@ class CookManager extends BackManager
       $req->bindValue(':ImagePathName',$pics,PDO::PARAM_STR);
       $req->execute();
     }
-/*
-
-    public function addDish($values)
-    {
-        $bdd = $this->bdd;
-        $query = "INSERT INTO dish (DishId,Title,Category,Author, CreationDate,Recipe,Portion,ImagePathName,Origin,CookingTime,PreparationTime,Ingredients ,Difficulty,Featured,Status,lke)
-                  VALUES (NULL ,:Title,:Category,:Author,Now(),:Recipe,:Portion,:ImagePathName,:Origin,NULL,NULL,:Ingredients,:Difficulty,:Featured,:Status,:Likes );";
-
-        $req = $bdd->prepare($query);
-
-
-        $req->bindValue(':Title',$values['Name'],PDO::PARAM_STR);
-        $req->bindValue(':Category',1,PDO::PARAM_INT);
-        $req->bindValue(':Author','Admin',PDO::PARAM_STR);
-        $req->bindValue(':Recipe',$values['Preparation'],PDO::PARAM_STR);
-        $req->bindValue(':Portion',4,PDO::PARAM_INT);
-        $req->bindValue(':ImagePathName','',PDO::PARAM_STR);
-        $req->bindValue(':Origin','FRANCE',PDO::PARAM_STR);
-        //$req->bindValue(':CookingTime','',PDO::PARAM_STR );
-        //$req->bindValue(':PreparationTime','',PDO::PARAM_STR);
-        $req->bindValue(':Ingredients','ffff',PDO::PARAM_STR);
-        $req->bindValue(':Difficulty',1,PDO::PARAM_INT);
-        $req->bindValue(':Featured',0,PDO::PARAM_INT);
-        $req->bindValue(':Status','D',PDO::PARAM_STR);
-        $req->bindValue(':Likes',0,PDO::PARAM_INT);
-        $req->execute();
-
-    }
-*/
-
 
 
     /**
@@ -607,7 +572,15 @@ class CookManager extends BackManager
     }
 
 
-
+    /**
+     *
+     * UpdateRecipeName
+     *
+     * update a recipe Name  in db
+     *
+     *
+     * @param $newRecipeName
+     */
 
 
     public function UpdateRecipeName($newRecipeName)
@@ -619,7 +592,17 @@ class CookManager extends BackManager
         $req->execute();
     }
 
-
+    /**
+     *
+     *  UpdateRecipePreparation
+     *
+     * Update recipe content in db
+     *
+     * @param $newRecipePreparation
+     *
+     *
+     *
+     */
 
     public function UpdateRecipePreparation($newRecipePreparation)
     {
@@ -630,6 +613,16 @@ class CookManager extends BackManager
         $req->execute();
     }
 
+    /**
+     * UpdateRecipeStatus
+     *
+     *
+     * update status recipe  in Db
+     * @param $newRecipe
+     *
+     *
+     */
+
     public function UpdateRecipeStatus($newRecipe)
     {
         $bdd = $this->bdd;
@@ -639,6 +632,16 @@ class CookManager extends BackManager
         $req->execute();
     }
 
+    /**
+     * UpdateRecipePortion
+     *
+     * Update recipe Portion in Db
+     *
+     *
+     * @param $newRecipe
+     *
+     *
+     */
 
     public function UpdateRecipePortion($newRecipe)
     {
@@ -649,6 +652,13 @@ class CookManager extends BackManager
         $req->execute();
     }
 
+    /**
+     *
+     * UpdateRecipeOrigin
+     *
+     * Update  Recipe Origin in db
+     * @param $newRecipe
+     */
     public function UpdateRecipeOrigin($newRecipe)
     {
         $bdd = $this->bdd;
@@ -658,6 +668,15 @@ class CookManager extends BackManager
         $req->execute();
     }
 
+    /**
+     * UpdateRecipeCookingTime
+     *
+     * update recipeCooking Time  in db
+     *
+     *
+     * @param $newRecipe
+     */
+
     public function UpdateRecipeCookingTime($newRecipe)
     {
         $bdd = $this->bdd;
@@ -666,6 +685,16 @@ class CookManager extends BackManager
         $req->bindValue(':CookingTime',$newRecipe->getCookingTime(),PDO::PARAM_STR);
         $req->execute();
     }
+
+    /**
+     * UpdateRecipePreparationTime
+     *
+     * Update Recipe Preparation time in db
+     *
+     * @param $newRecipe
+     *
+     */
+
     public function UpdateRecipePreparationTime($newRecipe)
     {
         $bdd = $this->bdd;
@@ -675,7 +704,14 @@ class CookManager extends BackManager
         $req->execute();
     }
 
-
+    /**
+     * UpdateRecipeDifficulty
+     *
+     * Update Recipe Difficulty in db
+     *
+     * @param $newRecipe
+     *
+     */
     public function UpdateRecipeDifficulty($newRecipe)
     {
         $bdd = $this->bdd;
@@ -684,6 +720,20 @@ class CookManager extends BackManager
         $req->bindValue(':Difficulty',$newRecipe->getDifficulty(),PDO::PARAM_INT);
         $req->execute();
     }
+
+
+    /**
+     *
+     * UpdateRecipeCategory
+     *
+     * Update Recipe category (Main plate , dessert ..)
+     *
+     *
+     * @param $newRecipe
+     */
+
+
+
     public function UpdateRecipeCategory($newRecipe)
     {
 
@@ -699,53 +749,15 @@ class CookManager extends BackManager
     }
 
 
-
     /**
-     * Warning
+     * findInDb
      *
-     * @param $id
-     * @param $value
-     */
-    public function Warning($id , $value)
-    {
-        $bdd = $this->bdd;
-        $req = $bdd->prepare('UPDATE comments SET Warning = :Warning  WHERE CommentId = :CommentId');
-        $req->bindValue(':Warning',$value,PDO::PARAM_INT);
-        $req->bindValue(':CommentId',$id,PDO::PARAM_INT);
-
-        $req->execute();
-    }
-
-    /**
-     * getWarnings
+     * find a term in db for search block
      *
+     *
+     * @param $term
      * @return array
      */
-    public function getWarnings()
-    {
-        $bdd = $this->bdd;
-        $req = $bdd->prepare($query = "SELECT * FROM Comments WHERE Warning =:warning");
-        $req->bindValue(':warning','1',PDO::PARAM_INT);
-        $req->execute();
-
-        //$req->fetch(PDO::FETCH_ASSOC);
-
-        $warnings = array();
-        while ($row = $req-> fetch(PDO::FETCH_ASSOC)){
-            $warning = new Warning();
-            $warning->setPostId($row['PostId']);
-            $warning->setCommentId($row['CommentId']);
-            $warning->setAnswerId($row['AnswerId']);
-            $warning->setAnswer($row['Answ']);
-            $warning->setTopic($row['CommentContent']);
-            $warning->setAuthor($row['Author']);
-
-            $warnings[] = $warning;
-        }
-        return $warnings;
-    }
-
-
 
     public function findInDb($term){
         $bdd = $this->bdd;
@@ -766,5 +778,8 @@ class CookManager extends BackManager
             }
             return $Dishes;
     }
+
+
+
 
 }

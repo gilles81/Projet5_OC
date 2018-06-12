@@ -1,70 +1,50 @@
 <?php
-
 session_start();
-/**
- * Created by PhpStorm.
- * User: Gilles
- * Date: 07/05/2018
- * Time: 22:43
- */
-
-
-
 /**
  * Class Router
  *
  *Create route et find controller
  */
 
-
 class Routeur
 {
     private $request;
     private $routes = [
-        'contact.html'                  => ['controller' => 'MiscController', 'method' => 'ShowContact'],
-        'contactMail.html'              => ['controller' => 'MiscController', 'method' => 'ContactMail'],
+        //Miscellanous
+        'contact.html'                          => ['controller' => 'MiscController', 'method' => 'ShowContact'],
+        'contactMail.html'                      => ['controller' => 'MiscController', 'method' => 'ContactMail'],
         'LegalMentions.html'                    => ['controller' => 'MiscController', 'method' => 'legalMentions'],
-        'about.html'                    => ['controller' => 'MiscController', 'method' => 'ShowAbout'],
-        'home.html'                             => ['controller' => 'CookController', 'method' => 'showHome'],
+        'about.html'                            => ['controller' => 'MiscController', 'method' => 'ShowAbout'],
+        // Member identification
         'admin.html'                            => ['controller' => 'MemberController', 'method' => 'loginSession'],
         'adminverif.html'                       => ['controller' => 'MemberController', 'method' => 'identification'],
+        // Users part
+        'home.html'                             => ['controller' => 'CookController', 'method' => 'showHome'],
+        'recipe.html'                           => ['controller' => 'CookController', 'method' => 'showDish'],
+        'category.html'                         => ['controller' => 'CookController', 'method' => 'showCategory'],
+        'homeRecipesCat1.html'                  => ['controller' => 'CookController', 'method' => 'homeRecipesCat1View'],
+        'homeRecipesCat2.html'                  => ['controller' => 'CookController', 'method' => 'homeRecipesCat2View'],
+        'homeRecipesCat3.html'                  => ['controller' => 'CookController', 'method' => 'homeRecipesCat3View'],
+        'homeRecipesCat4.html'                  => ['controller' => 'CookController', 'method' => 'homeRecipesCat4View'],
+        'error.html'                            => ['controller' =>'PostsController', 'method' => 'error'],
         // Recipe Administration
         'adminBoard.html'                       => ['controller' => 'CookController', 'method' => 'adminBoard'],
         'adminRecipes.html'                     => ['controller' => 'CookController', 'method' => 'adminRecipes'],
-
         'adminSendNewRecipeName.html'           => ['controller' => 'CookController', 'method' => 'adminSendNewRecipeName'],
         'adminSendNewRecipePreparation.html'    => ['controller' => 'CookController', 'method' => 'adminSendNewRecipePreparation'],
         'adminAddCardRecipe.html'               => ['controller' => 'CookController', 'method' => 'adminAddCardRecipeView'],
         'adminSendNewRecipe.html'               => ['controller' => 'CookController', 'method' => 'adminSendNewRecipe'],
         'adminRemoveRecipe.html'                => ['controller' => 'CookController', 'method' => 'adminRemoveDish'],
         'adminRemoveIngredientRecipe.html'      => ['controller' => 'CookController', 'method' => 'adminRemoveIngredientRecipe'],
-
-        'adminNewPictureRecipeInDB.html'      => ['controller' => 'CookController', 'method' => 'adminNewPictureRecipeInDB'], // Ne fonctionne pas a supprimer a pres debug
-
-        'adminUpdateRecipe.html'      => ['controller' => 'CookController', 'method' => 'adminUpdateRecipeView'],
-
-        'adminSendUpdateRecipe.html'           => ['controller' => 'CookController', 'method' => 'adminUpdateStatusRecipe'],
-
-
-        'recipe.html'                     => ['controller' => 'CookController', 'method' => 'showDish'],
-        'category.html'                     => ['controller' => 'CookController', 'method' => 'showCategory'],
-
-
-        'homeRecipesCat1.html'                     => ['controller' => 'CookController', 'method' => 'homeRecipesCat1View'],
-        'homeRecipesCat2.html'                     => ['controller' => 'CookController', 'method' => 'homeRecipesCat2View'],
-        'homeRecipesCat3.html'                     => ['controller' => 'CookController', 'method' => 'homeRecipesCat3View'],
-        'homeRecipesCat4.html'                     => ['controller' => 'CookController', 'method' => 'homeRecipesCat4View'],
-
-
-
-
-         'findInDb.html'                     => ['controller' => 'CookController', 'method' => 'findInDb'],
+        'adminNewPictureRecipeInDB.html'        => ['controller' => 'CookController', 'method' => 'adminNewPictureRecipeInDB'],
+        'adminUpdateRecipe.html'                => ['controller' => 'CookController', 'method' => 'adminUpdateRecipeView'],
+        'adminSendUpdateRecipe.html'            => ['controller' => 'CookController', 'method' => 'adminUpdateStatusRecipe'],
+        'findInDb.html'                         => ['controller' => 'CookController', 'method' => 'findInDb'],
+        'adminRecipesSearch.html'               => ['controller' => 'CookController', 'method' => 'adminRecipesSearch'],
+        'adminCopyRecipe.html'                  => ['controller' => 'CookController', 'method' => 'adminCopyRecipe'],
+        'deconnection.html'                     => ['controller' => 'MemberController', 'method' => 'deconnection'],
 // Zone de test
-        'adminRecipesSearch.html'                     => ['controller' => 'CookController', 'method' => 'adminRecipesSearch'],
-        //
-        'deconnection.html'              => ['controller' => 'MemberController', 'method' => 'deconnection'],
-        'error.html'         => ['controller' =>'PostsController', 'method' => 'error']
-
+        'adminSearchComputeList.html'           => ['controller' => 'CookController', 'method' => 'adminSearchComputeList'],
 
 
     ];
@@ -74,7 +54,6 @@ class Routeur
     {
         $this -> request =$request;
     }
-
     /**
      *  public function findController()
      *
@@ -84,8 +63,6 @@ class Routeur
     public function findController()
     {
         $request = $this->request;
-
-
         if (key_exists($request , $this->routes))
         {
             $controller = $this->routes[$request]['controller'];

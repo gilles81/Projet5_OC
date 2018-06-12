@@ -11,7 +11,13 @@ $(function() {
             beforeSend: function(){},
             success: function(data) {
 
-                $('#secondPartHome').html(data); },
+                $('#secondPartHome').html(data);
+                $('html, body').animate({
+                        scrollTop: $('#RecipeList').position().top },
+                    1000
+                );
+
+                },
             error: function() {
                 alert('La requête n\'a pas abouti'); }
         });
@@ -79,7 +85,7 @@ $(function() {
 
         $.ajax({
             type: 'post',
-            url: 'homeRecipesCat4.html',
+            url: 'homeRecipesCat4.html#RecipeList',
             timeout: 3000,
             beforeSend: function(){},
             success: function(data) {
