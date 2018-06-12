@@ -36,7 +36,7 @@ class Routeur
         'adminSendNewRecipe.html'               => ['controller' => 'CookController', 'method' => 'adminSendNewRecipe'],
         'adminRemoveRecipe.html'                => ['controller' => 'CookController', 'method' => 'adminRemoveDish'],
         'adminRemoveIngredientRecipe.html'      => ['controller' => 'CookController', 'method' => 'adminRemoveIngredientRecipe'],
-        'adminNewPictureRecipeInDB.html'        => ['controller' => 'CookController', 'method' => 'adminNewPictureRecipeInDB'], // Ne fonctionne pas a supprimer a pres debug
+        'adminNewPictureRecipeInDB.html'        => ['controller' => 'CookController', 'method' => 'adminNewPictureRecipeInDB'],
         'adminUpdateRecipe.html'                => ['controller' => 'CookController', 'method' => 'adminUpdateRecipeView'],
         'adminSendUpdateRecipe.html'            => ['controller' => 'CookController', 'method' => 'adminUpdateStatusRecipe'],
         'findInDb.html'                         => ['controller' => 'CookController', 'method' => 'findInDb'],
