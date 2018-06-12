@@ -422,34 +422,44 @@ class CookController extends lib
     {
         // Picture loadind and copy into Pics File on serveur
         if (isset($_FILES['customFile']) AND isset($_POST['customHiddenDishId'])) {
-            $dossier = ROOT . "assets\pics/";
-            $time = time();
-            $fichier = $time . '_' . basename($_FILES['customFile']['name'] . '');
-
-            if (move_uploaded_file($_FILES['customFile']['tmp_name'], $dossier . $fichier)) //Si la fonction renvoie TRUE, c'est que ça a fonctionné...
-            {
-                //echo 'Upload effectué avec succès !';
-                //addNewPictureRecipeInDB($dishId,$pics);
-                $manager = new CookManager();
-                $currentDish = $manager->addNewPictureRecipeInDB($_POST['customHiddenDishId'], $fichier);
-                /*
-                $myView = new View('');
-                $myView->redirect('adminRecipes.html');
-                */
-                $Recipe = $manager->findDish($_POST['customHiddenDishId']);
-                $IngredientsList = $manager->findIngredientsList();
-                $IngredientsRecipes = $manager->findIngredientsRecipe($_POST['customHiddenDishId']);
-                $ArrayOfIngredients = array();
-                $ArrayOfIngredients = [$IngredientsList, $IngredientsRecipes];
-
-                $myView = new View('adminUpdateRecipe');
-                $myView->build(array('recipes' => $Recipe, 'ingredients' => $ArrayOfIngredients, 'comments' => null, 'warningList' => null, 'message' => null, 'HOST' => HOST, 'adminLevel' => $_SESSION['adminLevel']));
+            if (isset($_FILES['customFile']['size']) AND (($_FILES['customFile']['size']<= 1000000))) {
+                $dossier = ROOT . "assets\pics/";
+                $time = time();
+                $fichier = $time . '_' . basename($_FILES['customFile']['name'] . '');
 
 
-            } else //Sinon (la fonction renvoie FALSE).
-            {
-                // TODO : Gerer erreur ;
-                echo 'Echec de l\'upload !';
+                $dimensions = getimagesize($_FILES['customFile']['tmp_name']);
+
+
+                if ($dimensions[0]==1920 AND $dimensions[1]==1080 ) {
+                    if (move_uploaded_file($_FILES['customFile']['tmp_name'], $dossier . $fichier)) //Si la fonction renvoie TRUE, c'est que ça a fonctionné...
+                    {
+                        $manager = new CookManager();
+                        $currentDish = $manager->addNewPictureRecipeInDB($_POST['customHiddenDishId'], $fichier);
+                        $Recipe = $manager->findDish($_POST['customHiddenDishId']);
+                        $IngredientsList = $manager->findIngredientsList();
+                        $IngredientsRecipes = $manager->findIngredientsRecipe($_POST['customHiddenDishId']);
+                        $ArrayOfIngredients = array();
+                        $ArrayOfIngredients = [$IngredientsList, $IngredientsRecipes];
+                        $myView = new View('adminUpdateRecipe');
+                        $myView->build(array('recipes' => $Recipe, 'ingredients' => $ArrayOfIngredients, 'comments' => null, 'warningList' => null, 'message' => null, 'HOST' => HOST, 'adminLevel' => $_SESSION['adminLevel']));
+                    } else //Sinon (la fonction renvoie FALSE).
+                    {
+
+                        echo 'Echec de l\'upload !';
+                    }
+                }else {
+                    $manager = new CookManager();
+                    $Recipe = $manager->findDish($_POST['customHiddenDishId']);
+                    $IngredientsList = $manager->findIngredientsList();
+                    $IngredientsRecipes = $manager->findIngredientsRecipe($_POST['customHiddenDishId']);
+                    $ArrayOfIngredients = array();
+                    $ArrayOfIngredients = [$IngredientsList, $IngredientsRecipes];
+
+                    $myView = new View('adminUpdateRecipe');
+                    $myView->build(array('recipes' => $Recipe, 'ingredients' => $ArrayOfIngredients, 'comments' => null, 'warningList' => null, 'message' => null, 'HOST' => HOST, 'adminLevel' => $_SESSION['adminLevel']));
+
+                }
             }
         }
     }
