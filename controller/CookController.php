@@ -422,7 +422,8 @@ class CookController extends lib
     {
         // Picture loadind and copy into Pics File on serveur
         if (isset($_FILES['customFile']) AND isset($_POST['customHiddenDishId'])) {
-            if (isset($_FILES['customFile']['size']) AND (($_FILES['customFile']['size']<= 1000000))) {
+            if (isset($_FILES['customFile']['size']) AND (($_FILES['customFile']['size']<= 1000000))
+                AND (isset($_FILES['customFile']['tmp_name'])) AND (!empty($_FILES['customFile']['tmp_name'])))  {
                 $dossier = ROOT . "assets\pics/";
                 $time = time();
                 $fichier = $time . '_' . basename($_FILES['customFile']['name'] . '');
@@ -459,7 +460,19 @@ class CookController extends lib
                     $myView = new View('adminUpdateRecipe');
                     $myView->build(array('recipes' => $Recipe, 'ingredients' => $ArrayOfIngredients, 'comments' => null, 'warningList' => null, 'message' => null, 'HOST' => HOST, 'adminLevel' => $_SESSION['adminLevel']));
 
+
                 }
+            }else {
+                $manager = new CookManager();
+                $Recipe = $manager->findDish($_POST['customHiddenDishId']);
+                $IngredientsList = $manager->findIngredientsList();
+                $IngredientsRecipes = $manager->findIngredientsRecipe($_POST['customHiddenDishId']);
+                $ArrayOfIngredients = array();
+                $ArrayOfIngredients = [$IngredientsList, $IngredientsRecipes];
+
+                $myView = new View('adminUpdateRecipe');
+                $myView->build(array('recipes' => $Recipe, 'ingredients' => $ArrayOfIngredients, 'comments' => null, 'warningList' => null, 'message' => null, 'HOST' => HOST, 'adminLevel' => $_SESSION['adminLevel']));
+
             }
         }
     }
