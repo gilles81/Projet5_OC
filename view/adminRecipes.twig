@@ -31,7 +31,7 @@
                                 <div Class="PicsInadminRecipes" >
                                     {% if not PicsName  %}
                                         <img  class="card-img-top rounded " src="{{ HOST }}{{ PicsRecipeDir }}{{ PicsReplacement}}" alt="image de remplacement">
-                                        <div class="card-img-overlay"><a href="#">Pas d'image disponible<i class="far fa-edit"></i> </a></div>
+                                        <p class="card-img-overlay text-danger " >Pas d'image disponible</p>
                                     {% else %}
                                         <img  class="card-img-top rounded" src="{{ HOST }}{{ PicsRecipeDir }}{{ PicsName }}" alt="{{ recipe.getImagePathName }}">
                                     {% endif %}
