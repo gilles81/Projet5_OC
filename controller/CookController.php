@@ -385,7 +385,7 @@ class CookController extends lib
     }
 
     /*
-     *  duplicDish()
+     *  adminCopyRecipe()
      *
      *
      *
