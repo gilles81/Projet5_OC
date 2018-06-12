@@ -386,42 +386,38 @@ class CookManager extends BackManager
      *
      * adminCopyRecipe
      *
-     * copy a relcipe in db
+     * copy a recipe in db
      *
      *
      * @param $currentDish
      */
-    public function adminCopyRecipe( $currentDish)
+    public function adminCopyRecipe($currentDish)
     {
-
         $bdd = $this->bdd;
-/*
-        $query = "INSERT INTO `dish` (`DishId`, `Title`, `Category`, `Author`, `CreationDate`, `Recipe`, `Portion`, `ImagePathName`, `Origin`, `CookingTime`,
- `PreparationTime`, `Ingredients`, `Difficulty`, `Featured`, `Status`, `lke`,`cat1`,`cat2`,`cat3`,`cat4` )
-                  SELECT  `DishId`, `Title`, `Category`, `Author`, `CreationDate`, `Recipe`, `Portion`, `ImagePathName`, `Origin`, `CookingTime`,
- `PreparationTime`, `Ingredients`, `Difficulty`, `Featured`, `Status`, `lke` ,`cat1`,`cat2`,`cat3`,`cat4`
-                FROM `dish` WHERE 'DishId'=111";
-*/
 
-        $query = "INSERT INTO `dish` ( `CreationDate` )
-                  SELECT  `CreationDate`
-                FROM `dish` WHERE 'DishId'=111";
-        echo $currentDish->getDishId();
-        echo $query;
+        $query= "INSERT INTO `dish` (`DishId`, `Title`, `Category`,`Author`, `CreationDate`, `Recipe`, `Portion`, `ImagePathName`, `Origin`, `CookingTime`, `PreparationTime`, `Ingredients`, `Difficulty`, `Featured`, `Status`, `lke`, `Cat1`, `Cat2`, `Cat3`, `Cat4`) 
+                  VALUES (NULL, :Title,:Category,:Author, now(),:Recipe, :Portion, :ImagePathName, :Origin, :CookingTime, :PreparationTime, '', :Difficulty, '0', 'D', '0', :Cat1, :Cat2, :Cat3, :Cat4);";
 
         $req = $bdd->prepare($query);
+
+        $req->bindValue(':Title',$currentDish->getName(),PDO::PARAM_STR);
+        $req->bindValue(':Category',$currentDish->getCategory(),PDO::PARAM_INT);
+        $req->bindValue(':Author',$currentDish->getAuthor(),PDO::PARAM_STR);
+        $req->bindValue(':Recipe',$currentDish->getRecipe(),PDO::PARAM_STR);
+
+        $req->bindValue(':Portion',$currentDish->getPortion(),PDO::PARAM_INT);
+        $req->bindValue(':ImagePathName',$currentDish->getImagePathName(),PDO::PARAM_STR);
+
+        $req->bindValue(':Origin',$currentDish->getOrigin(),PDO::PARAM_STR);
+        $req->bindValue(':CookingTime',$currentDish->getCookingTime(),PDO::PARAM_STR);
+        $req->bindValue(':PreparationTime',$currentDish->getPreparationTime(),PDO::PARAM_STR);
+
+        $req->bindValue(':Difficulty',$currentDish->getDifficulty(),PDO::PARAM_INT);
+        $req->bindValue(':Cat1',$currentDish->getCat1(),PDO::PARAM_INT);
+        $req->bindValue(':Cat2',$currentDish->getCat2(),PDO::PARAM_INT);
+        $req->bindValue(':Cat3',$currentDish->getCat3(),PDO::PARAM_INT);
+        $req->bindValue(':Cat4',$currentDish->getCat4(),PDO::PARAM_INT);
         $req->execute();
-
-
-        /*
-        INSERT INTO maTable(colonne1, colonne2, ..., colonneN)
-SELECT colonne1, colonne2, ..., colonneN FROM maTable
-WHERE id = 1;*/
-
-
-
-
-
     }
 
     /**
@@ -441,7 +437,7 @@ WHERE id = 1;*/
                   VALUES (NULL, 'Nouvelle recette ', '1', '', now(), '', '0' , :ImagePathName, '', '0', '0', '', '0', '0', 'D', '0');";
 
         $req = $bdd->prepare($query);
-        $req->bindValue(':ImagePathName','NoPictures_1920_1080.jpg',PDO::PARAM_INT);
+        $req->bindValue(':ImagePathName','NoPictures_1920_1080.jpg',PDO::PARAM_STR);
         $req->execute();
     }
 
