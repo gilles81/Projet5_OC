@@ -73,7 +73,7 @@ class MemberController extends lib
                     } else {
                         /** Redirection to cnx PAge**/
                         $myView = new View('userCnxForm');
-                        $myView->build( array('recipes'=> null ,'ingredientst'=>null,'comments'=>null,'warningList' => null,'message'=>null,'HOST'=>HOST,'adminLevel'=>  $_SESSION['adminLevel']) );
+                        $myView->build( array('recipes'=> null ,'ingredients'=>null,'comments'=>null,'warningList' => null,'message'=>null,'HOST'=>HOST,'adminLevel'=>  $_SESSION['adminLevel']) );
                     }
                 } else {
                     /** Redirection to PWD Page **/
