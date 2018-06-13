@@ -30,10 +30,7 @@ class Routeur
         // Recipe Administration
         'adminBoard.html'                       => ['controller' => 'CookController', 'method' => 'adminBoard'],
         'adminRecipes.html'                     => ['controller' => 'CookController', 'method' => 'adminRecipes'],
-        'adminSendNewRecipeName.html'           => ['controller' => 'CookController', 'method' => 'adminSendNewRecipeName'],
-        'adminSendNewRecipePreparation.html'    => ['controller' => 'CookController', 'method' => 'adminSendNewRecipePreparation'],
         'adminAddCardRecipe.html'               => ['controller' => 'CookController', 'method' => 'adminAddCardRecipeView'],
-        'adminSendNewRecipe.html'               => ['controller' => 'CookController', 'method' => 'adminSendNewRecipe'],
         'adminRemoveRecipe.html'                => ['controller' => 'CookController', 'method' => 'adminRemoveDish'],
         'adminRemoveIngredientRecipe.html'      => ['controller' => 'CookController', 'method' => 'adminRemoveIngredientRecipe'],
         'adminNewPictureRecipeInDB.html'        => ['controller' => 'CookController', 'method' => 'adminNewPictureRecipeInDB'],
@@ -44,8 +41,7 @@ class Routeur
         'adminCopyRecipe.html'                  => ['controller' => 'CookController', 'method' => 'adminCopyRecipe'],
         'deconnection.html'                     => ['controller' => 'MemberController', 'method' => 'deconnection'],
 // Zone de test
-        'adminSearchComputeList.html'           => ['controller' => 'CookController', 'method' => 'adminSearchComputeList']
-
+        //'adminSearchComputeList.html'           => ['controller' => 'CookController', 'method' => 'adminSearchComputeList']
 
     ];
 
