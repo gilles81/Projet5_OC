@@ -39,6 +39,7 @@ class CookController extends lib
     public function showDish()
     {
         if (isset($_GET['dishId']) AND ($_GET['dishId'] > 0)) {
+            $this->sessionStatus();//determine status admin or not
             $manager = new CookManager();
             $recipe = $manager->findDish($_GET['dishId']);
             if (!empty($recipe)) {
@@ -102,6 +103,7 @@ class CookController extends lib
 
     public function adminBoard()
     {
+        $this->sessionStatus();//determine status admin or not
         $myView = new View('adminBoard');
         $myView->build(array('recipes' => null, 'ingredients' => null, 'comments' => null, 'warningList' => null, 'message' => null, 'HOST' => HOST, 'adminLevel' => $_SESSION['adminLevel']));
     }
@@ -114,6 +116,7 @@ class CookController extends lib
 
     public function adminAddCardRecipeView()
     {
+
         $manager = new CookManager();
         $recipes = $manager->createEmptyRecipe();
         $recipes = $manager->findDishes();
@@ -133,6 +136,7 @@ class CookController extends lib
     public function adminUpdateRecipeView()
     {
         if (isset($_GET['dishId']) && (ctype_digit($_GET['dishId']) == 1) && $_GET['dishId'] > 0) {
+            $this->sessionStatus();//determine status admin or not
             $manager = new CookManager();
             $recipe = $manager->findDish($_GET['dishId']);
             $IngredientsList = $manager->findIngredientsList();// list of ingredient in db
@@ -660,56 +664,37 @@ class CookController extends lib
     /*
      * adminSearchComputeList()
      *
-     *
+     *  this Method is in dev phase  it shall be used  for give aa list of ingredients in autocompletion mode of select 2
      *
      */
 
     public function adminSearchComputeList()
     {
-
-
-        if (isset($_GET['dishId']) && (ctype_digit($_GET['dishId']) == 1) && $_GET['dishId'] > 0) {
+        if (isset($_POST['dishId']) && (ctype_digit($_POST['dishId']) == 1) && $_POST['dishId'] > 0) {
+            echo $_POST['dishId'];
             $manager = new CookManager();
-            $recipe = $manager->findDish($_GET['dishId']);
+            $recipe = $manager->findDish($_POST['dishId']);
             $IngredientsList = $manager->findIngredientsList();// list of ingredient in db
-            $IngredientsRecipes = $manager->findIngredientsRecipe($_GET['dishId']);
+            $IngredientsRecipes = $manager->findIngredientsRecipe($_POST['dishId']);
             $IngredientsListNotSelected = $this->findIngredientsListAlreadySelectioned($IngredientsList, $IngredientsRecipes);
-            var_dump ($IngredientsListNotSelected);
-        }
-
-
-            $tableau_pour_json=array();
-
-        $ingred= new IngredientJson();
-        $ingred->setId(1);
-        $ingred->setText('option1');
-
-        $tableau_pour_json[]=$ingred;
-
-        $ingred= new IngredientJson();
-        $ingred->setId(2);
-        $ingred->setText('option2');
-
-        $tableau_pour_json[]=$ingred;
-
-        var_dump($tableau_pour_json);
-        var_dump($tableau_pour_json);
-        print_r( $ingred);
-
-        $contenu_json = json_encode($tableau_pour_json,"\n");
-
-        var_dump($contenu_json);
-
-
-        $tableau_pour_json2 = ['prenom'=>'Alexandre', 'nom'=>'Chevalier'];
-
-// Convertir le tableau au format json
-        $contenu_json2 = json_encode($tableau_pour_json2);
-
-        var_dump($contenu_json2);
-
+            $ingred = new IngredientJson();
+            $json = array();
+            $cpt = 1;
+            foreach ($IngredientsListNotSelected as $ing) {
+               // creation d'objet
+                $ingred = new IngredientJson();
+                $ingred->setId($cpt);
+                $ingred->setText($ing->getName());
+                $cpt = $cpt + 1;
+                //$tab[]=$ingred;
+                $tab['results'][] =[  'id' => $ingred->getId(), 'text' => $ingred->getText()];
+            }
+            $tab['pagination'] = ['more'=>false];
+            $tab2 =json_encode($tab);
+            var_dump($tab2);
+        };
+        return $tab2;
     }
-// Affichera {"prenom":"Alexandre","nom":"Chevalier"}
 
 
 
