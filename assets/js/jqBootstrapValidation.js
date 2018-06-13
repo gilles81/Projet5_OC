@@ -9,7 +9,7 @@
  */
 
 (function($) {
-  console.log('valid');
+
 
   var createdElements = [];
 
