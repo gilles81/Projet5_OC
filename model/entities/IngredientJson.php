@@ -1,24 +1,28 @@
 <?php
-
+/**
+ * Class IngredientJs
+ * This class is not used for . It shall be use for select2 ingredient dropdown
+ *
+ */
 
 class IngredientJson
 {
-    private $Id;
+    private $id;
     private $text;
     /**
      * @return mixed
      */
     public function getId()
     {
-        return $this->Id;
+        return $this->id;
     }
 
     /**
      * @param mixed $Id
      */
-    public function setId($Id)
+    public function setId($id)
     {
-        $this->Id = $Id;
+        $this->id = $id;
     }
 
     /**
