@@ -452,12 +452,13 @@ class CookController extends lib
             if (isset($_FILES['customFile']) AND isset($_POST['customHiddenDishId'])) {
                 if (isset($_FILES['customFile']['size']) AND (($_FILES['customFile']['size']<= 1000000))
                     AND (isset($_FILES['customFile']['tmp_name'])) AND (!empty($_FILES['customFile']['tmp_name'])))  {
-                    $dossier = ROOT . "assets\pics\\";
+                    $dossier = ROOT . 'assets/pics/';
+
                     $time = time();
                     $fichier = $time . '_' . basename($_FILES['customFile']['name'] . '');
                     $dimensions = getimagesize($_FILES['customFile']['tmp_name']);
                     if ($dimensions[0]==1920 AND $dimensions[1]==1080 ) {
-                        if (move_uploaded_file($_FILES['customFile']['tmp_name'], $dossier . $fichier)) //Si la fonction renvoie TRUE, c'est que ça a fonctionné...
+                        if (move_uploaded_file($_FILES['customFile']['tmp_name'],   $dossier . $fichier)) //Si la fonction renvoie TRUE, c'est que ça a fonctionné...
                         {
                             $manager = new CookManager();
                             $currentDish = $manager->addNewPictureRecipeInDB($_POST['customHiddenDishId'], $fichier);
