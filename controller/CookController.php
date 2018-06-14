@@ -452,7 +452,8 @@ class CookController extends lib
             if (isset($_FILES['customFile']) AND isset($_POST['customHiddenDishId'])) {
                 if (isset($_FILES['customFile']['size']) AND (($_FILES['customFile']['size']<= 1000000))
                     AND (isset($_FILES['customFile']['tmp_name'])) AND (!empty($_FILES['customFile']['tmp_name'])))  {
-                    $dossier = ROOT . 'assets\pics\\';
+                    $dossier = ROOT . 'assets/pics/';
+
                     $time = time();
                     $fichier = $time . '_' . basename($_FILES['customFile']['name'] . '');
                     $dimensions = getimagesize($_FILES['customFile']['tmp_name']);
