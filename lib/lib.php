@@ -151,6 +151,7 @@ class lib
 
     function findIngredientsListAlreadySelectioned($ingredientsList, $ingredientsRecipes){
         $ingredientsAvailables =  array();
+        $IngredientsAvailables=null;
         foreach ($ingredientsList as $ingredient){
 
             $ingredientInList =false;

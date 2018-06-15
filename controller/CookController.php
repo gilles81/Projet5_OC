@@ -254,16 +254,16 @@ class CookController extends lib
         if ($_SESSION['adminLevel']==1) {
         // Pictures
         if (isset($_FILES['customFile'])) {
-            $dossier = ROOT . "assets\pics/";
+            $dossier = ROOT . "assets/pics/";
             $time = time();
             $fichier = $time . '_' . basename($_FILES['customFile']['name']);
 
             if (move_uploaded_file($_FILES['customFile']['tmp_name'], $dossier . $fichier)) //Si la fonction renvoie TRUE, c'est que ça a fonctionné...
             {
-                echo 'Upload effectué avec succès !';
+               // echo 'Upload effectué avec succès !';
             } else //Sinon (la fonction renvoie FALSE).
             {
-                echo 'Echec de l\'upload !';
+               // echo 'Echec de l\'upload !';
             }
         }
 
@@ -362,16 +362,18 @@ class CookController extends lib
                 $manager->UpdateRecipePreparationTime($newRecipe);
             }
             // Ingredients
+            // Unit Verification it's possible to dont have unit and in this case $Unit is set to ""
+            if ((isset($_POST['UnitFormValue']))) {
+                $Unit = $_POST['UnitFormValue'];
+            } else {
+                $Unit = "";
+            }
+            // case of a new ingredient and a quantity positive. in other case ingredients is not take into account
             if ((isset($_POST['NewRecipeIngredient']))) {
-                if ((isset($_POST['UnitFormValue']))) {
-                    $Unit = $_POST['UnitFormValue'];
-                } else {
-                    $Unit = "";
-                }
-                if ((isset($_POST['QuantityFormValue']) AND (!empty($_POST['QuantityFormValue'])))) {
+                if ((isset($_POST['QuantityFormValue']) AND (($_POST['QuantityFormValue'])>=0))) {
                     $manager->createRecipeIngredient($_GET['dishId'], $_POST['NewRecipeIngredient'], $_POST['QuantityFormValue'], $Unit);
                 }
-                $manager->createRecipeIngredient($_GET['dishId'], $_POST['NewRecipeIngredient'], $_POST['QuantityFormValue'], $Unit);
+
             }
         } else { // If not a good  dish ID
 
