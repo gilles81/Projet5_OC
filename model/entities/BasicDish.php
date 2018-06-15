@@ -444,6 +444,7 @@ class BasicDish
      */
     public function getDifficulty()
     {
+
         return $this->difficulty;
     }
 
@@ -455,6 +456,11 @@ class BasicDish
         if (!is_numeric($difficulty)){
             return;
         }
+
+        if ($difficulty < 0 ){
+            return;
+        }
+
         $this->difficulty = $difficulty;
     }
 

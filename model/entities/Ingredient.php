@@ -54,6 +54,15 @@ class Ingredient
      */
     public function setId($Id)
     {
+
+        if (!is_numeric($Id)){
+            return;
+        }
+
+        if ($Id < 0 ){
+            return;
+        }
+
         $this->Id = $Id;
     }
 
@@ -62,6 +71,9 @@ class Ingredient
      */
     public function getName()
     {
+
+
+
         return $this->Name;
     }
 
@@ -70,6 +82,9 @@ class Ingredient
      */
     public function setName($Name)
     {
+        if (!is_string($Name)){
+            return;
+        }
         $this->Name = $Name;
     }
 
@@ -86,6 +101,7 @@ class Ingredient
      */
     public function setCategory($Category)
     {
+
         $this->Category = $Category;
     }
 
