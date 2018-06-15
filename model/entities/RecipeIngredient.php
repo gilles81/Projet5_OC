@@ -15,55 +15,6 @@ class RecipeIngredient
     private $Quantity;
     private $Unit;
 
-    /**
-     * @return mixed
-     */
-    public function getUnit()
-    {
-        return $this->Unit;
-    }
-
-    /**
-     * @param mixed $Unit
-     */
-    public function setUnit($Unit)
-    {
-        $this->Unit = $Unit;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getQuantity()
-    {
-        return $this->Quantity;
-    }
-
-    /**
-     * @param mixed $Quantity
-     */
-    public function setQuantity($Quantity)
-    {
-        $this->Quantity = $Quantity;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getUnity()
-    {
-        return $this->Unity;
-    }
-
-    /**
-     * @param mixed $Unity
-     */
-    public function setUnity($Unity)
-    {
-        $this->Unity = $Unity;
-    }
-    private $Unity;
-
 
 
     public function __construct($data)
@@ -93,6 +44,49 @@ class RecipeIngredient
     /**
      * @return mixed
      */
+    public function getUnit()
+    {
+        return $this->Unit;
+    }
+
+    /**
+     * @param mixed $Unit
+     */
+    public function setUnit($Unit)
+    {
+        $this->Unit = $Unit;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getQuantity()
+    {
+        return $this->Quantity;
+    }
+
+    /**
+     * @param mixed $Quantity
+     */
+    public function setQuantity($Quantity)
+    {
+        if (!is_numeric($Quantity)){
+            return;
+        }
+        if ($Quantity < 0 ){
+            return;
+        }
+        $this->Quantity = $Quantity;
+    }
+
+    /**
+     * @return mixed
+     */
+
+
+    /**
+     * @return mixed
+     */
     public function getId()
     {
         return $this->Id;
@@ -103,8 +97,16 @@ class RecipeIngredient
      */
     public function setId($Id)
     {
+        if (!is_numeric($Id)){
+            return;
+        }
+        if ($Id < 0 ){
+            return;
+        }
+
         $this->Id = $Id;
     }
+
 
     /**
      * @return mixed
@@ -119,6 +121,12 @@ class RecipeIngredient
      */
     public function setRecipeId($RecipeId)
     {
+        if (!is_numeric($RecipeId)){
+            return;
+        }
+        if ($RecipeId < 0 ){
+            return;
+        }
         $this->RecipeId = $RecipeId;
     }
 
@@ -135,6 +143,12 @@ class RecipeIngredient
      */
     public function setIngredientId($IngredientId)
     {
+        if (!is_numeric($IngredientId)){
+            return;
+        }
+        if ($IngredientId < 0 ){
+            return;
+        }
         $this->IngredientId = $IngredientId;
     }
 
@@ -151,6 +165,12 @@ class RecipeIngredient
      */
     public function setName($Name)
     {
+        if (!is_string($Name)){
+            return;
+        }
+        if ($Name < 0 ){
+            return;
+        }
         $this->Name = $Name;
     }
 

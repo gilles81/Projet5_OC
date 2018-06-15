@@ -94,7 +94,7 @@
                     <div  class="row mx-2 align-content-start text-body "  style="border : 1px solid black;height :350px;overflow-y: scroll" >
                         {% for ingredient in ingredients[1] %}
                             <p class="mt-1 mb-1 pt-1 pb-1  ">
-                                {{ ingredient.Name }} : {{ ingredient.quantity}}  {{ ingredient.unit }}  , </p>
+                                {{ ingredient.Name }} : {{ ingredient.quantity  |round(2,'ceil')}}  {{ ingredient.unit }}  , </p>
                         {% endfor %}
                     </div>
                 </div>
