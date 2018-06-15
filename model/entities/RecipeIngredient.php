@@ -54,6 +54,10 @@ class RecipeIngredient
      */
     public function setUnit($Unit)
     {
+        if (!is_string($Unit)){
+            return;
+        }
+
         $this->Unit = $Unit;
     }
 
@@ -62,6 +66,7 @@ class RecipeIngredient
      */
     public function getQuantity()
     {
+
         return $this->Quantity;
     }
 

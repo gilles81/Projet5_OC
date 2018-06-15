@@ -26,6 +26,7 @@ class User
      */
     public function getId()
     {
+
         return $this->Id;
     }
 
@@ -34,6 +35,12 @@ class User
      */
     public function setId($Id)
     {
+        if (!is_numeric($Id)){
+            return;
+        }
+        if ($Id < 0 ){
+            return;
+        }
         $this->Id = $Id;
     }
 
@@ -50,6 +57,10 @@ class User
      */
     public function setPseudo($pseudo)
     {
+        if (!is_string($pseudo)){
+            return;
+        }
+
         $this->pseudo = $pseudo;
     }
 
@@ -58,6 +69,7 @@ class User
      */
     public function getEmail()
     {
+
         return $this->email;
     }
 
@@ -66,6 +78,9 @@ class User
      */
     public function setEmail($email)
     {
+        if (!is_string($email)){
+            return;
+        }
         $this->email = $email;
     }
 
@@ -98,6 +113,12 @@ class User
      */
     public function setRight($right)
     {
+        if (!is_numeric($right)){
+            return;
+        }
+        if ($right < 0 ){
+            return;
+        }
         $this->right = $right;
     }
 
