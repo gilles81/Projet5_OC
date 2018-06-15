@@ -366,23 +366,6 @@ class CookManager extends BackManager
 
 
     /**
-     *  remove
-     *
-     * remove a comment from database
-     *
-     * @param $ComId
-     */
-    public function remove($ComId)
-    {
-        $bdd = $this->bdd;
-        $req = $bdd->exec("DELETE FROM `Comments` WHERE `CommentId` = $ComId");
-
-        if (!$req) {
-            echo 'Erreur a la suppression du commentaire';
-        }
-    }
-
-    /**
      *
      * adminCopyRecipe
      *
@@ -522,10 +505,14 @@ class CookManager extends BackManager
     {
 
         $bdd = $this->bdd;
-        $req = $bdd->exec("DELETE FROM `recipe_ingredients` WHERE `RecipeId` = $recipeId AND `IngredientId` = $ingredientId" );
-        if (!$req) {
-            echo 'Erreur a la suppression du chapitre';
-        }
+        $query = "DELETE FROM `recipe_ingredients` WHERE `RecipeId` = :RecipeId AND `IngredientId` = :IngredientId";
+      //  $req = $bdd->exec("" );
+        $req = $bdd->prepare($query);
+        $req->bindValue(':RecipeId',$recipeId,PDO::PARAM_INT);
+        $req->bindValue(':IngredientId',$ingredientId,PDO::PARAM_INT);
+
+        $req->execute();
+
     }
 
     /**
@@ -561,14 +548,17 @@ class CookManager extends BackManager
     public function removeDish( $dishId)
     {
 
+
+      //  $req = $bdd->exec("DELETE FROM `dish` WHERE `DishId` = $dishId");
+
+
         $bdd = $this->bdd;
-        $req = $bdd->exec("DELETE FROM `dish` WHERE `DishId` = $dishId");
+        $query = "DELETE FROM `dish` WHERE `DishId` = :DishId";
+        //  $req = $bdd->exec("" );
+        $req = $bdd->prepare($query);
+        $req->bindValue(':DishId',$dishId,PDO::PARAM_INT);
 
-        if (!$req) {
-
-            echo 'Erreur a la suppression du chapitre';
-
-        }
+        $req->execute();
     }
 
 
