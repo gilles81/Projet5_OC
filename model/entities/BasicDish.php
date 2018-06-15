@@ -60,6 +60,8 @@ class BasicDish
      */
     public function getCat1()
     {
+
+
         return $this->cat1;
     }
 
@@ -68,6 +70,12 @@ class BasicDish
      */
     public function setCat1($cat1)
     {
+        if (!is_numeric($cat1)){
+            return;
+        }
+        if ($cat1 < 0 ){
+            return;
+        }
         $this->cat1 = $cat1;
     }
 
@@ -76,6 +84,7 @@ class BasicDish
      */
     public function getCat2()
     {
+
         return $this->cat2;
     }
 
@@ -84,6 +93,12 @@ class BasicDish
      */
     public function setCat2($cat2)
     {
+        if (!is_numeric($cat2)){
+            return;
+        }
+        if ($cat2 < 0 ){
+            return;
+        }
         $this->cat2 = $cat2;
     }
 
@@ -92,6 +107,7 @@ class BasicDish
      */
     public function getCat3()
     {
+
         return $this->cat3;
     }
 
@@ -100,6 +116,12 @@ class BasicDish
      */
     public function setCat3($cat3)
     {
+        if (!is_numeric($cat3)){
+            return;
+        }
+        if ($cat3 < 0 ){
+            return;
+        }
         $this->cat3 = $cat3;
     }
 
@@ -116,6 +138,12 @@ class BasicDish
      */
     public function setCat4($cat4)
     {
+        if (!is_numeric($cat4)){
+            return;
+        }
+        if ($cat4 < 0 ){
+            return;
+        }
         $this->cat4 = $cat4;
     }
 
@@ -139,6 +167,11 @@ class BasicDish
      */
     public function setStatus($status)
     {
+        if (!is_string($status)){
+            return;
+        }
+
+
         $this->status = $status;
     }
 
@@ -147,6 +180,7 @@ class BasicDish
      */
     public function getFeatured()
     {
+
         return $this->featured;
     }
 
@@ -155,6 +189,12 @@ class BasicDish
      */
     public function setFeatured($featured)
     {
+        if (!is_numeric($featured)){
+            return;
+        }
+        if ($featured < 0 ){
+            return;
+        }
         $this->featured = $featured;
     }
 
@@ -163,6 +203,7 @@ class BasicDish
      */
     public function getImagePathName()
     {
+
         return $this->ImagePathName;
     }
 
@@ -171,6 +212,9 @@ class BasicDish
      */
     public function setImagePathName($ImagePathName)
     {
+        if (!is_string($ImagePathName)){
+            return;
+        }
         $this->ImagePathName = $ImagePathName;
     }
 
@@ -189,6 +233,13 @@ class BasicDish
      */
     public function setDishId($dishId)
     {
+        if (!is_numeric($dishId)){
+            return;
+        }
+        if ($dishId < 0 ){
+            return;
+        }
+
         $this->dishId = $dishId;
     }
 
@@ -205,6 +256,9 @@ class BasicDish
      */
     public function setName($name)
     {
+        if (!is_string($name)){
+            return;
+        }
         $this->name = $name;
     }
 
@@ -221,6 +275,9 @@ class BasicDish
      */
     public function setCategory($category)
     {
+        if (!is_string($category)){
+            return;
+        }
         $this->category = $category;
     }
 
@@ -229,6 +286,7 @@ class BasicDish
      */
     public function getAuthor()
     {
+
         return $this->Author;
     }
 
@@ -237,6 +295,9 @@ class BasicDish
      */
     public function setAuthor($Author)
     {
+        if (!is_string($Author)){
+            return;
+        }
         $this->Author = $Author;
     }
 
@@ -253,6 +314,7 @@ class BasicDish
      */
     public function setCreationDate($creationDate)
     {
+
         $this->creationDate = $creationDate;
     }
 
@@ -261,6 +323,7 @@ class BasicDish
      */
     public function getRecipe()
     {
+
         return $this->recipe;
     }
 
@@ -269,6 +332,9 @@ class BasicDish
      */
     public function setRecipe($recipe)
     {
+        if (!is_string($recipe)){
+            return;
+        }
         $this->recipe = $recipe;
     }
 
@@ -285,6 +351,12 @@ class BasicDish
      */
     public function setPortion($portion)
     {
+        if (!is_numeric($portion)){
+            return;
+        }
+        if ($portion < 0 ){
+            return;
+        }
         $this->portion = $portion;
     }
 
@@ -299,6 +371,10 @@ class BasicDish
      */
     public function setOrigin($origin)
     {
+        if (!is_string($origin)){
+            return;
+        }
+
         $this->origin = $origin;
     }
 
@@ -315,6 +391,11 @@ class BasicDish
      */
     public function setCookingTime($cookingTime)
     {
+        if (!is_string($cookingTime)){
+            return;
+        }
+
+
         $this->cookingTime = $cookingTime;
     }
 
@@ -323,6 +404,7 @@ class BasicDish
      */
     public function getPreparationTime()
     {
+
         return $this->preparationTime;
     }
 
@@ -331,6 +413,10 @@ class BasicDish
      */
     public function setPreparationTime($preparationTime)
     {
+        if (!is_string($preparationTime)){
+            return;
+        }
+
         $this->preparationTime = $preparationTime;
     }
 
@@ -347,6 +433,9 @@ class BasicDish
      */
     public function setIngredients($ingredients)
     {
+        if (!is_string($ingredients)){
+            return;
+        }
         $this->ingredients = $ingredients;
     }
 
@@ -363,6 +452,9 @@ class BasicDish
      */
     public function setDifficulty($difficulty)
     {
+        if (!is_numeric($difficulty)){
+            return;
+        }
         $this->difficulty = $difficulty;
     }
 
