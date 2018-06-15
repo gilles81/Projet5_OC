@@ -254,7 +254,7 @@ class CookController extends lib
         if ($_SESSION['adminLevel']==1) {
         // Pictures
         if (isset($_FILES['customFile'])) {
-            $dossier = ROOT . "assets\pics/";
+            $dossier = ROOT . "assets/pics/";
             $time = time();
             $fichier = $time . '_' . basename($_FILES['customFile']['name']);
 
