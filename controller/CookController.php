@@ -370,7 +370,8 @@ class CookController extends lib
             }
             // case of a new ingredient and a quantity positive. in other case ingredients is not take into account
             if ((isset($_POST['NewRecipeIngredient']))) {
-                if ((isset($_POST['QuantityFormValue']) AND (($_POST['QuantityFormValue'])>=0))) {
+
+                if ((isset($_POST['QuantityFormValue']) AND (($_POST['QuantityFormValue'])>0))) {
                     $manager->createRecipeIngredient($_GET['dishId'], $_POST['NewRecipeIngredient'], $_POST['QuantityFormValue'], $Unit);
                 }
 
